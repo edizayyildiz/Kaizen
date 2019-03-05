@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizen.Data", "Kaizen.Data\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizen.Service", "Kaizen.Service\Kaizen.Service.csproj", "{32978173-CCEF-4B7F-9274-5A71C121932F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizen.Web", "Kaizen.Web\Kaizen.Web.csproj", "{6BCF340C-9EF7-41BF-89C5-C74CC350A648}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizen.Web", "Kaizen.Web\Kaizen.Web.csproj", "{7E6DC5CB-24CB-4152-986B-29591EF2F9B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{32978173-CCEF-4B7F-9274-5A71C121932F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32978173-CCEF-4B7F-9274-5A71C121932F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32978173-CCEF-4B7F-9274-5A71C121932F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BCF340C-9EF7-41BF-89C5-C74CC350A648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BCF340C-9EF7-41BF-89C5-C74CC350A648}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BCF340C-9EF7-41BF-89C5-C74CC350A648}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BCF340C-9EF7-41BF-89C5-C74CC350A648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E6DC5CB-24CB-4152-986B-29591EF2F9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E6DC5CB-24CB-4152-986B-29591EF2F9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E6DC5CB-24CB-4152-986B-29591EF2F9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E6DC5CB-24CB-4152-986B-29591EF2F9B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
