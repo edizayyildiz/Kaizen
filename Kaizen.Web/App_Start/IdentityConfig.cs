@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Kaizen.Web.Models;
+using Kaizen.Model;
+using Kaizen.Data;
 
 namespace Kaizen.Web
 {

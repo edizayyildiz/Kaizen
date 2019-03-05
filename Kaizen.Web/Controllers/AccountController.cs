@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Kaizen.Web.Models;
+using Kaizen.Model;
 
 namespace Kaizen.Web.Controllers
 {
