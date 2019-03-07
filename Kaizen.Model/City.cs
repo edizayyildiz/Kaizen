@@ -8,6 +8,13 @@ namespace Kaizen.Model
 {
     public class City : BaseEntity
     {
+        public City()
+        {
+            Counties = new HashSet<County>();
+        }
         public string Name { get; set; }
+        public Guid CountryId { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual ICollection<County> Counties { get; set; }
     }
 }

@@ -11,16 +11,13 @@ namespace Kaizen.Model
     {
         [Display(Name = "Görevi")]
         public string Posation { get; set; }
-        [Display(Name = "Departman")]
-        public int DepartmentId { get; set; }
         [Display(Name = "Mevcut Durum")]
         public string CurrentStatus { get; set; }
         [Display(Name = "Önerilen Durum")]
         public string SuggestedStatus { get; set; }
         [Display(Name = "Değerlendirme")]
         public Assessment Assessment { get; set; }
-
-        [Display(Name = "Departman")]
-        public virtual Department Department { get; set; }
+        public Guid EmployeeId { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

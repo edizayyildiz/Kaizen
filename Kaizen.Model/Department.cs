@@ -11,14 +11,14 @@ namespace Kaizen.Model
     {
         public Department()
         {
-            this.Suggestions = new HashSet<Suggestion>();
+            Employees = new HashSet<Employee>();
         }
         [Display(Name = "Departman Adı")]
         public string Name { get; set; }
         public int CompanyId { get; set; }
-
-        [Display(Name = "Öneriler")]
-        public virtual ICollection<Suggestion> Suggestions { get; set; }
         public virtual Company Company { get; set; }
+        [Display(Name = "Çalışanlar")]
+        public virtual ICollection<Employee> Employees { get; set; }
+        
     }
 }

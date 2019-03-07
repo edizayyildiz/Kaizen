@@ -10,7 +10,7 @@ namespace Kaizen.Model
     public class BaseEntity
     {
         [Display(Name = "Id")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Display(Name = "Oluşturulma Tarihi")]
         public DateTime CreatedAt { get; set; }
         [Display(Name = "Güncelleme Tarihi")]
