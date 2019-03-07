@@ -55,6 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Builders\CityBuilder.cs" />
+    <Compile Include="Builders\CompanyBuilder.cs" />
+    <Compile Include="Builders\CountryBuilder.cs" />
+    <Compile Include="Builders\CountyBuilder.cs" />
+    <Compile Include="Builders\DepartmentBuilder.cs" />
+    <Compile Include="Builders\EmployeeBuilder.cs" />
+    <Compile Include="Builders\SuggestionBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
