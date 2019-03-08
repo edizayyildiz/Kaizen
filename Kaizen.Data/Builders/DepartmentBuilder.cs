@@ -1,4 +1,4 @@
-﻿,using Kaizen.Model;
+﻿using Kaizen.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
