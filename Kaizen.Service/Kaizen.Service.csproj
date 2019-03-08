@@ -41,7 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CityService.cs" />
+    <Compile Include="CompanyService.cs" />
+    <Compile Include="CountryService.cs" />
+    <Compile Include="CountyService.cs" />
+    <Compile Include="DepartmentService.cs" />
+    <Compile Include="EmployeeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
