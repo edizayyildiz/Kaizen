@@ -62,12 +62,14 @@
     <Compile Include="Builders\DepartmentBuilder.cs" />
     <Compile Include="Builders\EmployeeBuilder.cs" />
     <Compile Include="Builders\SuggestionBuilder.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\201903080929283_InitialCreate.cs" />
     <Compile Include="Migrations\201903080929283_InitialCreate.Designer.cs">
       <DependentUpon>201903080929283_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
