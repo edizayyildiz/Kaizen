@@ -15,7 +15,7 @@ namespace Kaizen.Model
         }
         [Display(Name = "Departman Adı")]
         public string Name { get; set; }
-        public int CompanyId { get; set; }
+        public Guid CompanyId { get; set; }
         public virtual Company Company { get; set; }
         [Display(Name = "Çalışanlar")]
         public virtual ICollection<Employee> Employees { get; set; }
