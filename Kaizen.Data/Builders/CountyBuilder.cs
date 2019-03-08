@@ -12,7 +12,10 @@ namespace Kaizen.Data.Builders
     {
         public CountyBuilder(EntityTypeConfiguration<County> entity)
         {
+            entity.HasKey(p=>p.Id);
+            entity.Property(p => p.Name).IsRequired().HasMaxLength(200);
 
+            entity.HasRequired(p => p.City).WithMany(w => w.Counties).HasForeignKey(p => p.CityId);
         }
     }
 }

@@ -12,7 +12,13 @@ namespace Kaizen.Data.Builders
     {
         public SuggestionBuilder(EntityTypeConfiguration<Suggestion> entity)
         {
+            entity.HasKey(p => p.Id);
+            entity.Property(p => p.Posation).IsRequired().HasMaxLength(200);
+            entity.Property(p => p.CurrentStatus).IsRequired();
+            entity.Property(p => p.SuggestedStatus).IsRequired();
+            entity.Property(p => p.Assessment).IsRequired();
 
+            entity.HasRequired(p => p.Employee).WithMany(w => w.Suggestions).HasForeignKey(p => p.EmployeeId);
         }
     }
 }

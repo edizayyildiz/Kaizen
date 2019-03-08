@@ -12,7 +12,10 @@ namespace Kaizen.Data.Builders
     {
         public DepartmentBuilder(EntityTypeConfiguration<Department> entity)
         {
+            entity.HasKey(p => p.Id);
+            entity.Property(p => p.Name).IsRequired().HasMaxLength(200);
 
+            entity.HasRequired(p=>p.Company).WithMany(w=>w.Departments).HasForeignKey(p=>p.CompanyId);
         }
     }
 }

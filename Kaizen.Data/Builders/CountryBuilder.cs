@@ -12,7 +12,8 @@ namespace Kaizen.Data.Builders
     {
         public CountryBuilder(EntityTypeConfiguration<Country> entity)
         {
-
+            entity.HasKey(p => p.Id);
+            entity.Property(p => p.Name).IsRequired().HasMaxLength(200);
         }
     }
 }
