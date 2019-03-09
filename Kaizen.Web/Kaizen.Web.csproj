@@ -188,8 +188,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\SuperAdmin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -2180,15 +2180,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Areas\SuperAdmin\Views\web.config" />
-    <Content Include="Areas\SuperAdmin\Views\Home\About.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\Home\Contact.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\Shared\Lockout.cshtml" />
-    <Content Include="Areas\SuperAdmin\Views\_ViewStart.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -2197,6 +2188,15 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Home\About.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Contact.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Lockout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2262,7 +2262,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\SuperAdmin\Models\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
