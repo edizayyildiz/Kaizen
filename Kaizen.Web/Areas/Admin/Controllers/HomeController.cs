@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Kaizen.Web.Areas.SuperAdmin.Controllers
+namespace Kaizen.Web.Areas.Admin.Controllers
 {
-    [RouteArea("SuperAdmin")]
+    [RouteArea("Admin")]
     public class HomeController : Controller
     {
-        // GET: SuperAdmin/Home
+        // GET: Admin/Home
         public ActionResult Index()
         {
             return View();

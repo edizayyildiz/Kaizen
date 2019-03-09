@@ -1,24 +1,24 @@
 ﻿using System.Web.Mvc;
 
-namespace Kaizen.Web.Areas.SuperAdmin
+namespace Kaizen.Web.Areas.Admin
 {
-    public class SuperAdminAreaRegistration : AreaRegistration
+    public class AdminAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "SuperAdmin";
+                return "Admin";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "SuperAdmin_default",
-                "SuperAdmin/{controller}/{action}/{id}",
+                "Admin_default",
+                "Admin/{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "Kaizen.Web.Areas.SuperAdmin.Controllers" }
+                namespaces: new[] { "Kaizen.Web.Areas.Admin.Controllers" }
             );
         }
     }
