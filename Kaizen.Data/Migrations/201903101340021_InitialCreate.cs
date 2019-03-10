@@ -92,6 +92,7 @@ namespace Kaizen.Data.Migrations
                         FirstName = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 100),
                         UserName = c.String(nullable: false, maxLength: 200),
+                        Posation = c.String(nullable: false, maxLength: 200),
                         Email = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
@@ -105,7 +106,6 @@ namespace Kaizen.Data.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        Posation = c.String(nullable: false, maxLength: 200),
                         CurrentStatus = c.String(nullable: false),
                         SuggestedStatus = c.String(nullable: false),
                         Assessment = c.Int(nullable: false),
