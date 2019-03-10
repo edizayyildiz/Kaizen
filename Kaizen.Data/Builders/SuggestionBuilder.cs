@@ -17,7 +17,7 @@ namespace Kaizen.Data.Builders
             entity.Property(p => p.SuggestedStatus).IsRequired();
             entity.Property(p => p.Assessment).IsRequired();
 
-            entity.HasRequired(p => p.Employee).WithMany(w => w.Suggestions).HasForeignKey(p => p.EmployeeId);
+            entity.HasOptional(p => p.Employee).WithMany(w => w.Suggestions).HasForeignKey(p => p.EmployeeId);
         }
     }
 }

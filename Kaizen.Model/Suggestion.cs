@@ -15,7 +15,7 @@ namespace Kaizen.Model
         public string SuggestedStatus { get; set; }
         [Display(Name = "Değerlendirme")]
         public Assessment Assessment { get; set; }
-        public Guid EmployeeId { get; set; }
+        public Guid? EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
     }
 }
