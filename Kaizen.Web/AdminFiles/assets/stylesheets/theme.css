@@ -1532,7 +1532,7 @@ html.header-dark .header .input-search .input-group-btn .btn-default {
 }
 
 .sidebar-left .sidebar-header .sidebar-title {
-	color: #465162;
+	color: white;
 	padding: 15px;
 	font-size: 15px;
 	font-size: 1.5rem;
@@ -2161,7 +2161,7 @@ html.boxed.no-overflowscrolling.custom-scroll .inner-menu .nano > .nano-content 
 }
 
 .inner-menu .title {
-	color: #465162;
+	color: white;
 	font-weight: 600;
 	margin: 10px 0;
 	padding: 0;
@@ -5221,7 +5221,7 @@ html.header-dark .userbox .dropdown-menu a {
 .sidebar-widget .widget-header h6 {
 	font-size: 13px;
 	font-size: 1.3rem;
-	color: #465162;
+	color: white;
 	font-weight: 600;
 	margin: 0;
 	padding: 0;
@@ -5255,7 +5255,7 @@ html.header-dark .userbox .dropdown-menu a {
 	font-size: 1.7rem;
 	line-height: 13px;
 	line-height: 1.3rem;
-	color: #465162;
+	color: white;
 	position: absolute;
 	right: 0;
 	top: 0;
