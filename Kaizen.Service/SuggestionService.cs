@@ -71,7 +71,6 @@ namespace Kaizen.Service
             model.Assessment = entity.Assessment;
             model.CurrentStatus = entity.CurrentStatus;
             model.EmployeeId = entity.EmployeeId;
-            model.Posation = entity.Posation;
             model.SuggestedStatus = entity.SuggestedStatus;
             suggestionRepository.Update(model);
             unitOfWork.SaveChanges();

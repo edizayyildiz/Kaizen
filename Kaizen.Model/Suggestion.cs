@@ -9,8 +9,6 @@ namespace Kaizen.Model
 {
     public class Suggestion : BaseEntity
     {
-        [Display(Name = "Görevi")]
-        public string Posation { get; set; }
         [Display(Name = "Mevcut Durum")]
         public string CurrentStatus { get; set; }
         [Display(Name = "Önerilen Durum")]

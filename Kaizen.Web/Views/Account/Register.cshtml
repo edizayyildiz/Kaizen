@@ -1,12 +1,11 @@
-﻿@using Kaizen.Web.Models
-@model Kaizen.Web.Models.RegisterViewModel
+﻿@model Kaizen.Web.Models.RegisterViewModel
 @{
     ViewBag.Title = "Kayıt Ol";
     Layout = null;
 }
 
 <!doctype html>
-<html class="fixed">
+<html class="fixed" lang="tr">
 <head>
 
     <!-- Basic -->
@@ -48,32 +47,56 @@
             <a href="/" class="logo pull-left">
                 <img src="~/AdminFiles/assets/images/logo.png" height="54" alt="Porto Admin" />
             </a>
-
             <div class="panel panel-sign">
                 <div class="panel-title-sign mt-xl text-right">
-                    <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign Up</h2>
+                    <h2 class="title text-uppercase text-bold m-none" style="letter-spacing: 0.5px;"><i class="fa fa-user mr-xs"></i> Hesap Oluştur <br /><small style="color: white; letter-spacing: 1px;">-Kurumsal-</small></h2>
                 </div>
                 <div class="panel-body">
-
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
-                        <h4>Create a new account.</h4>
-                        <hr />
                         @Html.ValidationSummary("", new { @class = "text-danger" })
                         <div class="form-group mb-lg">
-                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.Label("Name", "Şirket Adı", new { @class = "control-label" })
+                                    @Html.TextBox("Name", null, new { @class = "form-control input-lg" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-lg">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.Label("Sector", "Sektör", new { @class = "control-label" })
+                                    @Html.TextBox("Sector", null, new { @class = "form-control input-lg" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("HeadCount", "Şirket Çalışan Sayısı", new { @class = "control-label" })
+                                    @Html.TextBox("HeadCount", null, new { @class = "form-control input-lg" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-lg">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.Label("Description", "Açıklama", new { @class = "control-label" })
+                                    @Html.TextArea("Description", null, new { @class = "form-control", style = "resize: none; height: 100px;" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-lg">
+                            @Html.LabelFor(m => m.Email, "E-Posta", new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg" })
                         </div>
                         <div class="form-group mb-none">
                             <div class="row">
                                 <div>
                                     <div class="col-sm-6 mb-lg">
-                                        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                                        @Html.LabelFor(m => m.Password, "Parola", new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg" })
                                     </div>
                                     <div class="col-sm-6 mb-lg">
-                                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                                        @Html.LabelFor(m => m.ConfirmPassword, "Parola(Tekrar)", new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input-lg" })
                                     </div>
                                 </div>
@@ -84,11 +107,11 @@
                                 <div class="col-sm-8">
                                     <div class="checkbox-custom checkbox-default">
                                         <input id="AgreeTerms" name="agreeterms" type="checkbox" />
-                                        <label for="AgreeTerms">I agree with <a href="#">terms of use</a></label>
+                                        <label for="AgreeTerms"><a href="#">Kullanım şartları</a>nı kabul ediyorum</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 text-right">
-                                    <button type="submit" class="btn btn-primary hidden-xs">Sign Up</button>
+                                    <button type="submit" class="btn btn-primary hidden-xs">Kayıt Ol</button>
                                     <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign Up</button>
                                 </div>
                             </div>
