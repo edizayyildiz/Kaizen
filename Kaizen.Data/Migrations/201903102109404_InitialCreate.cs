@@ -92,7 +92,7 @@ namespace Kaizen.Data.Migrations
                         FirstName = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 100),
                         UserName = c.String(nullable: false, maxLength: 200),
-                        Posation = c.String(nullable: false, maxLength: 200),
+                        Position = c.String(nullable: false, maxLength: 200),
                         Email = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
@@ -109,14 +109,14 @@ namespace Kaizen.Data.Migrations
                         CurrentStatus = c.String(nullable: false),
                         SuggestedStatus = c.String(nullable: false),
                         Assessment = c.Int(nullable: false),
-                        EmployeeId = c.Guid(nullable: false),
+                        EmployeeId = c.Guid(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                         CreatedBy = c.String(),
                         UpdatedBy = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: true)
+                .ForeignKey("dbo.Employees", t => t.EmployeeId)
                 .Index(t => t.EmployeeId);
             
             CreateTable(

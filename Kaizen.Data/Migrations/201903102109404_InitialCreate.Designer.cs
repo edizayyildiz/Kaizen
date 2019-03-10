@@ -7,13 +7,13 @@ namespace Kaizen.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AssessmentTypeAssessmentForSuggestion : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AssessmentTypeAssessmentForSuggestion));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903101740076_AssessmentTypeAssessmentForSuggestion"; }
+            get { return "201903102109404_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

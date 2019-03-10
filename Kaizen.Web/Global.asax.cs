@@ -56,6 +56,9 @@ namespace Kaizen.Web
             builder.RegisterType(typeof(DepartmentService)).As(typeof(IDepartmentService)).InstancePerDependency();
             builder.RegisterType(typeof(EmployeeService)).As(typeof(IEmployeeService)).InstancePerDependency();
             builder.RegisterType(typeof(SuggestionService)).As(typeof(ISuggestionService)).InstancePerDependency();
+
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication.User.Identity).As<System.Security.Principal.IIdentity>();
+
             //builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             //builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
             //builder.Register(c => new UserStore<ApplicationUser>(c.Resolve<ApplicationDbContext>())).AsImplementedInterfaces().InstancePerRequest();
