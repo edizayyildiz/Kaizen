@@ -71,7 +71,7 @@ namespace Kaizen.Service
             model.FirstName = entity.FirstName;
             model.LastName = entity.LastName;
             model.UserName = entity.UserName;
-            model.Posation = entity.Posation;
+            model.Position = entity.Position;
             model.Departments.Clear();
             foreach (var item in entity.Departments)
             {

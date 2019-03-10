@@ -152,29 +152,29 @@ namespace Kaizen.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, string Name, string Sector, int HeadCount, string Description, string FirstName, string LastName, string Posation, string UserName)
+        public async Task<ActionResult> Register(RegisterViewModel model, string Name, string Sector, int HeadCount, string Description, string FirstName, string LastName, string Position, string UserName)
         {
             if (ModelState.IsValid)
             {
-                var company = new Company();
-                company.Name = Name;
-                company.Sector = Sector;
-                company.HeadCount = HeadCount;
-                company.Description = Description;
-                companyService.Insert(company);
-
-                var employee = new Employee();
-                employee.Email = model.Email;
-                employee.FirstName = FirstName;
-                employee.LastName = LastName;
-                employee.Posation = Posation;
-                employee.UserName = UserName;
-                employeeService.Insert(employee);
-
                 var user = new ApplicationUser { UserName = UserName, Email = model.Email, FirstName = FirstName, LastName = LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var company = new Company();
+                    company.Name = Name;
+                    company.Sector = Sector;
+                    company.HeadCount = HeadCount;
+                    company.Description = Description;
+                    companyService.Insert(company);
+
+                    var employee = new Employee();
+                    employee.Email = model.Email;
+                    employee.FirstName = FirstName;
+                    employee.LastName = LastName;
+                    employee.Position = Position;
+                    employee.UserName = UserName;
+                    employeeService.Insert(employee);
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

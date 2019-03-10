@@ -18,7 +18,7 @@ namespace Kaizen.Model
         public string LastName { get; set; }
         public string UserName { get; set; }
         [Display(Name = "Görevi")]
-        public string Posation { get; set; }
+        public string Position { get; set; }
         public string Email { get; set; }
         public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Suggestion> Suggestions { get; set; }
