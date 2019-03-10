@@ -26,7 +26,6 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         {
             var suggestion = new Suggestion();
             suggestion.Assessment = Assessment.NoAssessment;
-            suggestion.Employee.FirstName = "Name";
             return View(suggestion);
         }
 
