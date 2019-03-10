@@ -1,12 +1,14 @@
 ﻿@using Kaizen.Web.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Giriş Yap";
     Layout = null;
 }
 <!doctype html>
 <html lang="tr" class="fixed">
 <head>
+    <title>@ViewBag.Title</title>
+
     <!-- Basic -->
     <meta charset="UTF-8">
 
@@ -48,62 +50,29 @@
 
             <div class="panel panel-sign">
                 <div class="panel-title-sign mt-xl text-right">
-                    <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+                    <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Giriş Yap</h2>
                 </div>
                 <div class="panel-body">
-                    <form action="index.html" method="post">
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
                         <div class="form-group mb-lg">
-                            <label>Username</label>
-                            <div class="input-group input-group-icon">
-                                <input name="username" type="text" class="form-control input-lg" />
-                                <span class="input-group-addon">
-                                    <span class="icon icon-lg">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                </span>
-                            </div>
+                            @Html.LabelFor(m => m.Email, "E-Posta Adresiniz", new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, null, new { @class = "form-control input-lg" })
                         </div>
-
                         <div class="form-group mb-lg">
-                            <div class="clearfix">
-                                <label class="pull-left">Password</label>
-                                <a href="pages-recover-password.html" class="pull-right">Lost Password?</a>
-                            </div>
-                            <div class="input-group input-group-icon">
-                                <input name="pwd" type="password" class="form-control input-lg" />
-                                <span class="input-group-addon">
-                                    <span class="icon icon-lg">
-                                        <i class="fa fa-lock"></i>
-                                    </span>
-                                </span>
-                            </div>
+                            @Html.LabelFor(m => m.Password, "Şifreniz", new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg" })
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <div class="checkbox-custom checkbox-default">
-                                    <input id="RememberMe" name="rememberme" type="checkbox" />
-                                    <label for="RememberMe">Remember Me</label>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-8 text-right">
+                                    <button type="submit" class="btn btn-primary">Giriş Yap</button>
                                 </div>
                             </div>
-                            <div class="col-sm-4 text-right">
-                                <button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
-                                <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
-                            </div>
                         </div>
-
-                        <span class="mt-lg mb-lg line-thru text-center text-uppercase">
-                            <span>or</span>
-                        </span>
-
-                        <div class="mb-xs text-center">
-                            <a class="btn btn-facebook mb-md ml-xs mr-xs">Connect with <i class="fa fa-facebook"></i></a>
-                            <a class="btn btn-twitter mb-md ml-xs mr-xs">Connect with <i class="fa fa-twitter"></i></a>
-                        </div>
-
-                        <p class="text-center">Don't have an account yet? <a href="pages-signup.html">Sign Up!</a>
-
-                    </form>
+                    }
                 </div>
             </div>
 
