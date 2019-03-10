@@ -59,7 +59,7 @@
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.Label("Şirket Adı", new { @class = "control-label" })
+                                    @Html.Label("Name", "Şirket Adı", new { @class = "control-label" })
                                     @Html.TextBox("Name", null, new { @class = "form-control input-lg" })
                                 </div>
                             </div>
@@ -67,11 +67,11 @@
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("Sektör", new { @class = "control-label" })
-                                    @Html.TextBox("Sector", "", new { @class = "form-control input-lg" })
+                                    @Html.Label("Sector", "Sektör", new { @class = "control-label" })
+                                    @Html.TextBox("Sector", null, new { @class = "form-control input-lg" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("Kişi Sayısı", new { @class = "control-label" })
+                                    @Html.Label("HeadCount", "Kişi Sayısı", new { @class = "control-label" })
                                     @Html.TextBox("HeadCount", null, new { @class = "form-control input-lg" })
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.Label("Açıklama", new { @class = "control-label" })
+                                    @Html.Label("Description", "Açıklama", new { @class = "control-label" })
                                     @Html.TextArea("Description", null, new { @class = "form-control", style = "resize: none; height: 100px;" })
                                 </div>
                             </div>
