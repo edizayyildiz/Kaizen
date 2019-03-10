@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     @Html.Label("HeadCount", "Şirket Çalışan Sayısı", new { @class = "control-label" })
-                                    @Html.TextBox("HeadCount", null, new { @class = "form-control input-lg" })
+                                    @Html.TextBox("HeadCount", null, new { @class = "form-control input-lg", type = "number", min = "0" })
                                 </div>
                             </div>
                         </div>
@@ -81,6 +81,30 @@
                                 <div class="col-md-12">
                                     @Html.Label("Description", "Açıklama", new { @class = "control-label" })
                                     @Html.TextArea("Description", null, new { @class = "form-control", style = "resize: none; height: 100px;" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-lg">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.Label("FirstName", "Yetkili Adı", new { @class = "control-label" })
+                                    @Html.TextBox("FirstName", null, new { @class = "form-control input-lg" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("LastName", "Yetkili Soyadı", new { @class = "control-label" })
+                                    @Html.TextBox("LastName", null, new { @class = "form-control input-lg" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-lg">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.Label("UserName", "Kullanıcı Adı", new { @class = "control-label" })
+                                    @Html.TextBox("UserName", null, new { @class = "form-control input-lg" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("Posation", "Pozisyon", new { @class = "control-label" })
+                                    @Html.TextBox("Posation", null, new { @class = "form-control input-lg" })
                                 </div>
                             </div>
                         </div>

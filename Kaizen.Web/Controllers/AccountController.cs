@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Kaizen.Web.Models;
 using Kaizen.Model;
+using Kaizen.Service;
 
 namespace Kaizen.Web.Controllers
 {
@@ -18,12 +19,16 @@ namespace Kaizen.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ICompanyService companyService;
+        private readonly IEmployeeService employeeService;
 
-        public AccountController()
+        public AccountController(ICompanyService companyService, IEmployeeService employeeService)
         {
+            this.companyService = companyService;
+            this.employeeService = employeeService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +40,9 @@ namespace Kaizen.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -52,7 +57,6 @@ namespace Kaizen.Web.Controllers
                 _userManager = value;
             }
         }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -121,7 +125,7 @@ namespace Kaizen.Web.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -148,16 +152,31 @@ namespace Kaizen.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string Name, string Sector, int HeadCount, string Description, string FirstName, string LastName, string Posation, string UserName)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var company = new Company();
+                company.Name = Name;
+                company.Sector = Sector;
+                company.HeadCount = HeadCount;
+                company.Description = Description;
+                companyService.Insert(company);
+
+                var employee = new Employee();
+                employee.Email = model.Email;
+                employee.FirstName = FirstName;
+                employee.LastName = LastName;
+                employee.Posation = Posation;
+                employee.UserName = UserName;
+                employeeService.Insert(employee);
+
+                var user = new ApplicationUser { UserName = UserName, Email = model.Email, FirstName = FirstName, LastName = LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
