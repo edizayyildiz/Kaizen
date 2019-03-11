@@ -17,6 +17,7 @@ namespace Kaizen.Web
 
             cfg.CreateMap<Employee, EmployeeViewModel>().ReverseMap();
             cfg.CreateMap<Company, CompanyViewModel>().ReverseMap();
+            cfg.CreateMap<Suggestion, SuggestionViewModel>().ReverseMap();
 
             Mapper.Initialize(cfg);
         }

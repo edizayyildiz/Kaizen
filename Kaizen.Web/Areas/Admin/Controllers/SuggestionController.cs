@@ -1,5 +1,7 @@
-﻿using Kaizen.Model;
+﻿using AutoMapper;
+using Kaizen.Model;
 using Kaizen.Service;
+using Kaizen.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,32 +20,51 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         // GET: Admin/Suggestion
         public ActionResult Index()
         {
-            var suggestion = suggestionService.GetAll();
-            return View(suggestion);
+            var suggestions = suggestionService.GetAll();
+            var suggestionViewModels = Mapper.Map<IEnumerable<SuggestionViewModel>>(suggestions);
+            return View(suggestionViewModels);
         }
 
         public ActionResult Create()
         {
-            var suggestion = new Suggestion();
-            suggestion.Assessment = Assessment.NoAssessment;
-            return View(suggestion);
+            var suggestionViewModel = new SuggestionViewModel();
+            suggestionViewModel.Assessment = Assessment.NoAssessment;
+            return View(suggestionViewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(Suggestion suggestion)
+        public ActionResult Create(SuggestionViewModel suggestionViewModel)
         {
             if (ModelState.IsValid)
             {
+                var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
                 suggestionService.Insert(suggestion);
                 return RedirectToAction("index");
             }
-            return View(suggestion);
+            return View(suggestionViewModel);
         }
 
         public ActionResult Edit(Guid id)
         {
             var suggestion = suggestionService.Find(id);
-            return View();
+            var suggestionViewModel = Mapper.Map<SuggestionViewModel>(suggestion);
+            if (suggestionViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(suggestionViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(SuggestionViewModel suggestionViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
+                suggestionService.Update(suggestion);
+                return RedirectToAction("index");
+            }
+            return View(suggestionViewModel);
         }
     }
 }

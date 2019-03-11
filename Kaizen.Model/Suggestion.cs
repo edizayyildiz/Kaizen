@@ -9,11 +9,8 @@ namespace Kaizen.Model
 {
     public class Suggestion : BaseEntity
     {
-        [Display(Name = "Mevcut Durum")]
         public string CurrentStatus { get; set; }
-        [Display(Name = "Önerilen Durum")]
         public string SuggestedStatus { get; set; }
-        [Display(Name = "Değerlendirme")]
         public Assessment Assessment { get; set; }
         public Guid? EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
