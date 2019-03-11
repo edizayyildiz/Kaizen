@@ -71,8 +71,11 @@ namespace Kaizen.Web
             //});
 
             // Set the dependency resolver to be Autofac.
+
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            new AutoMapperConfig().Initialize();
         }
     }
 }
