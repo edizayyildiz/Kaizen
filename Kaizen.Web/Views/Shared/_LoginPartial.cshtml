@@ -13,15 +13,12 @@
 }
 else
 {
-    <li>
-        <div class="dropdown-menu">
-            <ul>
-                @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-
-                //liste gelicek
-                
-            </ul>
-        </div>
+    <li class="has-dropdown">
+        <a>Kayıt Ol</a>
+        <ul class="dropdown">
+            <li>@Html.ActionLink("Kurumsal", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Bireysel", "UserRegister", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        </ul>
     </li>
     <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }
