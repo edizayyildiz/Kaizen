@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Kaizen.Web.Models;
 using Kaizen.Model;
 using Kaizen.Service;
+using AutoMapper;
 
 namespace Kaizen.Web.Controllers
 {
@@ -28,10 +29,12 @@ namespace Kaizen.Web.Controllers
             this.employeeService = employeeService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICompanyService companyService, IEmployeeService employeeService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this.companyService = companyService;
+            this.employeeService = employeeService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -156,23 +159,25 @@ namespace Kaizen.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = UserName, Email = model.Email, FirstName = FirstName, LastName = LastName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = FirstName, LastName = LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var company = new Company();
-                    company.Name = Name;
-                    company.Sector = Sector;
-                    company.HeadCount = HeadCount;
-                    company.Description = Description;
+                    var companyViewModel = new CompanyViewModel();
+                    companyViewModel.Name = Name;
+                    companyViewModel.Sector = Sector;
+                    companyViewModel.HeadCount = HeadCount;
+                    companyViewModel.Description = Description;
+                    var company = Mapper.Map<Company>(companyViewModel);
                     companyService.Insert(company);
 
-                    var employee = new Employee();
-                    employee.Email = model.Email;
-                    employee.FirstName = FirstName;
-                    employee.LastName = LastName;
-                    employee.Position = Position;
-                    employee.UserName = UserName;
+                    var employeeViewModel = new EmployeeViewModel();
+                    employeeViewModel.Email = model.Email;
+                    employeeViewModel.FirstName = FirstName;
+                    employeeViewModel.LastName = LastName;
+                    employeeViewModel.Position = Position;
+                    employeeViewModel.UserName = UserName;
+                    var employee = Mapper.Map<Employee>(employeeViewModel);
                     employeeService.Insert(employee);
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
