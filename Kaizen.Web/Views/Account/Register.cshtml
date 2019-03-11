@@ -44,12 +44,12 @@
     <!-- start: page -->
     <section class="body-sign">
         <div class="center-sign">
-            <a href="/" class="logo pull-left">
-                <img src="~/AdminFiles/assets/images/logo.png" height="54" alt="Porto Admin" />
-            </a>
             <div class="panel panel-sign">
                 <div class="panel-title-sign mt-xl text-right">
-                    <h2 class="title text-uppercase text-bold m-none" style="letter-spacing: 0.5px;"><i class="fa fa-user mr-xs"></i> Hesap Oluştur <br /><small style="color: white; letter-spacing: 1px;">-Kurumsal-</small></h2>
+                    <a href="/" class="logo pull-left">
+                        <img src="~/AdminFiles/assets/images/logo.png" height="54" alt="Porto Admin" />
+                    </a>
+                    <h2 class="title text-uppercase text-bold m-none" style="letter-spacing: 0.5px;"><i class="fa fa-user mr-xs"></i> Hesap Oluştur <br /><small style="color: white; letter-spacing: 1px; font-size: 10px;">-Kurumsal-</small></h2>
                 </div>
                 <div class="panel-body">
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
