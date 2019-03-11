@@ -197,6 +197,51 @@ namespace Kaizen.Web.Controllers
             return View(model);
         }
 
+        // GET: /Account/UserRegister
+        [AllowAnonymous]
+        public ActionResult UserRegister()
+        {
+            return View();
+        }
+
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UserRegister(RegisterViewModel model, string Name, string FirstName, string LastName, string Position, string UserName)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = FirstName, LastName = LastName };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var employeeViewModel = new EmployeeViewModel();
+                    employeeViewModel.Email = model.Email;
+                    employeeViewModel.FirstName = FirstName;
+                    employeeViewModel.LastName = LastName;
+                    employeeViewModel.Position = Position;
+                    employeeViewModel.UserName = UserName;
+                    var employee = Mapper.Map<Employee>(employeeViewModel);
+                    employeeService.Insert(employee);
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
