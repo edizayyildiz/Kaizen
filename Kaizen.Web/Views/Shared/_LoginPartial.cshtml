@@ -6,19 +6,19 @@
         @Html.AntiForgeryToken()
 
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Çıkış</a></li>
     }
 }
 else
 {
     <li class="has-dropdown">
-        <a>Kayıt Ol</a>
+        <a>Kayıt</a>
         <ul class="dropdown">
             <li>@Html.ActionLink("Kurumsal", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li>@Html.ActionLink("Bireysel", "UserRegister", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         </ul>
     </li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li>@Html.ActionLink("Giriş", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }
