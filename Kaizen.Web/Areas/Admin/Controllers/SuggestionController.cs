@@ -39,5 +39,11 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             }
             return View(suggestion);
         }
+
+        public ActionResult Edit(Guid id)
+        {
+            var suggestion = suggestionService.Find(id);
+            return View();
+        }
     }
 }
