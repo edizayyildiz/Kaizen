@@ -57,6 +57,7 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Assessment.cs" />
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Branch.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="Country.cs" />

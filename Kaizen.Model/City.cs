@@ -11,10 +11,12 @@ namespace Kaizen.Model
         public City()
         {
             Counties = new HashSet<County>();
+            Branches = new HashSet<Branch>();
         }
         public string Name { get; set; }
         public Guid CountryId { get; set; }
         public virtual Country Country { get; set; }
+        public virtual ICollection<Branch> Branches { get; set; }
         public virtual ICollection<County> Counties { get; set; }
     }
 }

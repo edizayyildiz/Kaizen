@@ -13,7 +13,7 @@ namespace Kaizen.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201903102109404_InitialCreate"; }
+            get { return "201903120653384_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

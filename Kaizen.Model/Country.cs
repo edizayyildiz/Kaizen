@@ -11,9 +11,10 @@ namespace Kaizen.Model
         public Country()
         {
             Cities = new HashSet<City>();
+            Branches = new HashSet<Branch>();
         }
         public string Name { get; set; }
-
+        public virtual ICollection<Branch> Branches { get; set; }
         public virtual ICollection<City> Cities { get; set; }
     }
 }

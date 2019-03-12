@@ -29,6 +29,7 @@ namespace Kaizen.Data
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Suggestion> Suggestions { get; set; }
+        public virtual DbSet<Branch> Branches { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +42,8 @@ namespace Kaizen.Data
             new DepartmentBuilder(modelBuilder.Entity<Department>());
             new EmployeeBuilder(modelBuilder.Entity<Employee>());
             new SuggestionBuilder(modelBuilder.Entity<Suggestion>());
+            new BranchBuilder(modelBuilder.Entity<Branch>());
+
         }
     }
 }

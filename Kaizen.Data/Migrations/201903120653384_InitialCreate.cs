@@ -8,6 +8,30 @@ namespace Kaizen.Data.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Branches",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        CompanyId = c.Guid(nullable: false),
+                        CountryId = c.Guid(),
+                        CityId = c.Guid(),
+                        CountyId = c.Guid(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        CreatedBy = c.String(),
+                        UpdatedBy = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Cities", t => t.CityId)
+                .ForeignKey("dbo.Companies", t => t.CompanyId, cascadeDelete: true)
+                .ForeignKey("dbo.Countries", t => t.CountryId)
+                .ForeignKey("dbo.Counties", t => t.CountyId)
+                .Index(t => t.CompanyId)
+                .Index(t => t.CountryId)
+                .Index(t => t.CityId)
+                .Index(t => t.CountyId);
+            
+            CreateTable(
                 "dbo.Cities",
                 c => new
                     {
@@ -210,10 +234,14 @@ namespace Kaizen.Data.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Branches", "CountyId", "dbo.Counties");
+            DropForeignKey("dbo.Branches", "CountryId", "dbo.Countries");
+            DropForeignKey("dbo.Branches", "CompanyId", "dbo.Companies");
             DropForeignKey("dbo.Suggestions", "EmployeeId", "dbo.Employees");
             DropForeignKey("dbo.EmployeeDepartments", "Department_Id", "dbo.Departments");
             DropForeignKey("dbo.EmployeeDepartments", "Employee_Id", "dbo.Employees");
             DropForeignKey("dbo.Departments", "CompanyId", "dbo.Companies");
+            DropForeignKey("dbo.Branches", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Cities", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.Counties", "CityId", "dbo.Cities");
             DropIndex("dbo.EmployeeDepartments", new[] { "Department_Id" });
@@ -228,6 +256,10 @@ namespace Kaizen.Data.Migrations
             DropIndex("dbo.Departments", new[] { "CompanyId" });
             DropIndex("dbo.Counties", new[] { "CityId" });
             DropIndex("dbo.Cities", new[] { "CountryId" });
+            DropIndex("dbo.Branches", new[] { "CountyId" });
+            DropIndex("dbo.Branches", new[] { "CityId" });
+            DropIndex("dbo.Branches", new[] { "CountryId" });
+            DropIndex("dbo.Branches", new[] { "CompanyId" });
             DropTable("dbo.EmployeeDepartments");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
@@ -241,6 +273,7 @@ namespace Kaizen.Data.Migrations
             DropTable("dbo.Countries");
             DropTable("dbo.Counties");
             DropTable("dbo.Cities");
+            DropTable("dbo.Branches");
         }
     }
 }
