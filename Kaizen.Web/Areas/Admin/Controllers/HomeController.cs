@@ -48,7 +48,6 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var userName = User.Identity.Name;
             var currentUser = await UserManager.FindByNameAsync(userName);
             ViewBag.CurrentUser = currentUser.FullName;
-            ViewBag.UserMail = userName;
             return View();
         }
     }
