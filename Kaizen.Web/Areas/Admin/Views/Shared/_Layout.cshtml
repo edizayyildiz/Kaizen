@@ -238,7 +238,7 @@
                             <img src="~/AdminFiles/assets/images/!logged-user.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="~/AdminFiles/assets/images/!logged-user.jpg" />
                         </figure>
                         <div class="profile-info" data-lock-name="Joseph Doe" data-lock-email="johndoe@JSOFT.com">
-                            <span class="name">@ViewBag.CurrentUser</span>
+                            <span class="name">@(ViewBag.CurrentUser ?? "Kullanıcı Adı")</span>
                             <span class="role">administrator</span>
                         </div>
                         <i class="fa custom-caret"></i>

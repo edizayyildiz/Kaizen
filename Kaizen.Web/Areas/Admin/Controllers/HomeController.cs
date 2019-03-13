@@ -45,9 +45,9 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         // GET: Admin/Home
         public async Task<ActionResult> Index()
         {
-            var userName = User.Identity.Name;
-            var currentUser = await UserManager.FindByNameAsync(userName);
-            ViewBag.CurrentUser = currentUser.FullName;
+            //var userName = User.Identity.Name;
+            //var currentUser = await UserManager.FindByNameAsync(userName);
+            //ViewBag.CurrentUser = currentUser.FullName;
             return View();
         }
     }
