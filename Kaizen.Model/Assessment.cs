@@ -8,8 +8,8 @@ namespace Kaizen.Model
 {
     public enum Assessment
     {
-        Confirmed = 1,
-        Rejected = 2,
-        NoAssessment = 3
+        Onay = 1,
+        Red = 2,
+        Bekleniyor = 3
     }
 }

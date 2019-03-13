@@ -62,7 +62,7 @@ namespace Kaizen.Service
         public void Insert(Suggestion entity)
         {
             suggestionRepository.Insert(entity);
-            entity.Assessment = Assessment.NoAssessment;
+            entity.Assessment = Assessment.Bekleniyor;
             unitOfWork.SaveChanges();
         }
 

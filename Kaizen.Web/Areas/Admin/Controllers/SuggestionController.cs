@@ -13,7 +13,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class SuggestionController : ControllerBase
     {
         private readonly ISuggestionService suggestionService;
-        public SuggestionController(ISuggestionService suggestionService, ApplicationUserManager userManager):base(userManager)
+        public SuggestionController(ISuggestionService suggestionService, ApplicationUserManager userManager) : base(userManager)
         {
             this.suggestionService = suggestionService;
             this.userManager = userManager;

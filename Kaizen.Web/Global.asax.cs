@@ -48,6 +48,7 @@ namespace Kaizen.Web
 
             builder.RegisterType<ApplicationDbContext>().InstancePerRequest();
             builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication.User.Identity).As<System.Security.Principal.IIdentity>();
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerDependency();
             builder.RegisterType(typeof(CityService)).As(typeof(ICityService)).InstancePerDependency();
             builder.RegisterType(typeof(CompanyService)).As(typeof(ICompanyService)).InstancePerDependency();
@@ -57,7 +58,6 @@ namespace Kaizen.Web
             builder.RegisterType(typeof(EmployeeService)).As(typeof(IEmployeeService)).InstancePerDependency();
             builder.RegisterType(typeof(SuggestionService)).As(typeof(ISuggestionService)).InstancePerDependency();
 
-            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication.User.Identity).As<System.Security.Principal.IIdentity>();
 
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();

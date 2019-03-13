@@ -26,6 +26,8 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var userName = User.Identity.Name;
             var currentUser = userManager.FindByNameAsync(userName).Result; // result async i senkrona çeviriyor
             ViewBag.CurrentUser = currentUser.FullName;
+            ViewBag.CurrentEmail = currentUser.Email;
+            ViewBag.CurrentUserName = currentUser.UserName;
 
             base.OnActionExecuted(filterContext);
         }

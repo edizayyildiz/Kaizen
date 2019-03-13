@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Principal;
 
 namespace Kaizen.Data
 {
@@ -50,16 +50,18 @@ namespace Kaizen.Data
         {
             entity.Id = Guid.NewGuid();
             entity.CreatedAt = DateTime.Now;
-            entity.CreatedBy = identity.Name;
+            var transactionOwner = db.Set<Employee>().FirstOrDefault(e => e.Email == identity.Name);
+            entity.CreatedBy = transactionOwner.FirstName + " " + transactionOwner.LastName + " - " + transactionOwner.UserName;
             entity.UpdatedAt = DateTime.Now;
-            entity.UpdatedBy = identity.Name;
+            entity.UpdatedBy = transactionOwner.FirstName + " " + transactionOwner.LastName + " - " + transactionOwner.UserName;
             entities.Add(entity);
         }
 
         public void Update(T entity)
         {
             entity.UpdatedAt = DateTime.Now;
-            entity.UpdatedBy = identity.Name;
+            var transactionOwner = db.Set<Employee>().FirstOrDefault(e => e.Email == identity.Name);
+            entity.UpdatedBy = transactionOwner.FirstName + " " + transactionOwner.LastName + " - " + transactionOwner.UserName;
             db.Entry(entity).State = EntityState.Modified;
         }
     }

@@ -9,12 +9,13 @@ using System.Web.Mvc;
 
 namespace Kaizen.Web.Areas.Admin.Controllers
 {
-    public class CompanyController : Controller
+    public class CompanyController : ControllerBase
     {
         private readonly ICompanyService companyService;
-        public CompanyController(ICompanyService companyService)
+        public CompanyController(ICompanyService companyService, ApplicationUserManager userManager):base(userManager)
         {
             this.companyService = companyService;
+
         }
         // GET: Admin/Company
         public ActionResult Index()
