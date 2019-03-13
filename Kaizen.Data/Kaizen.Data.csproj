@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201903121005496_AddedBranchName.Designer.cs">
       <DependentUpon>201903121005496_AddedBranchName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903131848454_CompanyIdToEmployee.cs" />
+    <Compile Include="Migrations\201903131848454_CompanyIdToEmployee.Designer.cs">
+      <DependentUpon>201903131848454_CompanyIdToEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -97,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903121005496_AddedBranchName.resx">
       <DependentUpon>201903121005496_AddedBranchName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903131848454_CompanyIdToEmployee.resx">
+      <DependentUpon>201903131848454_CompanyIdToEmployee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
