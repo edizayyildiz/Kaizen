@@ -28,7 +28,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var suggestionViewModel = new SuggestionViewModel();
-            suggestionViewModel.Assessment = Assessment.NoAssessment;
+            suggestionViewModel.Assessment = Enum.GetValues(typeof(Assessment));
             return View(suggestionViewModel);
         }
 
@@ -64,6 +64,19 @@ namespace Kaizen.Web.Areas.Admin.Controllers
                 suggestionService.Update(suggestion);
                 return RedirectToAction("index");
             }
+            return View(suggestionViewModel);
+        }
+
+        public ActionResult Delete(Guid id)
+        {
+            suggestionService.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(Guid id)
+        {
+            var suggestion = suggestionService.Find(id);
+            var suggestionViewModel = Mapper.Map<SuggestionViewModel>(suggestion);
             return View(suggestionViewModel);
         }
     }

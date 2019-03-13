@@ -1,23 +1,25 @@
 ﻿@model Kaizen.Web.Models.SuggestionViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Yeni Öneri</h2>
+<h2>Düzenle</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
             @Html.LabelFor(model => model.CurrentStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CurrentStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CurrentStatus, new { htmlAttributes = new { @class = "form-control", style = "resize:none; height: 100px; " } })
                 @Html.ValidationMessageFor(model => model.CurrentStatus, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,14 +27,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SuggestedStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SuggestedStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.SuggestedStatus, new { htmlAttributes = new { @class = "form-control", style = "resize:none; height: 100px; " } })
                 @Html.ValidationMessageFor(model => model.SuggestedStatus, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Assessment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Assessment, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Assessment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default">Öneri Ver</button>
+                <button type="submit" class="btn btn-default">Save</button>
             </div>
         </div>
     </div>

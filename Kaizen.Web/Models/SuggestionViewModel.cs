@@ -12,16 +12,22 @@ namespace Kaizen.Web.Models
         [Display(Name = "Id")]
         public Guid Id { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Mevcut Durum")]
         public string CurrentStatus { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Önerilen Durum")]
         public string SuggestedStatus { get; set; }
         [Display(Name = "Değerlendirme")]
         public Assessment Assessment { get; set; }
-        [Display(Name = "Çalışan")]
-        public Guid? EmployeeId { get; set; }
-        [Display(Name = "Çalışan")]
-        public EmployeeViewModel Employee { get; set; }
+        [Display(Name = "Oluşturulma Tarihi")]
+        public DateTime CreatedAt { get; set; }
+        [Display(Name = "Güncelleme Tarihi")]
+        public DateTime UpdatedAt { get; set; }
+        [Display(Name = "Oluşturan")]
+        public string CreatedBy { get; set; }
+        [Display(Name = "Güncelleyen")]
+        public string UpdatedBy { get; set; }
     }
 }
