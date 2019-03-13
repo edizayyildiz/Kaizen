@@ -28,7 +28,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var suggestionViewModel = new SuggestionViewModel();
-            suggestionViewModel.Assessment = Enum.GetValues(typeof(Assessment));
+            //suggestionViewModel.Assessment = Enum.GetValues(typeof(Assessment));
             return View(suggestionViewModel);
         }
 
