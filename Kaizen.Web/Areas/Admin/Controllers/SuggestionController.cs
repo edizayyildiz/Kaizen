@@ -10,12 +10,13 @@ using System.Web.Mvc;
 
 namespace Kaizen.Web.Areas.Admin.Controllers
 {
-    public class SuggestionController : Controller
+    public class SuggestionController : ControllerBase
     {
         private readonly ISuggestionService suggestionService;
-        public SuggestionController(ISuggestionService suggestionService)
+        public SuggestionController(ISuggestionService suggestionService, ApplicationUserManager userManager):base(userManager)
         {
             this.suggestionService = suggestionService;
+            this.userManager = userManager;
         }
         // GET: Admin/Suggestion
         public ActionResult Index()
@@ -38,7 +39,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             {
                 var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
                 suggestionService.Insert(suggestion);
-                return RedirectToAction("index");
+                return RedirectToAction("Index");
             }
             return View(suggestionViewModel);
         }
@@ -61,7 +62,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             {
                 var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
                 suggestionService.Update(suggestion);
-                return RedirectToAction("index");
+                return RedirectToAction("Index");
             }
             return View(suggestionViewModel);
         }

@@ -9,45 +9,16 @@ using System.Web.Mvc;
 namespace Kaizen.Web.Areas.Admin.Controllers
 {
     [RouteArea("Admin")]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) : base(userManager)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            this.userManager = userManager;
         }
 
         // GET: Admin/Home
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var userName = User.Identity.Name;
-            var currentUser = await UserManager.FindByNameAsync(userName);
-            ViewBag.CurrentUser = currentUser.FullName;
             return View();
         }
     }
