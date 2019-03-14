@@ -9,7 +9,7 @@ namespace Kaizen.Model
     public class Branch : BaseEntity
     {
         public string Name { get; set; }
-        public Guid CompanyId{ get; set; }
+        public Guid CompanyId { get; set; }
         public virtual Company Company { get; set; }
         public Guid? CountryId { get; set; }
         public virtual Country Country { get; set; }
@@ -17,5 +17,6 @@ namespace Kaizen.Model
         public virtual City City { get; set; }
         public Guid? CountyId { get; set; }
         public virtual County County { get; set; }
+        public string Address { get; set; }
     }
 }
