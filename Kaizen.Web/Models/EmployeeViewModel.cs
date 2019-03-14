@@ -8,14 +8,23 @@ namespace Kaizen.Web.Models
 {
     public class EmployeeViewModel
     {
-        [Required]
+        [Display(Name = "Id")]
         public Guid Id { get; set; }
+        [Display(Name = "Oluşturulma Tarihi")]
+        public DateTime CreatedAt { get; set; }
+        [Display(Name = "Güncelleme Tarihi")]
+        public DateTime UpdatedAt { get; set; }
+        [Display(Name = "Oluşturan")]
+        public string CreatedBy { get; set; }
+        [Display(Name = "Güncelleyen")]
+        public string UpdatedBy { get; set; }
         [Required]
         [Display(Name = "Ad")]
         public string FirstName { get; set; }
         [Required]
         [Display(Name = "Soyad")]
         public string LastName { get; set; }
+        public string FullName { get { return FirstName + " " + LastName; } }
         [Required]
         [Display(Name = "Kullanıcı Adı")]
         public string UserName { get; set; }
@@ -25,5 +34,8 @@ namespace Kaizen.Web.Models
         [Required]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
+        public CompanyViewModel Company { get; set; }
+        public IEnumerable<DepartmentViewModel> Departments { get; set; }
+        public IEnumerable<SuggestionViewModel> Suggestions { get; set; }
     }
 }

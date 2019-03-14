@@ -179,6 +179,7 @@ namespace Kaizen.Web.Controllers
                     employeeViewModel.Position = Position;
                     employeeViewModel.UserName = UserName;
                     var employee = Mapper.Map<Employee>(employeeViewModel);
+                    employee.CompanyId = company.Id; //company index viewında yazdığım yorum satır için bu satırı yazdım.
                     employeeService.Insert(employee);
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

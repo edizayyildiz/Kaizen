@@ -1,5 +1,4 @@
-﻿using Kaizen.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Web;
 
 namespace Kaizen.Web.Models
 {
-    public class SuggestionViewModel
+    public class DepartmentViewModel
     {
         [Display(Name = "Id")]
         public Guid Id { get; set; }
@@ -20,15 +19,12 @@ namespace Kaizen.Web.Models
         [Display(Name = "Güncelleyen")]
         public string UpdatedBy { get; set; }
         [Required]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Mevcut Durum")]
-        public string CurrentStatus { get; set; }
-        [Required]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Önerilen Durum")]
-        public string SuggestedStatus { get; set; }
-        [Display(Name = "Değerlendirme")]
-        public Assessment Assessment { get; set; }
-        public EmployeeViewModel Employee { get; set; }
+        [Display(Name = "Departman Adı")]
+        public string Name { get; set; }
+        public CompanyViewModel Company { get; set; }
+        [Display(Name = "Çalışanlar")]
+        public IEnumerable<EmployeeViewModel> Employees { get; set; }
     }
 }
+
+// Department headcount alanı eklenebilir ???

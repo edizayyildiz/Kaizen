@@ -12,6 +12,7 @@ namespace Kaizen.Model
         {
             Departments = new HashSet<Department>();
             Branches = new HashSet<Branch>();
+            Employees = new HashSet<Employee>();
         }
         public string Name { get; set; }
         public string Sector { get; set; }

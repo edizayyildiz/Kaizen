@@ -13,10 +13,11 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService companyService;
-        public CompanyController(ICompanyService companyService, ApplicationUserManager userManager):base(userManager)
+
+        public CompanyController(ICompanyService companyService, ApplicationUserManager userManager) : base(userManager)
         {
             this.companyService = companyService;
-            //this.userManager = userManager;
+            this.userManager = userManager;
 
         }
         // GET: Admin/Company
@@ -33,6 +34,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             return View(companyViewModel);
         }
 
+        [HttpPost]
         public ActionResult Create(CompanyViewModel companyViewModel)
         {
             if (ModelState.IsValid)
@@ -41,6 +43,42 @@ namespace Kaizen.Web.Areas.Admin.Controllers
                 companyService.Insert(company);
                 return RedirectToAction("Index");
             }
+            return View(companyViewModel);
+        }
+
+        public ActionResult Edit(Guid id)
+        {
+            var company = companyService.Find(id);
+            var companyViewModel = Mapper.Map<CompanyViewModel>(company);
+            if (companyViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(companyViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CompanyViewModel companyViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var company = Mapper.Map<Company>(companyViewModel);
+                companyService.Update(company);
+                return RedirectToAction("Index");
+            }
+            return View(companyViewModel);
+        }
+
+        public ActionResult Delete(Guid id)
+        {
+            companyService.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(Guid id)
+        {
+            var company = companyService.Find(id);
+            var companyViewModel = Mapper.Map<CompanyViewModel>(company);
             return View(companyViewModel);
         }
     }
