@@ -13,9 +13,11 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class SuggestionController : ControllerBase
     {
         private readonly ISuggestionService suggestionService;
-        public SuggestionController(ISuggestionService suggestionService, ApplicationUserManager userManager) : base(userManager)
+        private readonly IEmployeeService employeeService;
+        public SuggestionController(ISuggestionService suggestionService, IEmployeeService employeeService, ApplicationUserManager userManager) : base(userManager)
         {
             this.suggestionService = suggestionService;
+            this.employeeService = employeeService;
             this.userManager = userManager;
         }
         // GET: Admin/Suggestion
@@ -38,6 +40,9 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
+                var userMail = User.Identity.Name;
+                var employee = employeeService.GetAll(e => e.Email == userMail).FirstOrDefault().Id;
+                suggestion.EmployeeId = employee;
                 suggestionService.Insert(suggestion);
                 return RedirectToAction("Index");
             }
@@ -61,6 +66,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
+                //Create postta employee için yaptıklarımızı yap
                 suggestionService.Update(suggestion);
                 return RedirectToAction("Index");
             }

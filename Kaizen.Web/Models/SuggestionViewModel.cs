@@ -29,5 +29,6 @@ namespace Kaizen.Web.Models
         public string CreatedBy { get; set; }
         [Display(Name = "Güncelleyen")]
         public string UpdatedBy { get; set; }
+        public Employee Employee { get; set; }
     }
 }

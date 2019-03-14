@@ -50,18 +50,16 @@ namespace Kaizen.Data
         {
             entity.Id = Guid.NewGuid();
             entity.CreatedAt = DateTime.Now;
-            var transactionOwner = db.Set<Employee>().FirstOrDefault(e => e.Email == identity.Name);
-            entity.CreatedBy = transactionOwner.FirstName + " " + transactionOwner.LastName + " - " + transactionOwner.UserName;
+            entity.CreatedBy = identity.Name;
             entity.UpdatedAt = DateTime.Now;
-            entity.UpdatedBy = transactionOwner.FirstName + " " + transactionOwner.LastName + " - " + transactionOwner.UserName;
+            entity.UpdatedBy = identity.Name;
             entities.Add(entity);
         }
 
         public void Update(T entity)
         {
             entity.UpdatedAt = DateTime.Now;
-            var transactionOwner = db.Set<Employee>().FirstOrDefault(e => e.Email == identity.Name);
-            entity.UpdatedBy = transactionOwner.FirstName + " " + transactionOwner.LastName + " - " + transactionOwner.UserName;
+            entity.UpdatedBy = identity.Name;
             db.Entry(entity).State = EntityState.Modified;
         }
     }

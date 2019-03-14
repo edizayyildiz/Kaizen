@@ -11,8 +11,11 @@
 </p>
 <table class="table">
     <tr>
-        <th class="col-md-3">
-            @Html.DisplayNameFor(model => model.CreatedBy)
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.Employee.LastName)
         </th>
         <th class="col-md-2">
             @Html.DisplayNameFor(model => model.CurrentStatus)
@@ -23,13 +26,16 @@
         <th class="col-md-2">
             @Html.DisplayNameFor(model => model.Assessment)
         </th>
-        <th class="col-md-3"></th>
+        <th class="col-md-2"></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td class="col-md-3">
-            @Html.DisplayFor(modelItem => item.CreatedBy)
+        <td class="col-md-2">
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+        </td>
+        <td class="col-md-2">
+            @Html.DisplayFor(modelItem => item.Employee.LastName)
         </td>
         <td class="col-md-2">
             @Html.DisplayFor(modelItem => item.CurrentStatus)
@@ -40,7 +46,7 @@
         <td class="col-md-2">
             @Html.DisplayFor(modelItem => item.Assessment)
         </td>
-        <td class="col-md-3">
+        <td class="col-md-2">
             @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Detaylar", "Details", new { id = item.Id }) |
             @Html.ActionLink("Sil", "Delete", new { id = item.Id })
