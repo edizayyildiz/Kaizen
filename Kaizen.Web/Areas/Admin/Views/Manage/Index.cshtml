@@ -1,0 +1,327 @@
+﻿@model Kaizen.Web.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+@*<h2>@ViewBag.Title.</h2>
+
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div>
+        <h4>Change your account settings</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>Password:</dt>
+            <dd>
+                [
+                @if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }
+                ]
+            </dd>
+            @*<dt>External Logins:</dt>
+            <dd>
+                @Model.Logins.Count [
+                @Html.ActionLink("Manage", "ManageLogins") ]
+            </dd>*@
+@*
+    Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+     See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+        for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+     Uncomment the following block after you have set up two-factor authentication
+*@
+@*
+    <dt>Phone Number:</dt>
+    <dd>
+        @(Model.PhoneNumber ?? "None")
+        @if (Model.PhoneNumber != null)
+        {
+            <br />
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+            using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+            }
+        }
+        else
+        {
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+        }
+    </dd>
+*@
+@*<dt>Two-Factor Authentication:</dt>
+                <dd>
+                    <p>
+                        There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                        for details on setting up this ASP.NET application to support two-factor authentication.
+                    </p>
+                    @if (Model.TwoFactor)
+                        {
+                            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Enabled
+                                <input type="submit" value="Disable" class="btn btn-link" />
+                                </text>
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Disabled
+                                <input type="submit" value="Enable" class="btn btn-link" />
+                                </text>
+                            }
+                        }
+                </dd>
+        </dl>
+    </div>*@
+
+
+<header class="page-header">
+    <h2>User Profile</h2>
+
+    <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+            <li>
+                <a href="index.html">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li><span>Pages</span></li>
+            <li><span>User Profile</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+    </div>
+</header>
+
+<!-- start: page -->
+
+<div class="row">
+    <div class="col-md-4 col-lg-3">
+
+        <section class="panel">
+            <div class="panel-body">
+
+                <form method="post" action="" enctype="multipart/form-data" id="myForm">
+                    <div class="preview">
+                        <div class="thumb-info mb-md">
+                            <img src="" id="img" class="rounded img-responsive" alt="Profil Fotoğrafı">
+                            <div class="thumb-info-title">
+                                <span class="thumb-info-inner">John Doe</span>
+                                <span class="thumb-info-type">CEO</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="file" id="file" name="file" />
+                        <input type="button" class="button" value="Kaydet" id="btnUpload" />
+                    </div>
+                </form>
+
+
+                <hr class="dotted short">
+
+                <h6 class="text-muted">Şirket&nbsp;Adı</h6>
+                <p>!!Departman Bilgisi Gelecek!!</p>
+
+            </div>
+        </section>
+
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="fa fa-caret-down"></a>
+                    <a href="#" class="fa fa-times"></a>
+                </div>
+
+                <h2 class="panel-title">Popular Posts</h2>
+            </header>
+            <div class="panel-body">
+                <ul class="simple-post-list">
+                    <li>
+                        <div class="post-image">
+                            <div class="img-thumbnail">
+                                <a href="#">
+                                    <img src="~/AdminFiles/assets/images/post-thumb-1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="post-info">
+                            <a href="#">Nullam Vitae Nibh Un Odiosters</a>
+                            <div class="post-meta">
+                                Jan 10, 2013
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="post-image">
+                            <div class="img-thumbnail">
+                                <a href="#">
+                                    <img src="~/AdminFiles/assets/images/post-thumb-2.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="post-info">
+                            <a href="#">Vitae Nibh Un Odiosters</a>
+                            <div class="post-meta">
+                                Jan 10, 2013
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="post-image">
+                            <div class="img-thumbnail">
+                                <a href="#">
+                                    <img src="~/AdminFiles/assets/images/post-thumb-3.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="post-info">
+                            <a href="#">Odiosters Nullam Vitae</a>
+                            <div class="post-meta">
+                                Jan 10, 2013
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+    <div class="col-md-8 col-lg-6">
+
+        <div class="tabs">
+
+            <ul class="nav nav-tabs tabs-primary">
+                <li class="active">
+                    <a href="#edit" data-toggle="tab">Edit</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+
+                <div id="edit" class="tab-pane active">
+
+                    <form class="form-horizontal" method="get">
+                        <h4 class="mb-xlg">Personal Information</h4>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileFirstName">First Name</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="profileFirstName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileLastName">Last Name</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="profileLastName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileAddress">Address</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="profileAddress">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileCompany">Company</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="profileCompany">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr class="dotted tall">
+                    @*<h4 class="mb-xlg">Change Password</h4>
+                        <fieldset class="mb-xl">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileNewPassword">New Password</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="profileNewPassword">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileNewPasswordRepeat">Repeat New Password</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="profileNewPasswordRepeat">
+                                </div>
+                            </div>
+                        </fieldset>
+                    *@
+
+                    Parola Değiştirmek için RenderPartial gelecek
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-3">
+
+        <h4 class="mb-md">Sale Stats</h4>
+        <ul class="simple-card-list mb-xlg">
+            <li class="primary">
+                <h3>488</h3>
+                <p>Nullam quris ris.</p>
+            </li>
+            <li class="primary">
+                <h3>$ 189,000.00</h3>
+                <p>Nullam quris ris.</p>
+            </li>
+            <li class="primary">
+                <h3>16</h3>
+                <p>Nullam quris ris.</p>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<!-- end: page -->
+
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $("#btnUpload").click(function () {
+                var fd = new FormData();
+                var files = $("#file").get(0).files[0];
+                //fd.append("file", files);
+                fd.set("file", files, files.name);
+
+                $.ajax({
+                    url: '@Url.Action("UploadPhoto", "Manage")',
+                    type: "post",
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response != 0) {
+                            $("#img").attr("src", response);
+                            $("#img").show();
+                        } else {
+                            alert("Dosya yüklenemedi.");
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+
+}
