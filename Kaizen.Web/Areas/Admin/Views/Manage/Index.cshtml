@@ -113,19 +113,19 @@
         <section class="panel">
             <div class="panel-body">
 
-                <form method="post" action="" enctype="multipart/form-data" id="myForm">
+                <form id="photoForm" method="post" action="" enctype="multipart/form-data">
                     <div class="preview">
                         <div class="thumb-info mb-md">
-                            <img src="" id="img" class="rounded img-responsive" alt="Profil Fotoğrafı">
-                            <div class="thumb-info-title">
-                                <span class="thumb-info-inner">John Doe</span>
-                                <span class="thumb-info-type">CEO</span>
-                            </div>
+                            <img src="" id="img" class="rounded img-responsive" alt="Profil Fotoğrafı" style="display: none;">
+                        </div>
+                        <div class="thumb-info-title">
+                            <span class="thumb-info-inner">@ViewBag.CurrentUser</span>
+                            <span class="thumb-info-type">CEO</span>
                         </div>
                     </div>
                     <div>
-                        <input type="file" id="file" name="file" />
-                        <input type="button" class="button" value="Kaydet" id="btnUpload" />
+                        <input id="photoFile" type="file" name="file" />
+                        <input id="btnUpload" type="submit" class="button" value="Kaydet" />
                     </div>
                 </form>
 
@@ -238,6 +238,7 @@
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" id="profileCompany">
                                 </div>
+
                             </div>
                         </fieldset>
                         <div class="panel-footer">
@@ -267,7 +268,7 @@
                         </fieldset>
                     *@
 
-                    Parola Değiştirmek için RenderPartial gelecek
+                    @{Html.RenderPartial("_ChangePassword", new Kaizen.Web.Models.ChangePasswordViewModel());}
 
                 </div>
             </div>
@@ -298,17 +299,20 @@
 @section scripts {
 
     <script>
-        $(document).ready(function () {
+        @*$(document).ready(function () {
             $("#btnUpload").click(function () {
-                var fd = new FormData();
-                var files = $("#file").get(0).files[0];
-                //fd.append("file", files);
-                fd.set("file", files, files.name);
+                var formData = new FormData();
+                //var form = $('#photoForm')[0];
+                //var fd = new FormData(form);
+                //var upload = $("#file").get(0).files[0];
+                //fd.append("#file", upload);
+                //fd.set("file", upload, upload.name);
+                formData.append('file', $('#file')[0].files[0]);
 
                 $.ajax({
-                    url: '@Url.Action("UploadPhoto", "Manage")',
-                    type: "post",
-                    data: fd,
+                    url: "@Url.Action("UploadPhoto", "Manage")",
+                    type: "POST",
+                    data: formData,
                     contentType: false,
                     processData: false,
                     success: function (response) {
@@ -320,6 +324,37 @@
                         }
                     },
                 });
+            });
+        });*@
+
+
+        $(document).ready(function (e) {
+            //$("#btnUpload").click(function (e) {
+                $("#photoForm").on('submit', (function (e) {
+                    e.preventDefault();
+                    //var form = $('#photoForm')[0];
+                    //var upload = $('#photoFile');
+                    $.ajax({
+                        url: '@Url.Action("UploadPhoto", "Manage")',
+                        type: "POST",
+                        data: new FormData($('#photoForm')),
+                        cache: false,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (response) {
+                            if (response != 0) {
+                                $("#img").attr("src", response);
+                                $("#img").show();
+                            } else {
+                                alert("Fotoğraf yüklenemedi.");
+                            }
+                        },
+                    });
+                }));
+            //});
+            $("#photoFile").on("change", function () {
+                $("#photoFrom").submit();
             });
         });
     </script>
