@@ -15,7 +15,7 @@ namespace Kaizen.Data.Builders
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Name).IsRequired().HasMaxLength(200);
 
-            entity.HasRequired(p=>p.Company).WithMany(w=>w.Departments).HasForeignKey(p=>p.CompanyId);
-        }
+            entity.HasRequired(p => p.Branch).WithMany(b => b.Departments).HasForeignKey(p=>p.BranchId);
     }
+}
 }

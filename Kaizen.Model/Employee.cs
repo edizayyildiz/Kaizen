@@ -19,9 +19,11 @@ namespace Kaizen.Model
         public string UserName { get; set; }
         public string Photo { get; set; }
         public string Email { get; set; }
-        public Guid? CompanyId { get; set; }
         public string Position { get; set; }
-        public virtual Company Company { get; set; }
+        public Guid? CompanyId { get; set; } // bunu sonra silmek gerekicek.
+        public virtual Company Company { get; set; } // bunu sonra silmek gerekicek.
+        public Guid? BranchId { get; set; }
+        public virtual Branch Branch { get; set; }
         public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Suggestion> Suggestions { get; set; }
     }

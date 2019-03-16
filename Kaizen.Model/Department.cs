@@ -13,11 +13,9 @@ namespace Kaizen.Model
         {
             Employees = new HashSet<Employee>();
         }
-        [Display(Name = "Departman Adı")]
         public string Name { get; set; }
-        public Guid CompanyId { get; set; }
-        public virtual Company Company { get; set; }
-        [Display(Name = "Çalışanlar")]
+        public Guid BranchId { get; set; }
+        public virtual Branch Branch { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         
     }

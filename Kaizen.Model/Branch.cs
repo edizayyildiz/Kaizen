@@ -8,6 +8,11 @@ namespace Kaizen.Model
 {
     public class Branch : BaseEntity
     {
+        public Branch()
+        {
+            Departments = new HashSet<Department>();
+            Employees = new HashSet<Employee>();
+        }
         public string Name { get; set; }
         public Guid CompanyId { get; set; }
         public virtual Company Company { get; set; }
@@ -18,5 +23,8 @@ namespace Kaizen.Model
         public Guid? CountyId { get; set; }
         public virtual County County { get; set; }
         public string Address { get; set; }
+
+        public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
