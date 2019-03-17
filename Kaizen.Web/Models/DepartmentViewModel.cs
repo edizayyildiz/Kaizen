@@ -21,7 +21,8 @@ namespace Kaizen.Web.Models
         [Required]
         [Display(Name = "Departman Adı")]
         public string Name { get; set; }
-        public CompanyViewModel Company { get; set; }
+        [Display(Name = "Şube")]
+        public BranchViewModel Branch { get; set; }
         [Display(Name = "Çalışanlar")]
         public IEnumerable<EmployeeViewModel> Employees { get; set; }
     }

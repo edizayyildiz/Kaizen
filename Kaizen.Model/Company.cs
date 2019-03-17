@@ -10,7 +10,6 @@ namespace Kaizen.Model
     {
         public Company()
         {
-            Departments = new HashSet<Department>();
             Branches = new HashSet<Branch>();
             Employees = new HashSet<Employee>();
         }
@@ -19,7 +18,6 @@ namespace Kaizen.Model
         public string Description { get; set; }
         public int HeadCount { get; set; }
         public virtual ICollection<Branch> Branches { get; set; }
-        public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

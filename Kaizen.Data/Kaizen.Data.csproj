@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201903142034242_AddedPhotoToEmployee.Designer.cs">
       <DependentUpon>201903142034242_AddedPhotoToEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903161023445_editingForCompanyAndBranch.cs" />
+    <Compile Include="Migrations\201903161023445_editingForCompanyAndBranch.Designer.cs">
+      <DependentUpon>201903161023445_editingForCompanyAndBranch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201903171523339_TitleAddedToSuggestion.cs" />
     <Compile Include="Migrations\201903171523339_TitleAddedToSuggestion.Designer.cs">
       <DependentUpon>201903171523339_TitleAddedToSuggestion.cs</DependentUpon>
@@ -101,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903142034242_AddedPhotoToEmployee.resx">
       <DependentUpon>201903142034242_AddedPhotoToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903161023445_editingForCompanyAndBranch.resx">
+      <DependentUpon>201903161023445_editingForCompanyAndBranch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903171523339_TitleAddedToSuggestion.resx">
       <DependentUpon>201903171523339_TitleAddedToSuggestion.cs</DependentUpon>

@@ -67,7 +67,7 @@ namespace Kaizen.Service
         public void Update(Department entity)
         {
             var model = this.Find(entity.Id);
-            model.CompanyId = entity.CompanyId;
+            model.BranchId = entity.BranchId;
             model.Name = entity.Name;
             departmentRepository.Update(model);
             unitOfWork.SaveChanges();

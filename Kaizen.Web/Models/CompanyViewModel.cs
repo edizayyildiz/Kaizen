@@ -23,7 +23,6 @@ namespace Kaizen.Web.Models
         [Display(Name = "Çalışan Sayısı")]
         public int HeadCount { get; set; }
         public IEnumerable<BranchViewModel> Branches { get; set; }
-        public IEnumerable<DepartmentViewModel> Departments { get; set; }
         public IEnumerable<EmployeeViewModel> Employees { get; set; }
     }
 }

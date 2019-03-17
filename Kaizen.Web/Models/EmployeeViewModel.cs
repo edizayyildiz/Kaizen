@@ -34,7 +34,8 @@ namespace Kaizen.Web.Models
         [Required]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
-        public CompanyViewModel Company { get; set; }
+        public CompanyViewModel Company { get; set; } //bunu silmek gerekecek
+        public BranchViewModel Branch { get; set; }
         public IEnumerable<DepartmentViewModel> Departments { get; set; }
         public IEnumerable<SuggestionViewModel> Suggestions { get; set; }
     }
