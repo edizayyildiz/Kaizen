@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201903171556031_InitialCreate.Designer.cs">
       <DependentUpon>201903171556031_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903171845448_SuggestionTitleChangedToSubject.cs" />
+    <Compile Include="Migrations\201903171845448_SuggestionTitleChangedToSubject.Designer.cs">
+      <DependentUpon>201903171845448_SuggestionTitleChangedToSubject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -90,6 +94,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903171556031_InitialCreate.resx">
       <DependentUpon>201903171556031_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903171845448_SuggestionTitleChangedToSubject.resx">
+      <DependentUpon>201903171845448_SuggestionTitleChangedToSubject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

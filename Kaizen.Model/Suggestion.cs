@@ -9,7 +9,7 @@ namespace Kaizen.Model
 {
     public class Suggestion : BaseEntity
     {
-        public string Title { get; set; }
+        public string Subject { get; set; }
         public string CurrentStatus { get; set; }
         public string SuggestedStatus { get; set; }
         public Assessment Assessment { get; set; }

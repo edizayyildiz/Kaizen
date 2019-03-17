@@ -73,7 +73,7 @@ namespace Kaizen.Service
             model.CurrentStatus = entity.CurrentStatus;
             model.EmployeeId = entity.EmployeeId;
             model.SuggestedStatus = entity.SuggestedStatus;
-            model.Title = entity.Title;
+            model.Subject = entity.Subject;
             suggestionRepository.Update(model);
             unitOfWork.SaveChanges();
         }
