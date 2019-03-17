@@ -20,6 +20,9 @@ namespace Kaizen.Web.Models
         [Display(Name = "Güncelleyen")]
         public string UpdatedBy { get; set; }
         [Required]
+        [Display(Name = "Başlık")]
+        public string Title { get; set; }
+        [Required]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Mevcut Durum")]
         public string CurrentStatus { get; set; }

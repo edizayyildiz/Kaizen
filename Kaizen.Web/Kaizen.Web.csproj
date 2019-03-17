@@ -244,6 +244,7 @@
     <Content Include="AdminFiles\assets\images\blog-image-2.jpg" />
     <Content Include="AdminFiles\assets\images\blog-image-3.jpg" />
     <Content Include="AdminFiles\assets\images\device.png" />
+    <Content Include="AdminFiles\assets\images\empty_avatar.jpg" />
     <Content Include="AdminFiles\assets\images\favicon.ico" />
     <Content Include="AdminFiles\assets\images\icon.png" />
     <Content Include="AdminFiles\assets\images\invoice-logo.png" />
@@ -2303,7 +2304,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Uploads\" />
+    <Folder Include="Uploads\ProfilePhotos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

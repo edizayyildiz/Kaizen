@@ -235,7 +235,7 @@
                 <div id="userbox" class="userbox">
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="~/AdminFiles/assets/images/!logged-user.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="~/AdminFiles/assets/images/!logged-user.jpg" />
+                            <img src="@(ViewBag.ProfilePhoto != null ? ("/Uploads/ProfilePhotos/" + ViewBag.ProfilePhoto) : "/AdminFiles/assets/images/empty_avatar.jpg")" style="border-radius: 50%"/>
                         </figure>
                         <div class="profile-info" data-lock-name="" data-lock-email="">
                             <span class="name">@(ViewBag.CurrentUser ?? "Kullanıcı Adı")</span>

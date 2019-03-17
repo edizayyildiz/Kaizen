@@ -67,7 +67,6 @@ namespace Kaizen.Service
         public void Update(Employee entity)
         {
             var model = this.Find(entity.Id);
-            model.Email = entity.Email;
             model.FirstName = entity.FirstName;
             model.LastName = entity.LastName;
             model.UserName = entity.UserName;

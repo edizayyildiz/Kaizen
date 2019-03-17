@@ -113,22 +113,19 @@
         <section class="panel">
             <div class="panel-body">
 
-                <form id="photoForm" method="post" action="" enctype="multipart/form-data">
-                    <div class="preview">
-                        <div class="thumb-info mb-md">
-                            <img src="" id="img" class="rounded img-responsive" alt="Profil Fotoğrafı" style="display: none;">
-                        </div>
-                        <div class="thumb-info-title">
-                            <span class="thumb-info-inner">@ViewBag.CurrentUser</span>
-                            <span class="thumb-info-type">CEO</span>
-                        </div>
+                <div class="thumb-info mb-md">
+                    <img src="@(ViewBag.ProfilePhoto != null ? ("/Uploads/ProfilePhotos/" + ViewBag.ProfilePhoto) : "/AdminFiles/assets/images/empty_avatar.jpg")" id="thumb" class="rounded img-responsive" alt="Profil Fotoğrafı">
+                    <div class="thumb-info-title">
+                        <span class="thumb-info-inner">@ViewBag.CurrentUser</span>
+                        <span class="thumb-info-type">@ViewBag.Position</span>
                     </div>
+                </div>
+                <form id="imgForm" method="post" action="" enctype="multipart/form-data">
                     <div>
-                        <input id="photoFile" type="file" name="file" />
-                        <input id="btnUpload" type="submit" class="button" value="Kaydet" />
+                        <input id="imgFile" type="file" name="file" />
+                        <button id="btnUpload" type="submit" class="btn btn-primary btn-xs">Kaydet</button>
                     </div>
                 </form>
-
 
                 <hr class="dotted short">
 
@@ -145,55 +142,23 @@
                     <a href="#" class="fa fa-times"></a>
                 </div>
 
-                <h2 class="panel-title">Popular Posts</h2>
+                <h2 class="panel-title">Son Öneriler</h2>
             </header>
             <div class="panel-body">
                 <ul class="simple-post-list">
-                    <li>
-                        <div class="post-image">
-                            <div class="img-thumbnail">
-                                <a href="#">
-                                    <img src="~/AdminFiles/assets/images/post-thumb-1.jpg" alt="">
-                                </a>
+
+                    @foreach (var item in ViewBag.Suggestions)
+                    {
+                        <li>
+                            <div class="post-info">
+                                <a href="@Url.Action("Details", "Suggestion", new { id = item.Id})">@item.Title</a>
+                                <div class="post-meta">
+                                    @item.UpdatedAt
+                                </div>
                             </div>
-                        </div>
-                        <div class="post-info">
-                            <a href="#">Nullam Vitae Nibh Un Odiosters</a>
-                            <div class="post-meta">
-                                Jan 10, 2013
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="post-image">
-                            <div class="img-thumbnail">
-                                <a href="#">
-                                    <img src="~/AdminFiles/assets/images/post-thumb-2.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="post-info">
-                            <a href="#">Vitae Nibh Un Odiosters</a>
-                            <div class="post-meta">
-                                Jan 10, 2013
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="post-image">
-                            <div class="img-thumbnail">
-                                <a href="#">
-                                    <img src="~/AdminFiles/assets/images/post-thumb-3.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="post-info">
-                            <a href="#">Odiosters Nullam Vitae</a>
-                            <div class="post-meta">
-                                Jan 10, 2013
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </section>
@@ -205,71 +170,54 @@
 
             <ul class="nav nav-tabs tabs-primary">
                 <li class="active">
-                    <a href="#edit" data-toggle="tab">Edit</a>
+                    <a href="#personal" data-toggle="tab">Kişisel Bilgiler</a>
+                </li>
+                <li>
+                    <a href="#password" data-toggle="tab">Parola</a>
                 </li>
             </ul>
+
             <div class="tab-content">
+                <div id="personal" class="tab-pane active">
 
-                <div id="edit" class="tab-pane active">
-
-                    <form class="form-horizontal" method="get">
-                        <h4 class="mb-xlg">Personal Information</h4>
+                    <form class="form-horizontal" id="personalForm" method="post">
+                        <h4 class="mb-xlg">Kişisel Bilgileri Güncelle</h4>
                         <fieldset>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="profileFirstName">First Name</label>
+                                <label class="col-md-3 control-label" for="FirstName" style="text-align: left">Ad</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="profileFirstName">
+                                    <input id="FirstName" type="text" class="form-control" name="FirstName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="profileLastName">Last Name</label>
+                                <label class="col-md-3 control-label" for="LastName" style="text-align: left">Soyad</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="profileLastName">
+                                    <input id="LastName" type="text" class="form-control" name="LastName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="profileAddress">Address</label>
+                                <label class="col-md-3 control-label" for="Position" style="text-align: left">Pozisyon</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="profileAddress">
+                                    <input id="Position" type="text" class="form-control" name="Position">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="profileCompany">Company</label>
+                                <label class="col-md-3 control-label" for="UserName" style="text-align: left">Kullanıcı Adı</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="profileCompany">
+                                    <input id="UserName" type="text" class="form-control" name="UserName">
                                 </div>
-
                             </div>
-                        </fieldset>
-                        <div class="panel-footer">
                             <div class="row">
                                 <div class="col-md-9 col-md-offset-3">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-default">Reset</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <hr class="dotted tall">
-                    @*<h4 class="mb-xlg">Change Password</h4>
-                        <fieldset class="mb-xl">
-                            <div class="form-group">
-                                <label class="col-md-3 control-label" for="profileNewPassword">New Password</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="profileNewPassword">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label" for="profileNewPasswordRepeat">Repeat New Password</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="profileNewPasswordRepeat">
+                                    <button id="btnPersonal" type="button" class="btn btn-primary">Kaydet</button>
                                 </div>
                             </div>
                         </fieldset>
-                    *@
+                    </form>
+                </div>
 
+                <div id="password" class="tab-pane fade">
                     @{Html.RenderPartial("_ChangePassword", new Kaizen.Web.Models.ChangePasswordViewModel());}
-
                 </div>
             </div>
         </div>
@@ -299,64 +247,58 @@
 @section scripts {
 
     <script>
-        @*$(document).ready(function () {
-            $("#btnUpload").click(function () {
-                var formData = new FormData();
-                //var form = $('#photoForm')[0];
-                //var fd = new FormData(form);
-                //var upload = $("#file").get(0).files[0];
-                //fd.append("#file", upload);
-                //fd.set("file", upload, upload.name);
-                formData.append('file', $('#file')[0].files[0]);
 
+        $(document).ready(function (e) {
+
+            $('#btnPersonal').click((function (e) {
+                e.preventDefault();
+                var formData = new FormData();
+                formData.append('FirstName', $('#FirstName').val());
+                formData.append('LastName', $('#LastName').val());
+                formData.append('Position', $('#Position').val());
+                formData.append('UserName', $('#UserName').val());
                 $.ajax({
-                    url: "@Url.Action("UploadPhoto", "Manage")",
-                    type: "POST",
-                    data: formData,
-                    contentType: false,
+                    url: '@Url.Action("UpdatePersonal", "Manage")',
+                    method: 'POST',
+                    cache: false,
+                    dataType: 'json',
                     processData: false,
+                    contentType: false,
+                    data: formData ? formData : formData.serialize(),
                     success: function (response) {
-                        if (response != 0) {
-                            $("#img").attr("src", response);
-                            $("#img").show();
+                        if (response.message == null) {
+                            alert('Kişisel bilgiler güncellendi.');
                         } else {
-                            alert("Dosya yüklenemedi.");
+                            alert(response.message);
                         }
                     },
                 });
-            });
-        });*@
+            }));
 
+            $('#imgForm').submit((function (e) {
+                e.preventDefault();
+                var imgData = new FormData();
+                imgData.append('file', $('#imgFile')[0].files[0]);
+                $.ajax({
+                    url: '@Url.Action("UploadPhoto", "Manage")',
+                    method: 'POST',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    data: imgData,
+                    success: function (response) {
+                        if (response.message == null) {
+                            $('#thumb').attr('src', response);
+                            alert('Profil fotoğrafı güncellendi.');
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                });
+            }));
 
-        $(document).ready(function (e) {
-            //$("#btnUpload").click(function (e) {
-                $("#photoForm").on('submit', (function (e) {
-                    e.preventDefault();
-                    //var form = $('#photoForm')[0];
-                    //var upload = $('#photoFile');
-                    $.ajax({
-                        url: '@Url.Action("UploadPhoto", "Manage")',
-                        type: "POST",
-                        data: new FormData($('#photoForm')),
-                        cache: false,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        success: function (response) {
-                            if (response != 0) {
-                                $("#img").attr("src", response);
-                                $("#img").show();
-                            } else {
-                                alert("Fotoğraf yüklenemedi.");
-                            }
-                        },
-                    });
-                }));
-            //});
-            $("#photoFile").on("change", function () {
-                $("#photoFrom").submit();
-            });
         });
+
     </script>
 
 }

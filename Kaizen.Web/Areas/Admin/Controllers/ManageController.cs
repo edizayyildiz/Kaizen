@@ -9,6 +9,8 @@ using Microsoft.Owin.Security;
 using Kaizen.Web.Models;
 using Kaizen.Service;
 using System.IO;
+using AutoMapper;
+using Kaizen.Model;
 
 namespace Kaizen.Web.Areas.Admin.Controllers
 {
@@ -16,19 +18,21 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class ManageController : ControllerBase
     {
         private ApplicationSignInManager _signInManager;
-        private readonly IEmployeeService employeeService;
+        private readonly ISuggestionService suggestionService;
 
-        public ManageController(ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager)
+        public ManageController(ApplicationUserManager userManager, IEmployeeService employeeService, ISuggestionService suggestionService) : base(userManager, employeeService)
         {
             this.userManager = userManager;
             this.employeeService = employeeService;
+            this.suggestionService = suggestionService;
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService) : base(userManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService, ISuggestionService suggestionService) : base(userManager, employeeService)
         {
             this.userManager = userManager;
             SignInManager = signInManager;
             this.employeeService = employeeService;
+            this.suggestionService = suggestionService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -47,6 +51,13 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            var userName = User.Identity.Name;
+            var currentUser = userManager.FindByNameAsync(userName).Result; // result async i senkrona çeviriyor
+            var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == currentUser.Email);
+            var suggestions = suggestionService.GetAll(f => f.EmployeeId == employee.Id).OrderByDescending(w => w.UpdatedAt);
+            ViewBag.Suggestions = suggestions;
+            ViewBag.Position = employee.Position;
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -69,34 +80,56 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadPhoto(HttpPostedFileBase upload)
+        public ActionResult UploadPhoto(HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            var userName = User.Identity.Name;
+            var user = userManager.FindByNameAsync(userName).Result;
+            var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == user.Email);
+            if (file != null && file.ContentLength > 0)
             {
-                var userName = User.Identity.Name;
-                var user = userManager.FindByNameAsync(userName).Result;
-                var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == user.Email);
-                if (upload != null && upload.ContentLength > 0)
+                string fileName = Path.GetFileName(file.FileName);
+                string extension = Path.GetExtension(fileName).ToLower();
+                if (extension == ".jpeg" || extension == ".jpg" || extension == ".png" || extension == ".gif")
                 {
-                    string fileName = Path.GetFileName(upload.FileName);
-                    string extension = Path.GetExtension(fileName).ToLower();
-                    if (extension == ".jpeg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
-                    {
-                        string path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
-                        upload.SaveAs(path);
-                        employee.Photo = fileName;
-                        employeeService.Update(employee);
-                        return Json(new { success = path });
-                    }
+                    string path = Path.Combine(Server.MapPath("~/Uploads/ProfilePhotos"), fileName);
+                    file.SaveAs(path);
+                    employee.Photo = fileName;
+                    employeeService.Update(employee);
+                    return Json("/Uploads/ProfilePhotos/" + fileName);
                 }
                 else
                 {
-                    return Json(new { success = 0 });
+                    return Json(new { message = "Dosya uzantısı .jpeg, .jpg, .png veya .gif olmalıdır." });
                 }
             }
-            return View();
+            else
+            {
+                return Json(new { message = "Lütfen bir fotoğraf seçiniz." });
+            }
         }
+        [HttpPost]
+        public ActionResult UpdatePersonal(string FirstName, string LastName, string Position, string UserName)
+        {
+            if (FirstName != "" && LastName != "" && Position != "" && UserName != "")
+            {
+                var currentUserMail = User.Identity.Name;
+                var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == currentUserMail);
+                var employeeModel = Mapper.Map<EmployeeViewModel>(employee);
 
+                employeeModel.FirstName = FirstName;
+                employeeModel.LastName = LastName;
+                employeeModel.UserName = UserName;
+                employeeModel.Position = Position;
+
+                var employeeToUpdate = Mapper.Map<Employee>(employeeModel);
+                this.employeeService.Update(employeeToUpdate);
+                return Json(true);
+            }
+            else
+            {
+                return Json(new { message = "Lütfen eksik alanları doldurunuz." });
+            }
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

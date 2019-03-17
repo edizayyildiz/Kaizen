@@ -14,10 +14,11 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     {
         private readonly ICompanyService companyService;
 
-        public CompanyController(ICompanyService companyService, ApplicationUserManager userManager) : base(userManager)
+        public CompanyController(ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
         {
             this.companyService = companyService;
             this.userManager = userManager;
+            this.employeeService = employeeService;
 
         }
         // GET: Admin/Company

@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.Employee.LastName)
         </th>
         <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th class="col-md-2">
             @Html.DisplayNameFor(model => model.CurrentStatus)
         </th>
         <th class="col-md-2">
@@ -36,6 +39,9 @@
         </td>
         <td class="col-md-2">
             @Html.DisplayFor(modelItem => item.Employee.LastName)
+        </td>
+        <td class="col-md-2">
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td class="col-md-2">
             @Html.DisplayFor(modelItem => item.CurrentStatus)
