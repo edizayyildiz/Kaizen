@@ -95,22 +95,6 @@ namespace Kaizen.Data.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Departments",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 200),
-                        CompanyId = c.Guid(nullable: false),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        CreatedBy = c.String(),
-                        UpdatedBy = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Companies", t => t.CompanyId, cascadeDelete: true)
-                .Index(t => t.CompanyId);
-            
-            CreateTable(
                 "dbo.Employees",
                 c => new
                     {
@@ -118,23 +102,44 @@ namespace Kaizen.Data.Migrations
                         FirstName = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 100),
                         UserName = c.String(nullable: false, maxLength: 200),
+                        Photo = c.String(),
                         Email = c.String(),
-                        CompanyId = c.Guid(),
                         Position = c.String(nullable: false, maxLength: 200),
+                        CompanyId = c.Guid(),
+                        BranchId = c.Guid(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                         CreatedBy = c.String(),
                         UpdatedBy = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Branches", t => t.BranchId)
                 .ForeignKey("dbo.Companies", t => t.CompanyId)
-                .Index(t => t.CompanyId);
+                .Index(t => t.CompanyId)
+                .Index(t => t.BranchId);
+            
+            CreateTable(
+                "dbo.Departments",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 200),
+                        BranchId = c.Guid(nullable: false),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        CreatedBy = c.String(),
+                        UpdatedBy = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Branches", t => t.BranchId, cascadeDelete: true)
+                .Index(t => t.BranchId);
             
             CreateTable(
                 "dbo.Suggestions",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
+                        Title = c.String(),
                         CurrentStatus = c.String(nullable: false),
                         SuggestedStatus = c.String(nullable: false),
                         Assessment = c.Int(nullable: false),
@@ -245,8 +250,9 @@ namespace Kaizen.Data.Migrations
             DropForeignKey("dbo.Suggestions", "EmployeeId", "dbo.Employees");
             DropForeignKey("dbo.EmployeeDepartments", "Department_Id", "dbo.Departments");
             DropForeignKey("dbo.EmployeeDepartments", "Employee_Id", "dbo.Employees");
+            DropForeignKey("dbo.Departments", "BranchId", "dbo.Branches");
             DropForeignKey("dbo.Employees", "CompanyId", "dbo.Companies");
-            DropForeignKey("dbo.Departments", "CompanyId", "dbo.Companies");
+            DropForeignKey("dbo.Employees", "BranchId", "dbo.Branches");
             DropForeignKey("dbo.Branches", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Cities", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.Counties", "CityId", "dbo.Cities");
@@ -259,8 +265,9 @@ namespace Kaizen.Data.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Suggestions", new[] { "EmployeeId" });
+            DropIndex("dbo.Departments", new[] { "BranchId" });
+            DropIndex("dbo.Employees", new[] { "BranchId" });
             DropIndex("dbo.Employees", new[] { "CompanyId" });
-            DropIndex("dbo.Departments", new[] { "CompanyId" });
             DropIndex("dbo.Counties", new[] { "CityId" });
             DropIndex("dbo.Cities", new[] { "CountryId" });
             DropIndex("dbo.Branches", new[] { "CountyId" });
@@ -274,8 +281,8 @@ namespace Kaizen.Data.Migrations
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Suggestions");
-            DropTable("dbo.Employees");
             DropTable("dbo.Departments");
+            DropTable("dbo.Employees");
             DropTable("dbo.Companies");
             DropTable("dbo.Countries");
             DropTable("dbo.Counties");

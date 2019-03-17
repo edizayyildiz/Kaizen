@@ -7,13 +7,13 @@ namespace Kaizen.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class editingForCompanyAndBranch : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(editingForCompanyAndBranch));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903161023445_editingForCompanyAndBranch"; }
+            get { return "201903171556031_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
