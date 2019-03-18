@@ -22,8 +22,6 @@ namespace Kaizen.Web.Areas.Admin.Controllers
 
         public ManageController(ApplicationUserManager userManager, IEmployeeService employeeService, ISuggestionService suggestionService) : base(userManager, employeeService)
         {
-            this.userManager = userManager;
-            this.employeeService = employeeService;
             this.suggestionService = suggestionService;
         }
 

@@ -31,7 +31,6 @@ namespace Kaizen.Web.Models
         public CountyViewModel County { get; set; }
         [Display(Name = "Şube Adresi")]
         public string Address { get; set; }
-
         [Display(Name = "Departmanlar")]
         public IEnumerable<DepartmentViewModel> Departments { get; set; }
         [Display(Name = "Çalışanlar")]

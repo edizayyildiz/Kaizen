@@ -14,8 +14,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     {
         public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService) : base(userManager, employeeService)
         {
-            this.userManager = userManager;
-            this.employeeService = employeeService;
+
         }
 
         // GET: Admin/Home

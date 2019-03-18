@@ -16,8 +16,6 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         public SuggestionController(ISuggestionService suggestionService, IEmployeeService employeeService, ApplicationUserManager userManager) : base(userManager, employeeService)
         {
             this.suggestionService = suggestionService;
-            this.employeeService = employeeService;
-            this.userManager = userManager;
         }
         // GET: Admin/Suggestion
         public ActionResult Index()

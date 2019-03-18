@@ -17,9 +17,6 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         public CompanyController(ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
         {
             this.companyService = companyService;
-            this.userManager = userManager;
-            this.employeeService = employeeService;
-
         }
         // GET: Admin/Company
         public ActionResult Index()
