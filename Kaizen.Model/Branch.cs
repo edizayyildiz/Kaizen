@@ -14,7 +14,7 @@ namespace Kaizen.Model
             Employees = new HashSet<Employee>();
         }
         public string Name { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
         public virtual Company Company { get; set; }
         public Guid? CountryId { get; set; }
         public virtual Country Country { get; set; }

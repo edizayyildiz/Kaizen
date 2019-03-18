@@ -13,7 +13,7 @@ namespace Kaizen.Data.Migrations
                     {
                         Id = c.Guid(nullable: false),
                         Name = c.String(),
-                        CompanyId = c.Guid(nullable: false),
+                        CompanyId = c.Guid(),
                         CountryId = c.Guid(),
                         CityId = c.Guid(),
                         CountyId = c.Guid(),
@@ -25,7 +25,7 @@ namespace Kaizen.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cities", t => t.CityId)
-                .ForeignKey("dbo.Companies", t => t.CompanyId, cascadeDelete: true)
+                .ForeignKey("dbo.Companies", t => t.CompanyId)
                 .ForeignKey("dbo.Countries", t => t.CountryId)
                 .ForeignKey("dbo.Counties", t => t.CountyId)
                 .Index(t => t.CompanyId)
@@ -139,7 +139,7 @@ namespace Kaizen.Data.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        Title = c.String(),
+                        Subject = c.String(),
                         CurrentStatus = c.String(nullable: false),
                         SuggestedStatus = c.String(nullable: false),
                         Assessment = c.Int(nullable: false),

@@ -22,7 +22,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var branches = branchService.GetAll();
-            var branchViewModels = Mapper.Map<BranchViewModel>(branches);
+            var branchViewModels = Mapper.Map<IEnumerable<BranchViewModel>>(branches);
             return View(branchViewModels);
         }
 
@@ -38,6 +38,9 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var branch = Mapper.Map<Branch>(branchViewModel);
+                var userMail = User.Identity.Name;
+                var authorizedEmployee = employeeService.GetAll(w => w.Email == userMail).FirstOrDefault();
+                branch.CompanyId = authorizedEmployee.CompanyId;
                 branchService.Insert(branch);
                 return RedirectToAction("Index");
             }
@@ -62,7 +65,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             {
                 var branch = Mapper.Map<Branch>(branchViewModel);
                 branchService.Update(branch);
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View(branchViewModel);
         }
@@ -76,7 +79,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         public ActionResult Details(Guid id)
         {
             var branch = branchService.Find(id);
-            var branchViewModel = Mapper.Map<CompanyViewModel>(branch);
+            var branchViewModel = Mapper.Map<BranchViewModel>(branch);
             return View(branchViewModel);
         }
     }

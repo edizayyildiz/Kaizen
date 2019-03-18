@@ -68,7 +68,13 @@ namespace Kaizen.Service
 
         public void Update(Branch entity)
         {
-            branchRepository.Update(entity);
+            var model = this.Find(entity.Id);
+            model.Name = entity.Name;
+            model.Address = entity.Address;
+            //model.CountryId = entity.CountryId;
+            //model.CityId = entity.CityId;
+            //model.CountyId = entity.CountyId;
+            branchRepository.Update(model);
             unitOfWork.SaveChanges();
         }
     }

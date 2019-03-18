@@ -65,13 +65,9 @@
     <Compile Include="Builders\SuggestionBuilder.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Migrations\201903171556031_InitialCreate.cs" />
-    <Compile Include="Migrations\201903171556031_InitialCreate.Designer.cs">
-      <DependentUpon>201903171556031_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903171845448_SuggestionTitleChangedToSubject.cs" />
-    <Compile Include="Migrations\201903171845448_SuggestionTitleChangedToSubject.Designer.cs">
-      <DependentUpon>201903171845448_SuggestionTitleChangedToSubject.cs</DependentUpon>
+    <Compile Include="Migrations\201903181704409_InitialCreate.cs" />
+    <Compile Include="Migrations\201903181704409_InitialCreate.Designer.cs">
+      <DependentUpon>201903181704409_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,11 +88,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903171556031_InitialCreate.resx">
-      <DependentUpon>201903171556031_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903171845448_SuggestionTitleChangedToSubject.resx">
-      <DependentUpon>201903171845448_SuggestionTitleChangedToSubject.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903181704409_InitialCreate.resx">
+      <DependentUpon>201903181704409_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
