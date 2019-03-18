@@ -60,6 +60,31 @@
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-6">
+                                    @Html.Label("CompanyId", "Şirket Kodu", new { @class = "control-label" })
+                                    @Html.TextBox("CompanyId", null, new { @class = "form-control input-lg" })
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary mt-xlg">Şubeleri Getir</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @Html.Label("BranchId", "Şirket Kodu", new { @class = "control-label" })
+                                    @Html.DropDownList("BranchId", null, "Şube seçiniz", htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Label("DepartmentId", "Departman", new { @class = "control-label" })
+                                    @Html.DropDownList("DepartmentId", null, "Departman Seçiniz", htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-lg">
+                            <div class="row">
+                                <div class="col-md-6">
                                     @Html.Label("FirstName", "Ad", new { @class = "control-label" })
                                     @Html.TextBox("FirstName", null, new { @class = "form-control input-lg" })
                                 </div>
@@ -109,7 +134,7 @@
                                 </div>
                                 <div class="col-sm-4 text-right">
                                     <button type="submit" class="btn btn-primary hidden-xs">Kayıt Ol</button>
-                                    <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign Up</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Kayıt Ol</button>
                                 </div>
                             </div>
                         </div>
