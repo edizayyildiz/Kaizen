@@ -83,7 +83,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var userName = User.Identity.Name;
             var user = userManager.FindByNameAsync(userName).Result;
             var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == user.Email);
-            if (file != null && file.ContentLength > 0)
+            if (file != null && file.ContentLength > 0) // byte üzerinden kontrol et
             {
                 string fileName = Path.GetFileName(file.FileName);
                 string extension = Path.GetExtension(fileName).ToLower();
@@ -111,11 +111,14 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             if (FirstName != "" && LastName != "" && Position != "" && UserName != "")
             {
                 var currentUserMail = User.Identity.Name;
+                var user = userManager.FindByName(currentUserMail);
                 var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == currentUserMail);
                 var employeeModel = Mapper.Map<EmployeeViewModel>(employee);
 
                 employeeModel.FirstName = FirstName;
                 employeeModel.LastName = LastName;
+                user.FirstName = FirstName;
+                user.LastName = LastName;
                 employeeModel.UserName = UserName;
                 employeeModel.Position = Position;
 

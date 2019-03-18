@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Kaizen.Web.Models
 {
+    // companyId ve branchId gelecek
     public class EmployeeViewModel
     {
         [Display(Name = "Id")]
@@ -34,6 +35,7 @@ namespace Kaizen.Web.Models
         [Required]
         [Display(Name = "E-Posta")]
         public string Email { get; set; }
+        public string Photo { get; set; }
         public CompanyViewModel Company { get; set; } //bunu silmek gerekecek
         public BranchViewModel Branch { get; set; }
         public IEnumerable<DepartmentViewModel> Departments { get; set; }
