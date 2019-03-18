@@ -114,7 +114,7 @@
             <div class="panel-body">
 
                 <div class="thumb-info mb-md">
-                    <img src="@(ViewBag.ProfilePhoto != null ? ("/Uploads/ProfilePhotos/" + ViewBag.ProfilePhoto) : "/AdminFiles/assets/images/empty_avatar.jpg")" id="thumb" class="rounded img-responsive" alt="Profil Fotoğrafı">
+                    <img src="@(ViewBag.ProfilePhoto != null ? ("/Uploads/ProfilePhotos/" + ViewBag.ProfilePhoto) : "/AdminFiles/assets/images/empty_avatar.jpg")" id="thumb" class="rounded img-responsive profilePhoto" alt="Profil Fotoğrafı">
                     <div class="thumb-info-title">
                         <span class="thumb-info-inner">@ViewBag.CurrentUser</span>
                         <span class="thumb-info-type">@ViewBag.Position</span>
@@ -248,7 +248,7 @@
 
     <script>
 
-        $(document).ready(function (e) {
+        $(document).ready(function () {
 
             $('#btnPersonal').click((function (e) {
                 e.preventDefault();
@@ -288,15 +288,13 @@
                     data: imgData,
                     success: function (response) {
                         if (response.message == null) {
-                            $('#thumb').attr('src', response);
-                            alert('Profil fotoğrafı güncellendi.');
+                            $('.profilePhoto').attr('src', response);
                         } else {
                             alert(response.message);
                         }
                     },
                 });
             }));
-
         });
 
     </script>
