@@ -204,14 +204,16 @@ namespace Kaizen.Web.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        [AllowAnonymous]
         public ActionResult GetBranches(string CompanyId)
         {
             var branches = this.branchService.GetBranchesByCompany(Guid.Parse(CompanyId)).Select(s => new { Id = s.Id, Name = s.Name });
             return Json(branches);
         }
-        public ActionResult GetDepartments(Guid BranchId)
+        [AllowAnonymous]
+        public ActionResult GetDepartments(string BranchId)
         {
-            var departments = this.departmentService.GetDepartmentsByBranch(BranchId).Select(s => new { Id = s.Id, Name = s.Name });
+            var departments = this.departmentService.GetDepartmentsByBranch(Guid.Parse(BranchId)).Select(s => new { Id = s.Id, Name = s.Name });
             return Json(departments);
         }
 
@@ -219,8 +221,8 @@ namespace Kaizen.Web.Controllers
         [AllowAnonymous]
         public ActionResult UserRegister()
         {
-            ViewBag.BranchId = new SelectList(branchService.GetAll(), "Id", "Name");
-            ViewBag.DepartmentId = new SelectList(departmentService.GetAll(), "Id", "Name");
+            ViewBag.BranchId = new SelectList("", "Id", "Name");
+            ViewBag.DepartmentId = new SelectList("", "Id", "Name");
             return View();
         }
 
@@ -228,7 +230,7 @@ namespace Kaizen.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UserRegister(RegisterViewModel model, string Name, string FirstName, string LastName, string Position, string UserName)
+        public async Task<ActionResult> UserRegister(RegisterViewModel model, string FirstName, string LastName, string Position, string UserName, string CompanyId, Guid BranchId, Guid DepartmentId)
         {
             if (ModelState.IsValid)
             {
@@ -242,7 +244,17 @@ namespace Kaizen.Web.Controllers
                     employeeViewModel.LastName = LastName;
                     employeeViewModel.Position = Position;
                     employeeViewModel.UserName = UserName;
+                    var branch = branchService.Find(BranchId);
+                    var branchModel = Mapper.Map<BranchViewModel>(branch);
+                    employeeViewModel.Branch = branchModel;
+                    var company = companyService.Find(Guid.Parse(CompanyId));
+                    var companyModel = Mapper.Map<CompanyViewModel>(company);
+                    employeeViewModel.Company = companyModel;
+                    var department = departmentService.Find(DepartmentId);
+                    //var departmentModel = Mapper.Map<DepartmentViewModel>(department);
+                    //employeeViewModel.Departments.ToList().Add(departmentModel); // IEnumarable Departments a nasıl item eklenecek?
                     var employee = Mapper.Map<Employee>(employeeViewModel);
+                    //employee.Departments.Add(department);
                     employeeService.Insert(employee);
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

@@ -80,8 +80,7 @@ namespace Kaizen.Service
         }
         public IEnumerable<Branch> GetBranchesByCompany(Guid CompanyId)
         {
-            var branches = this.GetAll().Where(f => f.CompanyId == CompanyId);
-            return branches;
+            return this.GetAll().Where(f => f.CompanyId == CompanyId);
         }
     }
 }
