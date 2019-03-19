@@ -61,10 +61,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     @Html.Label("CompanyId", "Şirket Kodu", new { @class = "control-label" })
-                                    @Html.TextBox("CompanyId", null, new { @class = "form-control input-lg" })
+                                    @Html.TextBox("CompanyId", null, new { @class = "form-control input-lg", id = "CompanyId" })
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary mt-xlg">Şubeleri Getir</button>
+                                    <button id="btnBranch" type="button" class="btn btn-primary mt-xlg">Şubeleri Getir</button>
                                 </div>
                             </div>
                         </div>
@@ -72,12 +72,12 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4">
-                                    @Html.Label("BranchId", "Şirket Kodu", new { @class = "control-label" })
-                                    @Html.DropDownList("BranchId", null, "Şube seçiniz", htmlAttributes: new { @class = "form-control" })
+                                    @Html.Label("BranchId", "Şube", new { @class = "control-label" })
+                                    @Html.DropDownList("BranchId", null, "Şube seçiniz", htmlAttributes: new { @class = "form-control", id = "BranchId" })
                                 </div>
                                 <div class="col-md-4">
                                     @Html.Label("DepartmentId", "Departman", new { @class = "control-label" })
-                                    @Html.DropDownList("DepartmentId", null, "Departman Seçiniz", htmlAttributes: new { @class = "form-control" })
+                                    @Html.DropDownList("DepartmentId", null, "Departman Seçiniz", htmlAttributes: new { @class = "form-control", id = "DepartmentId" })
                                 </div>
                             </div>
                         </div>
@@ -170,3 +170,31 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    $(document).ready(function () {
+        $('#btnBranch').click(function () {
+            console.log("Şubeler getiriliyor");
+            $.post("@Url.Action("GetBranches", "Account")", { CompanyId: $('#CompanyId').val() }, function (data) {
+                console.log("Şubeler getirildi");
+                $('#BranchId').empty();
+                $('#BranchId').append('<option value="" >Şube seçiniz..</option>');
+                $.each(data, function (index, value) {
+                    $('#BranchId').append('<option value="' + value.Id + '" >' + value.Name + '</option>');
+                });
+            });
+        });
+
+        $('#BranchId').change(function (e) {
+            e.preventDefault;
+            $.post("@Url.Action("GetDepartments", "Account")", { BranchId: $('#BranchId').val() }, function (data) {
+                $('#DepartmentId').empty();
+                $('#DepartmentId').append('<option value"" >Departman Seçiniz</option>');
+                $.each(data, function (index, value) {
+                    $('#DepartmentId').append('<option value="' + value.Id + '" >' + value.Name + '</option>');
+                });
+            });
+        });
+
+    });
+</script>

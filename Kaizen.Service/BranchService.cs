@@ -18,6 +18,7 @@ namespace Kaizen.Service
         Branch Find(Guid id);
         IEnumerable<Branch> GetAll();
         IEnumerable<Branch> GetAll(Expression<Func<Branch, bool>> where);
+        IEnumerable<Branch> GetBranchesByCompany(Guid CompanyId);
 
     }
     public class BranchService : IBranchService
@@ -76,6 +77,11 @@ namespace Kaizen.Service
             //model.CountyId = entity.CountyId;
             branchRepository.Update(model);
             unitOfWork.SaveChanges();
+        }
+        public IEnumerable<Branch> GetBranchesByCompany(Guid CompanyId)
+        {
+            var branches = this.GetAll().Where(f => f.CompanyId == CompanyId);
+            return branches;
         }
     }
 }

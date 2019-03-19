@@ -22,19 +22,25 @@ namespace Kaizen.Web.Controllers
         private ApplicationUserManager _userManager;
         private readonly ICompanyService companyService;
         private readonly IEmployeeService employeeService;
+        private readonly IBranchService branchService;
+        private readonly IDepartmentService departmentService;
 
-        public AccountController(ICompanyService companyService, IEmployeeService employeeService)
+        public AccountController(ICompanyService companyService, IEmployeeService employeeService, IBranchService branchService, IDepartmentService departmentService)
         {
             this.companyService = companyService;
             this.employeeService = employeeService;
+            this.branchService = branchService;
+            this.departmentService = departmentService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICompanyService companyService, IEmployeeService employeeService)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICompanyService companyService, IEmployeeService employeeService, IBranchService branchService, IDepartmentService departmentService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             this.companyService = companyService;
             this.employeeService = employeeService;
+            this.branchService = branchService;
+            this.departmentService = departmentService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -198,11 +204,23 @@ namespace Kaizen.Web.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        public ActionResult GetBranches(string CompanyId)
+        {
+            var branches = this.branchService.GetBranchesByCompany(Guid.Parse(CompanyId)).Select(s => new { Id = s.Id, Name = s.Name });
+            return Json(branches);
+        }
+        public ActionResult GetDepartments(Guid BranchId)
+        {
+            var departments = this.departmentService.GetDepartmentsByBranch(BranchId).Select(s => new { Id = s.Id, Name = s.Name });
+            return Json(departments);
+        }
 
         // GET: /Account/UserRegister
         [AllowAnonymous]
         public ActionResult UserRegister()
         {
+            ViewBag.BranchId = new SelectList(branchService.GetAll(), "Id", "Name");
+            ViewBag.DepartmentId = new SelectList(departmentService.GetAll(), "Id", "Name");
             return View();
         }
 

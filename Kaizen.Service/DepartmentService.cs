@@ -18,6 +18,7 @@ namespace Kaizen.Service
         Department Find(Guid id);
         IEnumerable<Department> GetAll();
         IEnumerable<Department> GetAll(Expression<Func<Department, bool>> where);
+        IEnumerable<Department> GetDepartmentsByBranch(Guid BranchId);
     }
     public class DepartmentService : IDepartmentService
     {
@@ -56,6 +57,11 @@ namespace Kaizen.Service
         public IEnumerable<Department> GetAll(Expression<Func<Department, bool>> where)
         {
             return departmentRepository.GetAll(where);
+        }
+
+        public IEnumerable<Department> GetDepartmentsByBranch(Guid BranchId)
+        {
+            return this.GetAll().Where(w => w.BranchId == BranchId);
         }
 
         public void Insert(Department entity)
