@@ -13,7 +13,7 @@ namespace Kaizen.Model
             Branches = new HashSet<Branch>();
         }
         public string Name { get; set; }
-        public Guid CityId { get; set; }
+        public Guid? CityId { get; set; }
         public virtual City City { get; set; }
         public virtual ICollection<Branch> Branches { get; set; }
     }
