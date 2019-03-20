@@ -244,18 +244,23 @@ namespace Kaizen.Web.Controllers
                     employeeViewModel.LastName = LastName;
                     employeeViewModel.Position = Position;
                     employeeViewModel.UserName = UserName;
-                    var branch = branchService.Find(BranchId);
-                    var branchModel = Mapper.Map<BranchViewModel>(branch);
-                    employeeViewModel.Branch = branchModel;
-                    var company = companyService.Find(Guid.Parse(CompanyId));
-                    var companyModel = Mapper.Map<CompanyViewModel>(company);
-                    employeeViewModel.Company = companyModel;
-                    var department = departmentService.Find(DepartmentId);
-                    //var departmentModel = Mapper.Map<DepartmentViewModel>(department);
-                    //employeeViewModel.Departments.ToList().Add(departmentModel); // IEnumarable Departments a nasıl item eklenecek?
+                    // var branch = branchService.Find(BranchId);
+                    // var branchModel = Mapper.Map<BranchViewModel>(branch);
+                    employeeViewModel.BranchId = BranchId;
+                    employeeViewModel.CompanyId = Guid.Parse(CompanyId);
+                    // var company = companyService.Find(Guid.Parse(CompanyId));
+                    // var companyModel = Mapper.Map<CompanyViewModel>(company);
+                    // employeeViewModel.Company = companyModel;
+                    // var department = departmentService.Find(DepartmentId);
+                    // var departmentModel = Mapper.Map<DepartmentViewModel>(department);
+                    // employeeViewModel.Departments.ToList().Add(departmentModel); // IEnumarable Departments a nasıl item eklenecek?
+                    // employeeViewModel.Departments.ToList().Add(departmentModel);
                     var employee = Mapper.Map<Employee>(employeeViewModel);
                     //employee.Departments.Add(department);
                     employeeService.Insert(employee);
+                    var department = departmentService.Find(DepartmentId);
+                    employee.Departments.Add(department);
+                    employeeService.Update(employee);
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 

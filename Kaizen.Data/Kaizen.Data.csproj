@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201903181704409_InitialCreate.Designer.cs">
       <DependentUpon>201903181704409_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903201108494_dbfix.cs" />
+    <Compile Include="Migrations\201903201108494_dbfix.Designer.cs">
+      <DependentUpon>201903201108494_dbfix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -90,6 +94,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903181704409_InitialCreate.resx">
       <DependentUpon>201903181704409_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903201108494_dbfix.resx">
+      <DependentUpon>201903201108494_dbfix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

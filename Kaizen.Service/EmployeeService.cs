@@ -73,6 +73,8 @@ namespace Kaizen.Service
             model.Position = entity.Position;
             model.Photo = entity.Photo;
             model.Departments.Clear();
+            employeeRepository.Update(model);
+            unitOfWork.SaveChanges();
             foreach (var item in entity.Departments)
             {
                 model.Departments.Add(item);
