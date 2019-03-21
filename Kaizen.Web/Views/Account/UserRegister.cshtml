@@ -1,6 +1,8 @@
 ﻿@model Kaizen.Web.Models.RegisterViewModel
 
 @{
+    /**/
+
     ViewBag.Title = "UserRegister";
     Layout = null;
 }
@@ -175,11 +177,15 @@
     $(document).ready(function () {
         $('#btnBranch').click(function () {
             $.post("@Url.Action("GetBranches", "Account")", { CompanyId: $('#CompanyId').val() }, function (data) {
+                if (data.success == false) {
+                    alert(data.message);
+                    return;
+                }
                 $('#BranchId').empty();
                 $('#DepartmentId').empty();
                 $('#BranchId').append('<option value="" >Şube seçiniz..</option>');
                 $('#DepartmentId').append('<option value="" >Departman Seçiniz..</option>');
-                $.each(data, function (index, value) {
+                $.each(data.branches, function (index, value) {
                     $('#BranchId').append('<option value="' + value.Id + '" >' + value.Name + '</option>');
                 });
             });
