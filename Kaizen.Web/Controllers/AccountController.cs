@@ -208,17 +208,32 @@ namespace Kaizen.Web.Controllers
         [AllowAnonymous]
         public ActionResult GetBranches(string CompanyId)
         {
-            bool success = Guid.TryParse(CompanyId, out Guid resultCompanyId);
-            if (success == true)
+
+            if (CompanyId != "")
             {
-                var branches = this.branchService.GetBranchesByCompany(resultCompanyId).Select(s => new { Id = s.Id, Name = s.Name });
-                return Json(new { success = true, branches = branches });
+                bool success = Guid.TryParse(CompanyId, out Guid resultCompanyId);
+                if (success == true)
+                {
+                    var company = companyService.Find(resultCompanyId);
+                    if (company != null)
+                    {
+                        var branches = this.branchService.GetBranchesByCompany(resultCompanyId).Select(s => new { Id = s.Id, Name = s.Name });
+                        return Json(new { success = true, branches = branches });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = "Girdiğiniz şirket kodu kayıtlarımızda bulunmamaktadır.Lütfen doğru girdiğinizden emin olunuz." });
+                    }
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Şirket kodu XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX formatında olmalıdır." });
+                }
             }
             else
             {
-                return Json(new { success = false, message = "Şirket kodu XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX formatında olmalıdır." });
+                return Json(new { success = false, message = "Şirket kodu alanı gereklidir." });
             }
-
         }
         [AllowAnonymous]
         public ActionResult GetDepartments(string BranchId)
@@ -233,36 +248,35 @@ namespace Kaizen.Web.Controllers
         {
             ViewBag.BranchId = new SelectList("", "Id", "Name");
             ViewBag.DepartmentId = new SelectList("", "Id", "Name");
-            return View();
+            var userRegisterViewModel = new UserRegisterViewModel();
+            return View(userRegisterViewModel);
         }
 
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UserRegister(RegisterViewModel model, string FirstName, string LastName, string Position, string UserName, string CompanyId, Guid BranchId, Guid DepartmentId)
+        public async Task<ActionResult> UserRegister(UserRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = FirstName, LastName = LastName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // registerViewModel içine CompanyId firstName, userName alanlarını alabiliriz?
-
                     var employeeModel = new EmployeeViewModel();
                     employeeModel.Email = model.Email;
-                    employeeModel.FirstName = FirstName;
-                    employeeModel.LastName = LastName;
-                    employeeModel.Position = Position;
-                    employeeModel.UserName = UserName;
-                    employeeModel.BranchId = BranchId;
-                    employeeModel.CompanyId = Guid.Parse(CompanyId);
+                    employeeModel.FirstName = model.FirstName;
+                    employeeModel.LastName = model.LastName;
+                    employeeModel.Position = model.Position;
+                    employeeModel.UserName = model.UserName;
+                    employeeModel.BranchId = model.BranchId;
+                    employeeModel.CompanyId = Guid.Parse(model.CompanyId);
 
                     var employee = Mapper.Map<Employee>(employeeModel);
                     employeeService.Insert(employee);
 
-                    var department = departmentService.Find(DepartmentId);
+                    var department = departmentService.Find(model.DepartmentId);
                     department.Employees.Add(employee);
                     departmentService.Update(department);
 
@@ -279,6 +293,8 @@ namespace Kaizen.Web.Controllers
                 }
                 AddErrors(result);
             }
+            ViewBag.BranchId = new SelectList(branchService.GetAll(f => f.Id == model.BranchId), "Id", "Name");
+            ViewBag.DepartmentId = new SelectList(departmentService.GetAll(f => f.Id == model.DepartmentId), "Id", "Name");
 
             // If we got this far, something failed, redisplay form
             return View(model);

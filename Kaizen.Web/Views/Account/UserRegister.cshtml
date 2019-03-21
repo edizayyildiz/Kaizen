@@ -1,4 +1,4 @@
-﻿@model Kaizen.Web.Models.RegisterViewModel
+﻿@model Kaizen.Web.Models.UserRegisterViewModel
 
 @{
     /**/
@@ -58,12 +58,14 @@
                     @using (Html.BeginForm("UserRegister", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-9">
-                                    @Html.Label("CompanyId", "Şirket Kodu", new { @class = "control-label" })
-                                    @Html.TextBox("CompanyId", null, new { @class = "form-control input-lg", id = "CompanyId" })
+                                    @Html.LabelFor(model => model.CompanyId, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.CompanyId, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger", id="companyVal" })
+                                    <div id="companyMessage" class="text-danger"></div>
                                 </div>
                                 <div class="col-md-3">
                                     <button id="btnBranch" type="button" class="btn btn-primary btn-sm" style="margin-top: 28px;">Şubeleri Getir</button>
@@ -74,12 +76,14 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("BranchId", "Şube", new { @class = "control-label" })
-                                    @Html.DropDownList("BranchId", null, "Şube seçiniz..", htmlAttributes: new { @class = "form-control", id = "BranchId" })
+                                    @Html.LabelFor(model => model.BranchId, new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.BranchId, null, "Şube seçiniz..", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("DepartmentId", "Departman", new { @class = "control-label" })
-                                    @Html.DropDownList("DepartmentId", null, "Departman Seçiniz..", htmlAttributes: new { @class = "form-control", id = "DepartmentId" })
+                                    @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.DepartmentId, null, "Departman Seçiniz..", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -87,30 +91,35 @@
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("FirstName", "Ad", new { @class = "control-label" })
-                                    @Html.TextBox("FirstName", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("LastName", "Soyad", new { @class = "control-label" })
-                                    @Html.TextBox("LastName", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("UserName", "Kullanıcı Adı", new { @class = "control-label" })
-                                    @Html.TextBox("UserName", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.UserName, null, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("Position", "Pozisyon", new { @class = "control-label" })
-                                    @Html.TextBox("Position", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(model => model.Position, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Position, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
                             @Html.LabelFor(m => m.Email, "E-Posta", new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group mb-none">
                             <div class="row">
@@ -118,10 +127,12 @@
                                     <div class="col-sm-6 mb-lg">
                                         @Html.LabelFor(m => m.Password, "Parola", new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg" })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="col-sm-6 mb-lg">
                                         @Html.LabelFor(m => m.ConfirmPassword, "Parola(Tekrar)", new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input-lg" })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -178,11 +189,19 @@
         $('#btnBranch').click(function () {
             $.post("@Url.Action("GetBranches", "Account")", { CompanyId: $('#CompanyId').val() }, function (data) {
                 if (data.success == false) {
-                    alert(data.message);
+                    $('#companyMessage').empty();
+                    $('#companyVal').empty();
+                    $('#BranchId').empty();
+                    $('#DepartmentId').empty();
+                    $('#BranchId').append('<option value="" >Şube seçiniz..</option>');
+                    $('#DepartmentId').append('<option value="" >Departman Seçiniz..</option>');
+                    $('#companyMessage').append('<p style="margin: 0;">' + data.message + '</p>');
                     return;
                 }
+                $('#companyMessage').empty();
                 $('#BranchId').empty();
                 $('#DepartmentId').empty();
+                $('#companyVal').empty();
                 $('#BranchId').append('<option value="" >Şube seçiniz..</option>');
                 $('#DepartmentId').append('<option value="" >Departman Seçiniz..</option>');
                 $.each(data.branches, function (index, value) {
@@ -191,8 +210,7 @@
             });
         });
 
-        $('#BranchId').change(function (e) {
-            e.preventDefault;
+        $('#BranchId').change(function () {
             $.post("@Url.Action("GetDepartments", "Account")", { BranchId: $('#BranchId').val() }, function (data) {
                 $('#DepartmentId').empty();
                 $('#DepartmentId').append('<option value"" >Departman Seçiniz..</option>');

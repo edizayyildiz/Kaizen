@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Kaizen.Web.Models
@@ -6,7 +7,7 @@ namespace Kaizen.Web.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
 
@@ -33,7 +34,7 @@ namespace Kaizen.Web.Models
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = "Bu tarayıcı hatırlansın mı?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -42,14 +43,14 @@ namespace Kaizen.Web.Models
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -58,45 +59,93 @@ namespace Kaizen.Web.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Beni hatırla?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Ad")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Soyad")]
+        public string LastName { get; set; }
+        [Required]
+        [Display(Name = "Pozisyon")]
+        public string Position { get; set; }
+        [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Parola(Tekrar)")]
+        [Compare("Password", ErrorMessage = "Girdiğiniz parolalar uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
     }
+    public class UserRegisterViewModel
+    {
+        [Required]
+        [Display(Name = "Ad")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Soyad")]
+        public string LastName { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
+        [Display(Name = "Kullanıcı Adı")]
+        public string UserName { get; set; }
+        [Required]
+        [Display(Name = "Şirket kodu")]
+        public string CompanyId { get; set; }
+        [Required]
+        [Display(Name = "Şube")]
+        public Guid BranchId { get; set; }
+        [Required]
+        [Display(Name = "Departman")]
+        public Guid DepartmentId { get; set; }
+        [Required]
+        [Display(Name = "Pozisyon")]
+        public string Position { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "E-Posta")]
+        public string Email { get; set; }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Parola")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Parola(Tekrar)")]
+        [Compare("Password", ErrorMessage = "Girdiğiniz parolalar uyuşmuyor.")]
+        public string ConfirmPassword { get; set; }
+    }
     public class ResetPasswordViewModel
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Parola(Tekrar)")]
+        [Compare("Password", ErrorMessage = "Girdiğiniz parolalar uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -106,7 +155,7 @@ namespace Kaizen.Web.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-Posta")]
         public string Email { get; set; }
     }
 }
