@@ -12,6 +12,7 @@ using Kaizen.Web.Models;
 using Kaizen.Model;
 using Kaizen.Service;
 using AutoMapper;
+using System.Text.RegularExpressions;
 
 namespace Kaizen.Web.Controllers
 {
@@ -207,8 +208,17 @@ namespace Kaizen.Web.Controllers
         [AllowAnonymous]
         public ActionResult GetBranches(string CompanyId)
         {
-            var branches = this.branchService.GetBranchesByCompany(Guid.Parse(CompanyId)).Select(s => new { Id = s.Id, Name = s.Name });
-            return Json(branches);
+            bool success = Guid.TryParse(CompanyId, out Guid resultCompanyId);
+            if (success == true)
+            {
+                var branches = this.branchService.GetBranchesByCompany(resultCompanyId).Select(s => new { Id = s.Id, Name = s.Name });
+                return Json(new { success = true, branches = branches });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Şirket kodu XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX formatında olmalıdır." });
+            }
+
         }
         [AllowAnonymous]
         public ActionResult GetDepartments(string BranchId)
@@ -238,29 +248,24 @@ namespace Kaizen.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var employeeViewModel = new EmployeeViewModel();
-                    employeeViewModel.Email = model.Email;
-                    employeeViewModel.FirstName = FirstName;
-                    employeeViewModel.LastName = LastName;
-                    employeeViewModel.Position = Position;
-                    employeeViewModel.UserName = UserName;
-                    // var branch = branchService.Find(BranchId);
-                    // var branchModel = Mapper.Map<BranchViewModel>(branch);
-                    employeeViewModel.BranchId = BranchId;
-                    employeeViewModel.CompanyId = Guid.Parse(CompanyId);
-                    // var company = companyService.Find(Guid.Parse(CompanyId));
-                    // var companyModel = Mapper.Map<CompanyViewModel>(company);
-                    // employeeViewModel.Company = companyModel;
-                    // var department = departmentService.Find(DepartmentId);
-                    // var departmentModel = Mapper.Map<DepartmentViewModel>(department);
-                    // employeeViewModel.Departments.ToList().Add(departmentModel); // IEnumarable Departments a nasıl item eklenecek?
-                    // employeeViewModel.Departments.ToList().Add(departmentModel);
-                    var employee = Mapper.Map<Employee>(employeeViewModel);
-                    //employee.Departments.Add(department);
+                    // registerViewModel içine CompanyId firstName, userName alanlarını alabiliriz?
+
+                    var employeeModel = new EmployeeViewModel();
+                    employeeModel.Email = model.Email;
+                    employeeModel.FirstName = FirstName;
+                    employeeModel.LastName = LastName;
+                    employeeModel.Position = Position;
+                    employeeModel.UserName = UserName;
+                    employeeModel.BranchId = BranchId;
+                    employeeModel.CompanyId = Guid.Parse(CompanyId);
+
+                    var employee = Mapper.Map<Employee>(employeeModel);
                     employeeService.Insert(employee);
+
                     var department = departmentService.Find(DepartmentId);
-                    employee.Departments.Add(department);
-                    employeeService.Update(employee);
+                    department.Employees.Add(employee);
+                    departmentService.Update(department);
+
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
