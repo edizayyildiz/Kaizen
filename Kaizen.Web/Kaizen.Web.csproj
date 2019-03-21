@@ -2249,6 +2249,14 @@
     <Content Include="Areas\Admin\Views\City\Index.cshtml" />
     <Content Include="Areas\Admin\Views\County\Index.cshtml" />
     <Content Include="Areas\Admin\Views\County\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\City\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\City\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\City\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Country\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Country\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Country\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\County\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\County\Details.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
