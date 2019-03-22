@@ -155,7 +155,8 @@ namespace Kaizen.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var companyRegisterModel = new CompanyRegisterViewModel();
+            return View(companyRegisterModel);
         }
 
         //
@@ -163,28 +164,28 @@ namespace Kaizen.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, string Name, string Sector, int HeadCount, string Description, string FirstName, string LastName, string Position, string UserName)
+        public async Task<ActionResult> Register(CompanyRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = FirstName, LastName = LastName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     var companyViewModel = new CompanyViewModel();
-                    companyViewModel.Name = Name;
-                    companyViewModel.Sector = Sector;
-                    companyViewModel.HeadCount = HeadCount;
-                    companyViewModel.Description = Description;
+                    companyViewModel.Name = model.Name;
+                    companyViewModel.Sector = model.Sector;
+                    companyViewModel.HeadCount = model.HeadCount;
+                    companyViewModel.Description = model.Description;
                     var company = Mapper.Map<Company>(companyViewModel);
                     companyService.Insert(company);
 
                     var employeeViewModel = new EmployeeViewModel();
                     employeeViewModel.Email = model.Email;
-                    employeeViewModel.FirstName = FirstName;
-                    employeeViewModel.LastName = LastName;
-                    employeeViewModel.Position = Position;
-                    employeeViewModel.UserName = UserName;
+                    employeeViewModel.FirstName = model.FirstName;
+                    employeeViewModel.LastName = model.LastName;
+                    employeeViewModel.Position = model.Position;
+                    employeeViewModel.UserName = model.UserName;
                     var employee = Mapper.Map<Employee>(employeeViewModel);
                     employee.CompanyId = company.Id; //company index viewında yazdığım yorum satır için bu satırı yazdım.
                     employeeService.Insert(employee);

@@ -19,18 +19,21 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private readonly ISuggestionService suggestionService;
+        private readonly IDepartmentService departmentService;
 
-        public ManageController(ApplicationUserManager userManager, IEmployeeService employeeService, ISuggestionService suggestionService) : base(userManager, employeeService)
+        public ManageController(ApplicationUserManager userManager, IEmployeeService employeeService, ISuggestionService suggestionService, IDepartmentService departmentService) : base(userManager, employeeService)
         {
             this.suggestionService = suggestionService;
+            this.departmentService = departmentService;
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService, ISuggestionService suggestionService) : base(userManager, employeeService)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService, ISuggestionService suggestionService, IDepartmentService departmentService) : base(userManager, employeeService)
         {
             this.userManager = userManager;
             SignInManager = signInManager;
             this.employeeService = employeeService;
             this.suggestionService = suggestionService;
+            this.departmentService = departmentService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -53,8 +56,12 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var currentUser = userManager.FindByNameAsync(userName).Result; // result async i senkrona çeviriyor
             var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == currentUser.Email);
             var suggestions = suggestionService.GetAll(f => f.EmployeeId == employee.Id).OrderByDescending(w => w.UpdatedAt);
+            var departments = employee.Departments.ToList().Select(s => s.Name);
             ViewBag.Suggestions = suggestions;
             ViewBag.Position = employee.Position;
+            ViewBag.Departments = departments;
+            ViewBag.Company = employee.Company.Name;
+            
 
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
