@@ -24,11 +24,11 @@ namespace Kaizen.Web.Models
         [Display(Name = "Firma")]
         public CompanyViewModel Company { get; set; }
         [Display(Name = "Ülke")]
-        public CountryViewModel Country { get; set; } // Navigation property sil Guid CountryId Koy bunun yerine
+        public Guid CountryId { get; set; } // Navigation property sil Guid CountryId Koy bunun yerine
         [Display(Name = "İl")]
-        public CityViewModel City { get; set; } // Navigation property sil Guid CityId Koy bunun yerine
+        public Guid CityId { get; set; } // Navigation property sil Guid CityId Koy bunun yerine
         [Display(Name = "İlçe")]
-        public CountyViewModel County { get; set; } // Navigation property sil Guid CountyId Koy bunun yerine
+        public Guid CountyId { get; set; } // Navigation property sil Guid CountyId Koy bunun yerine
         [Display(Name = "Şube Adresi")]
         public string Address { get; set; }
         [Display(Name = "Departmanlar")]

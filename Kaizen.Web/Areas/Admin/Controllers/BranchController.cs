@@ -13,10 +13,18 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class BranchController : ControllerBase
     {
         private readonly IBranchService branchService;
+        private readonly ICountryService countryService;
+        private readonly ICityService cityService;
+        private readonly ICountyService countyService;
+        private readonly ICompanyService companyService;
 
-        public BranchController(IBranchService branchService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public BranchController(IBranchService branchService, ICountryService countryService, ICityService cityService, ICountyService countyService, ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
         {
             this.branchService = branchService;
+            this.countryService = countryService;
+            this.cityService = cityService;
+            this.countyService = countyService;
+            this.companyService = companyService;
         }
         // GET: Admin/Branch
         public ActionResult Index()
@@ -28,6 +36,14 @@ namespace Kaizen.Web.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
+            var userMail = User.Identity.Name;
+            var employee = employeeService.GetAll(f => f.Email == userMail).FirstOrDefault();
+            var company = companyService.GetAll(f => f.Id == employee.CompanyId).FirstOrDefault();
+            var branchCountries = company.Branches.Select(f=>f.Country).ToList();
+
+            ViewBag.CountryId = new SelectList(branchCountries, "Id", "Name");
+            ViewBag.CityId = new SelectList("", "Id", "Name");
+            ViewBag.CountyId = new SelectList("", "Id", "Name");
             var branchViewModel = new BranchViewModel();
             return View(branchViewModel);
         }
