@@ -1,4 +1,4 @@
-﻿@model Kaizen.Web.Models.RegisterViewModel
+﻿@model Kaizen.Web.Models.CompanyRegisterViewModel
 @{
     ViewBag.Title = "Kayıt Ol";
     Layout = null;
@@ -55,73 +55,85 @@
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.Label("Name", "Şirket Adı", new { @class = "control-label" })
-                                    @Html.TextBox("Name", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger", id="nameVal" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("Sector", "Sektör", new { @class = "control-label" })
-                                    @Html.TextBox("Sector", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(m => m.Sector, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Sector, null, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger", id = "sectorVal" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("HeadCount", "Şirket Çalışan Sayısı", new { @class = "control-label" })
-                                    @Html.TextBox("HeadCount", null, new { @class = "form-control input-lg", type = "number", min = "0" })
+                                    @Html.LabelFor(m => m.HeadCount, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.HeadCount, null, new { @class = "form-control input-lg", type = "number", min = "1" })
+                                    @Html.ValidationMessageFor(m => m.HeadCount, "", new { @class = "text-danger", id = "headCountVal" })
+                                    <div id="headCountMessage"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.Label("Description", "Açıklama", new { @class = "control-label" })
-                                    @Html.TextArea("Description", null, new { @class = "form-control", style = "resize: none; height: 100px;" })
+                                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", style = "resize: none; height: 100px;" })
+                                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger", id = "descriptionVal" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("FirstName", "Yetkili Adı", new { @class = "control-label" })
-                                    @Html.TextBox("FirstName", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.FirstName, null, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger", id = "firstNameVal" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("LastName", "Yetkili Soyadı", new { @class = "control-label" })
-                                    @Html.TextBox("LastName", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.LastName, null, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger", id = "lastNameVal" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.Label("UserName", "Kullanıcı Adı", new { @class = "control-label" })
-                                    @Html.TextBox("UserName", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.UserName, null, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger", id = "userNameVal" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.Label("Position", "Pozisyon", new { @class = "control-label" })
-                                    @Html.TextBox("Position", null, new { @class = "form-control input-lg" })
+                                    @Html.LabelFor(m => m.Position, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Position, null, new { @class = "form-control input-lg" })
+                                    @Html.ValidationMessageFor(m => m.Position, "", new { @class = "text-danger", id = "positionVal" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
-                            @Html.LabelFor(m => m.Email, "E-Posta", new { @class = "control-label" })
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger", id = "emailVal" })
                         </div>
                         <div class="form-group mb-none">
                             <div class="row">
                                 <div>
                                     <div class="col-sm-6 mb-lg">
-                                        @Html.LabelFor(m => m.Password, "Parola", new { @class = "control-label" })
+                                        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", id = "passwordVal" })
                                     </div>
                                     <div class="col-sm-6 mb-lg">
-                                        @Html.LabelFor(m => m.ConfirmPassword, "Parola(Tekrar)", new { @class = "control-label" })
+                                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input-lg" })
+                                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger", id = "confirmPasswordVal" })
                                     </div>
                                 </div>
                             </div>
@@ -172,3 +184,45 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#Name').keyup(function () {
+            $('#nameVal').empty();
+        });
+        $('#Sector').keyup(function () {
+            $('#sectorVal').empty();
+        });
+        $('#HeadCount').keyup(function () {
+            $('#headCountVal').empty();
+        });
+        $('#Description').keyup(function () {
+            $('#descriptionVal').empty();
+        });
+        $('#FirstName').keyup(function () {
+            $('#firstNameVal').empty();
+        });
+        $('#LastName').keyup(function () {
+            $('#lastNameVal').empty();
+        });
+        $('#UserName').keyup(function () {
+            $('#userNameVal').empty();
+        });
+        $('#Position').keyup(function () {
+            $('#positionVal').empty();
+        });
+        $('#Email').keyup(function () {
+            $('#emailVal').empty();
+        });
+        $('#Password').keyup(function () {
+            $('#passwordVal').empty();
+        });
+        $('#ConfirmPassword').keyup(function () {
+            $('#confirmPasswordVal').empty();
+        });
+
+    });
+
+</script>

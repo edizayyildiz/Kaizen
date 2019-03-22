@@ -63,14 +63,31 @@ namespace Kaizen.Web.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class CompanyRegisterViewModel
     {
         [Required]
-        [Display(Name = "Ad")]
+        [Display(Name = "Şirket Adı")]
+        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Sektör")]
+        public string Sector { get; set; }
+        [Required]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Açıklama")]
+        public string Description { get; set; }
+        [Required]
+        [Display(Name = "Çalışan Sayısı")]
+        public int HeadCount { get; set; }
+        [Required]
+        [Display(Name = "Yetkili Adı")]
         public string FirstName { get; set; }
         [Required]
-        [Display(Name = "Soyad")]
+        [Display(Name = "Yetkili Soyadı")]
         public string LastName { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluğunda olmalıdır.", MinimumLength = 6)]
+        [Display(Name = "Kullanıcı Adı")]
+        public string UserName { get; set; }
         [Required]
         [Display(Name = "Pozisyon")]
         public string Position { get; set; }

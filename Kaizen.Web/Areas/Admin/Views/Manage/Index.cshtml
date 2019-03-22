@@ -129,8 +129,11 @@
 
                 <hr class="dotted short">
 
-                <h6 class="text-muted">Şirket&nbsp;Adı</h6>
-                <p>!!Departman Bilgisi Gelecek!!</p>
+                <h6 class="text-muted">@ViewBag.Company</h6>
+                @foreach (var item in ViewBag.Departments)
+                {
+                    <p>@item</p>
+                }
 
             </div>
         </section>
