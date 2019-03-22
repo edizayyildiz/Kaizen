@@ -78,12 +78,12 @@
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.BranchId, new { @class = "control-label" })
                                     @Html.DropDownListFor(model => model.BranchId, null, "Şube seçiniz..", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger", id = "branchVal" })
                                 </div>
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label" })
                                     @Html.DropDownListFor(model => model.DepartmentId, null, "Departman Seçiniz..", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger", id = "departmentVal" })
                                 </div>
                             </div>
                         </div>
@@ -93,12 +93,12 @@
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
                                     @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control input-lg" })
-                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger", id = "firstNameVal" })
                                 </div>
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
                                     @Html.TextBoxFor(model => model.LastName, new { @class = "form-control input-lg" })
-                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger", id = "lastNameVal" })
                                 </div>
                             </div>
                         </div>
@@ -107,19 +107,19 @@
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
                                     @Html.TextBoxFor(model => model.UserName, null, new { @class = "form-control input-lg" })
-                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", id = "userNameVal" })
                                 </div>
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.Position, new { @class = "control-label" })
                                     @Html.TextBoxFor(model => model.Position, new { @class = "form-control input-lg" })
-                                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger", id = "positionVal" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mb-lg">
                             @Html.LabelFor(m => m.Email, "E-Posta", new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg" })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", id = "emailVal" })
                         </div>
                         <div class="form-group mb-none">
                             <div class="row">
@@ -127,12 +127,12 @@
                                     <div class="col-sm-6 mb-lg">
                                         @Html.LabelFor(m => m.Password, "Parola", new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg" })
-                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "passwordVal" })
                                     </div>
                                     <div class="col-sm-6 mb-lg">
                                         @Html.LabelFor(m => m.ConfirmPassword, "Parola(Tekrar)", new { @class = "control-label" })
                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input-lg" })
-                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger", id = "confirmPasswordVal" })
                                     </div>
                                 </div>
                             </div>
@@ -218,6 +218,38 @@
                     $('#DepartmentId').append('<option value="' + value.Id + '" >' + value.Name + '</option>');
                 });
             });
+        });
+
+        $('#CompanyId').keyup(function () {
+            $('#companyVal').empty();
+            $('#companyMessage').empty();
+        });
+        $('#BranchId').keyup(function () {
+            $('#branchVal').empty();
+        });
+        $('#DepartmentId').keyup(function () {
+            $('#departmentVal').empty();
+        });
+        $('#FirstName').keyup(function () {
+            $('#firstNameVal').empty();
+        });
+        $('#LastName').keyup(function () {
+            $('#lastNameVal').empty();
+        });
+        $('#UserName').keyup(function () {
+            $('#userNameVal').empty();
+        });
+        $('#Position').keyup(function () {
+            $('#positionVal').empty();
+        });
+        $('#Email').keyup(function () {
+            $('#emailVal').empty();
+        });
+        $('#Password').keyup(function () {
+            $('#passwordVal').empty();
+        });
+        $('#ConfirmPassword').keyup(function () {
+            $('#confirmPasswordVal').empty();
         });
 
     });
