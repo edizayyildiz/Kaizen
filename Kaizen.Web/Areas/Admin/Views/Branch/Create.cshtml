@@ -26,25 +26,34 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.DropDownListFor(model => model.CountryId, null, "Şube Ülkesini Seçiniz..", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger", id = "countryVal" })
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Yeni ülke ekle", "Create", "Country")
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CityId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.DropDownListFor(model => model.CityId, null, "Şehir Seçiniz..", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger", id = "cityVal" })
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Yeni il ekle", "Create", "City")
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CountyId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CountyId, null, "Şehir Seçiniz..", htmlAttributes: new { @class = "form-control" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.CountyId, null, "İlçe Seçiniz..", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CountyId, "", new { @class = "text-danger", id = "countyVal" })
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Yeni ilçe ekle", "Create", "County")
             </div>
         </div>
 

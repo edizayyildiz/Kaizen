@@ -38,7 +38,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             {
                 var country = Mapper.Map<Country>(countryViewModel);
                 countryService.Insert(country);
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View(countryViewModel);
         }

@@ -38,10 +38,12 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         {
             var userMail = User.Identity.Name;
             var employee = employeeService.GetAll(f => f.Email == userMail).FirstOrDefault();
-            var company = companyService.GetAll(f => f.Id == employee.CompanyId).FirstOrDefault();
-            var branchCountries = company.Branches.Select(f=>f.Country).ToList();
-
-            ViewBag.CountryId = new SelectList(branchCountries, "Id", "Name");
+            var companyEmployeeEmails = (companyService.GetAll(f => f.Id == employee.CompanyId).FirstOrDefault()).Employees.Select(s => s.Email).ToList(); // birden fazla yönetici ülke ekleyince gösteriyor mu ?
+            foreach (var item in companyEmployeeEmails)
+            {
+                var countries = countryService.GetAll(c => c.CreatedBy == item);   // Bu kısma hoca ile bir bakılmalı.
+                ViewBag.CountryId = new SelectList(countries, "Id", "Name");
+            }
             ViewBag.CityId = new SelectList("", "Id", "Name");
             ViewBag.CountyId = new SelectList("", "Id", "Name");
             var branchViewModel = new BranchViewModel();
