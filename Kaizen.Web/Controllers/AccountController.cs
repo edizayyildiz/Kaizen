@@ -13,6 +13,7 @@ using Kaizen.Model;
 using Kaizen.Service;
 using AutoMapper;
 using System.Text.RegularExpressions;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Kaizen.Web.Controllers
 {
@@ -21,6 +22,7 @@ namespace Kaizen.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
         private readonly ICompanyService companyService;
         private readonly IEmployeeService employeeService;
         private readonly IBranchService branchService;
@@ -34,10 +36,11 @@ namespace Kaizen.Web.Controllers
             this.departmentService = departmentService;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICompanyService companyService, IEmployeeService employeeService, IBranchService branchService, IDepartmentService departmentService)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager, ICompanyService companyService, IEmployeeService employeeService, IBranchService branchService, IDepartmentService departmentService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
             this.companyService = companyService;
             this.employeeService = employeeService;
             this.branchService = branchService;
@@ -65,6 +68,17 @@ namespace Kaizen.Web.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
             }
         }
         //
@@ -150,6 +164,26 @@ namespace Kaizen.Web.Controllers
             }
         }
 
+        private void CreateDefaultRoles()
+        {
+            if (!RoleManager.RoleExists("Developer"))
+            {
+                RoleManager.Create(new IdentityRole() { Name = "Developer" });
+            }
+            if (!RoleManager.RoleExists("SuperAdmin"))
+            {
+                RoleManager.Create(new IdentityRole() { Name = "SuperAdmin" });
+            }
+            if (!RoleManager.RoleExists("Admin"))
+            {
+                RoleManager.Create(new IdentityRole() { Name = "Admin" });
+            }
+            if (!RoleManager.RoleExists("User"))
+            {
+                RoleManager.Create(new IdentityRole() { Name = "User" });
+            }
+        }
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -168,7 +202,8 @@ namespace Kaizen.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                CreateDefaultRoles();
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Role = "SuperAdmin" };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -190,6 +225,8 @@ namespace Kaizen.Web.Controllers
                     employee.CompanyId = company.Id; //company index viewında yazdığım yorum satır için bu satırı yazdım.
                     employeeService.Insert(employee);
 
+                    UserManager.AddToRole(user.Id, "SuperAdmin"); // CompanyRegister ile kayıt olan kullanıcıya SuperAdmin rolü atanır
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -209,7 +246,6 @@ namespace Kaizen.Web.Controllers
         [AllowAnonymous]
         public ActionResult GetBranches(string CompanyId)
         {
-
             if (CompanyId != "")
             {
                 bool success = Guid.TryParse(CompanyId, out Guid resultCompanyId);
@@ -261,7 +297,8 @@ namespace Kaizen.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                CreateDefaultRoles();
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Role = "User" };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -281,6 +318,7 @@ namespace Kaizen.Web.Controllers
                     department.Employees.Add(employee);
                     departmentService.Update(department);
 
+                    UserManager.AddToRole(user.Id, "User"); // UserRegister ile kayıt olan kullanıcıya User rolü atanır
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 

@@ -1,19 +1,6 @@
-namespace Kaizen.Data.Migrations
-{
-    using Kaizen.Model;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<Kaizen.Data.ApplicationDbContext>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-        }
-
-        protected override void Seed(Kaizen.Data.ApplicationDbContext context)
+ï»¿ // BurayÄ± Migrations klasÃ¶rÃ¼ altÄ±nda ki Configuration class Ä±na Seed metodu yerine kopyala
+ 
+ protected override void Seed(Kaizen.Data.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -28,8 +15,8 @@ namespace Kaizen.Data.Migrations
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
                 Name = "Reason",
-                Sector = "Yazýlým",
-                Description = "Reason firmasý açýklamasý",
+                Sector = "YazÄ±lÄ±m",
+                Description = "Reason firmasÄ± aÃ§Ä±klamasÄ±",
                 HeadCount = 200
             };
             var microsoft = new Company()
@@ -40,8 +27,8 @@ namespace Kaizen.Data.Migrations
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
                 Name = "Microsoft",
-                Sector = "Yazýlým",
-                Description = "Microsoft firmasý açýklamasý",
+                Sector = "YazÄ±lÄ±m",
+                Description = "Microsoft firmasÄ± aÃ§Ä±klamasÄ±",
                 HeadCount = 1000
             };
 
@@ -53,7 +40,7 @@ namespace Kaizen.Data.Migrations
                 CreatedBy = "username",
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
-                Name = "Türkiye"
+                Name = "TÃ¼rkiye"
             };
             var usa = new Country()
             {
@@ -73,7 +60,7 @@ namespace Kaizen.Data.Migrations
                 CreatedBy = "username",
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
-                Name = "Ýstanbul",
+                Name = "Ä°stanbul",
                 CountryId = Guid.Parse("73756f28-9de2-4592-a7cc-4675d3bfedef")
             };
             var usaCity = new City()
@@ -95,7 +82,7 @@ namespace Kaizen.Data.Migrations
                 CreatedBy = "username",
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
-                Name = "Beþiktaþ",
+                Name = "BeÅŸiktaÅŸ",
                 CityId = Guid.Parse("6dbe0db1-763d-4ed1-8709-e7d7ce8a77a0")
             };
             var newYorkCounty = new County()
@@ -117,12 +104,12 @@ namespace Kaizen.Data.Migrations
                 CreatedBy = "username",
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
-                Name = "Ýstanbul Þubesi",
+                Name = "Ä°stanbul Åžubesi",
                 CompanyId = Guid.Parse("9854e4fd-6e1f-4c31-9f0d-65422dbd0bd9"),
                 CountryId = Guid.Parse("73756f28-9de2-4592-a7cc-4675d3bfedef"),
                 CityId = Guid.Parse("6dbe0db1-763d-4ed1-8709-e7d7ce8a77a0"),
                 CountyId = Guid.Parse("48800942-4888-409e-89a0-e51a60a2e7ba"),
-                Address = "Reason Software Beþiktaþ/Ýstanbul"
+                Address = "Reason Software BeÅŸiktaÅŸ/Ä°stanbul"
             };
             var reasonBranch2 = new Branch()
             {
@@ -131,7 +118,7 @@ namespace Kaizen.Data.Migrations
                 CreatedBy = "username",
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
-                Name = "New York Þubesi",
+                Name = "New York Åžubesi",
                 CompanyId = Guid.Parse("9854e4fd-6e1f-4c31-9f0d-65422dbd0bd9"),
                 CountryId = Guid.Parse("b780f09d-c2d1-4be0-8916-1ca1a6b5ecc6"),
                 CityId = Guid.Parse("8540d2c6-b95f-4129-8fe0-869db732045e"),
@@ -150,7 +137,7 @@ namespace Kaizen.Data.Migrations
                 CountryId = Guid.Parse("73756f28-9de2-4592-a7cc-4675d3bfedef"),
                 CityId = Guid.Parse("6dbe0db1-763d-4ed1-8709-e7d7ce8a77a0"),
                 CountyId = Guid.Parse("48800942-4888-409e-89a0-e51a60a2e7ba"),
-                Address = "Microsoft Beþiktaþ/Ýstanbul",
+                Address = "Microsoft BeÅŸiktaÅŸ/Ä°stanbul",
             };
 
 
@@ -187,7 +174,7 @@ namespace Kaizen.Data.Migrations
                 CreatedBy = "username",
                 UpdatedAt = DateTime.Now,
                 UpdatedBy = "username",
-                Name = "Ýnsan Kaynaklarý",
+                Name = "Ä°nsan KaynaklarÄ±",
                 BranchId = Guid.Parse("9fcf4898-20c2-4e21-9948-62d954421955"),
             };
             var microsoftDepartment = new Department()
@@ -247,6 +234,3 @@ namespace Kaizen.Data.Migrations
 
             base.Seed(context);
         }
-
-    }
-}
