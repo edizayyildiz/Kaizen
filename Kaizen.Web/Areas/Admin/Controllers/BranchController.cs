@@ -65,6 +65,18 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             return View(branchViewModel);
         }
 
+        public JsonResult GetCities(Guid CountryId)
+        {
+            var cities = cityService.GetAll(w => w.CountryId == CountryId).Select(c => new { Id = c.Id, Name = c.Name });
+            return Json(cities);
+        }
+
+        public JsonResult GetCounties(Guid CityId)
+        {
+            var counties = countyService.GetAll(w => w.CityId == CityId).Select(c => new { Id = c.Id, Name = c.Name}); ;
+            return Json(counties);
+        }
+
         public ActionResult Edit(Guid id)
         {
             var branch = branchService.Find(id);

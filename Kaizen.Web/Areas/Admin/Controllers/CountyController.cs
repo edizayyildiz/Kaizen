@@ -38,7 +38,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             {
                 var county = Mapper.Map<County>(countyViewModel);
                 countyService.Insert(county);
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View(countyViewModel);
         }

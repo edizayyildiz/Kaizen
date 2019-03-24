@@ -12,9 +12,13 @@ namespace Kaizen.Web.Areas.Admin.Controllers
 {
     public class CityController : ControllerBase
     {
+        private readonly ICompanyService companyService;
+        private readonly ICountryService countryService;
         private readonly ICityService cityService;
-        public CityController(ICityService cityService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public CityController(ICityService cityService, ICompanyService companyService, ICountryService countryService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
         {
+            this.companyService = companyService;
+            this.countryService = countryService;
             this.cityService = cityService;
         }
         // GET: Admin/City
@@ -27,7 +31,16 @@ namespace Kaizen.Web.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var cityViewModel = new CityViewModel();
+            var userMail = User.Identity.Name;
+            var employee = employeeService.GetAll(f => f.Email == userMail).FirstOrDefault();
+            var companyEmployeeEmails = (companyService.GetAll(f => f.Id == employee.CompanyId).FirstOrDefault()).Employees.Select(s => s.Email).ToList(); // birden fazla yönetici ülke ekleyince gösteriyor mu ?
+            foreach (var item in companyEmployeeEmails)
+            {
+                var countries = countryService.GetAll(c => c.CreatedBy == item);   // Bu kısma hoca ile bir bakılmalı.
+                ViewBag.CountryId = new SelectList(countries, "Id", "Name");
+            }
+            var city = new City();
+            var cityViewModel = Mapper.Map<CityViewModel>(city);
             return View(cityViewModel);
         }
 

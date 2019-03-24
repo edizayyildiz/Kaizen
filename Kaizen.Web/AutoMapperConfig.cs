@@ -17,7 +17,11 @@ namespace Kaizen.Web
 
             cfg.CreateMap<Employee, EmployeeViewModel>().ReverseMap();
             cfg.CreateMap<Company, CompanyViewModel>().ReverseMap();
+            cfg.CreateMap<Branch, BranchViewModel>().ReverseMap();
             cfg.CreateMap<Suggestion, SuggestionViewModel>().ReverseMap();
+            cfg.CreateMap<Country, CountryViewModel>().ReverseMap();
+            cfg.CreateMap<City, CityViewModel>().ReverseMap();
+            cfg.CreateMap<County, CountyViewModel>().ReverseMap();
 
             Mapper.Initialize(cfg);
         }

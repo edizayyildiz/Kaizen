@@ -21,7 +21,8 @@ namespace Kaizen.Web.Models
         [Required]
         [Display(Name = "İl Adı")]
         public string Name { get; set; }
-        public CountryViewModel Country { get; set; }
+        [Display(Name = "Ülke")]
+        public Guid CountryId { get; set; }
         public IEnumerable<BranchViewModel> Branches { get; set; }
         public IEnumerable<CountyViewModel> Counties { get; set; }
     }
