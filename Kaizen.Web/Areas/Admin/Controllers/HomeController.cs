@@ -12,7 +12,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     [RouteArea("Admin")]
     public class HomeController : ControllerBase
     {
-        public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
 
         }

@@ -18,7 +18,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         private readonly ICountyService countyService;
         private readonly ICompanyService companyService;
 
-        public BranchController(IBranchService branchService, ICountryService countryService, ICityService cityService, ICountyService countyService, ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public BranchController(IBranchService branchService, ICountryService countryService, ICityService cityService, ICountyService countyService, ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.branchService = branchService;
             this.countryService = countryService;

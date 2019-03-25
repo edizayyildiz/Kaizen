@@ -14,7 +14,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     {
         private readonly ICompanyService companyService;
 
-        public CompanyController(ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public CompanyController(ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.companyService = companyService;
         }

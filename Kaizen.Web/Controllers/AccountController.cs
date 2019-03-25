@@ -244,7 +244,7 @@ namespace Kaizen.Web.Controllers
             return View(model);
         }
         [AllowAnonymous]
-        public ActionResult GetBranches(string CompanyId)
+        public JsonResult GetBranches(string CompanyId)
         {
             if (CompanyId != "")
             {
@@ -273,7 +273,7 @@ namespace Kaizen.Web.Controllers
             }
         }
         [AllowAnonymous]
-        public ActionResult GetDepartments(string BranchId)
+        public JsonResult GetDepartments(string BranchId)
         {
             if (BranchId == "")
             {

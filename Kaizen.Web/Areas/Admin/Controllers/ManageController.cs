@@ -21,13 +21,13 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         private readonly ISuggestionService suggestionService;
         private readonly IDepartmentService departmentService;
 
-        public ManageController(ApplicationUserManager userManager, IEmployeeService employeeService, ISuggestionService suggestionService, IDepartmentService departmentService) : base(userManager, employeeService)
+        public ManageController(ApplicationUserManager userManager, IEmployeeService employeeService, ISuggestionService suggestionService, IDepartmentService departmentService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.suggestionService = suggestionService;
             this.departmentService = departmentService;
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService, ISuggestionService suggestionService, IDepartmentService departmentService) : base(userManager, employeeService)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService, ISuggestionService suggestionService, IDepartmentService departmentService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.userManager = userManager;
             SignInManager = signInManager;
@@ -61,7 +61,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             ViewBag.Position = employee.Position;
             ViewBag.Departments = departments;
             ViewBag.Company = employee.Company.Name;
-            
+
 
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
