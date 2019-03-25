@@ -275,8 +275,12 @@ namespace Kaizen.Web.Controllers
         [AllowAnonymous]
         public ActionResult GetDepartments(string BranchId)
         {
+            if (BranchId == "")
+            {
+                return Json(new { success = false, message = "Lütfen şube seçiniz." });
+            }
             var departments = this.departmentService.GetDepartmentsByBranch(Guid.Parse(BranchId)).Select(s => new { Id = s.Id, Name = s.Name });
-            return Json(departments);
+            return Json(new { success = true, departments = departments});
         }
 
         // GET: /Account/UserRegister
