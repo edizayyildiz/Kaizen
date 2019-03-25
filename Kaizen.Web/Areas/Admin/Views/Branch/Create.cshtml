@@ -79,40 +79,42 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
 
-<script>
+
+    <script>
     $(document).ready(function () {
-        $.post("@Url.Action("GetCities", "Branch")", { CountryId: $('#CountryId').val() }, function (data) {
-            if (data.success == false) {
+        $('#CountryId').change(function () {
+            $.post("@Url.Action("GetCities", "Branch")", { CountryId: $('#CountryId').val() }, function (data) {
+                if (data.success == false) {
+                    $('#CityId').empty();
+                    $('#CountyId').empty();
+                    $('#CityId').append('<option value="" >Şehir Seçiniz..</option>');
+                    $('#CountyId').append('<option value="" >İlçe Seçiniz..</option>');
+                    return;
+                }
                 $('#CityId').empty();
                 $('#CountyId').empty();
                 $('#CityId').append('<option value="" >Şehir Seçiniz..</option>');
                 $('#CountyId').append('<option value="" >İlçe Seçiniz..</option>');
-                return;
-            }
-            $('#CityId').empty();
-            $('#CountyId').empty();
-            $('#CityId').append('<option value="" >Şehir Seçiniz..</option>');
-            $('#CountyId').append('<option value="" >İlçe Seçiniz..</option>');
-            $.each(data.cities, function (index, value) {
-                $('#CityId').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                $.each(data.cities, function (index, value) {
+                    $('#CityId').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                });
             });
         });
-
-        $.post("@Url.Action("GetCounties", "Branch")", { CityId: $("#CityId").val } function (data) {
-            if (data.success == false) {
+        $('#CityId').change(function () {
+            $.post("@Url.Action("GetCounties", "Branch")", { CityId: $("#CityId").val }, function (data) {
+                if (data.success == false) {
+                    $('#CountyId').empty();
+                    $('#CountyId').append('<option value="" >İlçe Seçiniz..</option>');
+                    return;
+                }
                 $('#CountyId').empty();
-                $('#CountyId').append('<option value="" >İlçe Seçiniz..</option>');
-                return;
-            }
-            $('#CountyId').empty();
-            $('#CountyId').append('<option value="">İlçe Seçiniz..</option>')
-            $.each(data.counties, function (index, value) {
-                $('#CountyId').append('<option value="' + value.Id + '">' + value.Name + '</option>')
-            })
+                $('#CountyId').append('<option value="">İlçe Seçiniz..</option>');
+                $.each(data.counties, function (index, value) {
+                    $('#CountyId').append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                });
+            });
         });
-
 
         @*$('#CompanyId').keyup(function () {
             $('#companyVal').empty();
@@ -147,4 +149,5 @@
         });*@
 
     });
-</script>
+    </script>
+    }

@@ -51,7 +51,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             {
                 var city = Mapper.Map<City>(cityViewModel);
                 cityService.Insert(city);
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View(cityViewModel);
         }
