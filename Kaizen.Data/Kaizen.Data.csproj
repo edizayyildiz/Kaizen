@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="ApplicationDbContextSeed.cs" />
     <Compile Include="Builders\BranchBuilder.cs" />
     <Compile Include="Builders\CityBuilder.cs" />
     <Compile Include="Builders\CompanyBuilder.cs" />
@@ -112,9 +113,6 @@
     <EmbeddedResource Include="Migrations\201903232002303_RoleRemovedFromEmployeeEntity.resx">
       <DependentUpon>201903232002303_RoleRemovedFromEmployeeEntity.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ForSeed.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

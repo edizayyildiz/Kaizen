@@ -1,12 +1,17 @@
-﻿ // Burayı Migrations klasörü altında ki Configuration class ına Seed metodu yerine kopyala
- 
- protected override void Seed(Kaizen.Data.ApplicationDbContext context)
+﻿using Kaizen.Model;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Kaizen.Data
+{
+    public class ApplicationDbContextSeed 
+    {
+        public void Seed(ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdateOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-
             var reason = new Company()
             {
                 Id = Guid.Parse("9854e4fd-6e1f-4c31-9f0d-65422dbd0bd9"),
@@ -231,6 +236,6 @@
             context.Departments.AddOrUpdate(microsoftDepartment);
 
             context.Users.AddOrUpdate(user);
-
-            base.Seed(context);
         }
+    }
+}
