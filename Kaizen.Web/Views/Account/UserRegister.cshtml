@@ -190,6 +190,7 @@
         $('#btnBranch').click(function () {
             $.post("@Url.Action("GetBranches", "Account")", { CompanyId: $('#CompanyId').val() }, function (data) {
                 if (data.success == false) {
+                    $('#branchMessage').empty();
                     $('#companyMessage').empty();
                     $('#companyVal').empty();
                     $('#BranchId').empty();
@@ -199,6 +200,7 @@
                     $('#companyMessage').append('<p style="margin: 0;">' + data.message + '</p>');
                     return;
                 }
+                $('#branchMessage').empty();
                 $('#companyMessage').empty();
                 $('#BranchId').empty();
                 $('#DepartmentId').empty();
