@@ -79,6 +79,7 @@
                                     @Html.LabelFor(model => model.BranchId, new { @class = "control-label" })
                                     @Html.DropDownListFor(model => model.BranchId, null, "Şube seçiniz..", htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger", id = "branchVal" })
+                                    <div id="branchMessage" class="text-danger"></div>
                                 </div>
                                 <div class="col-md-6">
                                     @Html.LabelFor(model => model.DepartmentId, new { @class = "control-label" })
@@ -212,9 +213,17 @@
 
         $('#BranchId').change(function () {
             $.post("@Url.Action("GetDepartments", "Account")", { BranchId: $('#BranchId').val() }, function (data) {
+                if (data.success == false) {
+                    $('#BranchId').empty();
+                    $('#DepartmentId').empty();
+                    $('#BranchId').append('<option value="" >Şube seçiniz..</option>');
+                    $('#DepartmentId').append('<option value="" >Departman Seçiniz..</option>');
+                    $('#branchMessage').append('<p style="margin: 0;">' + data.message + '</p>');
+                    return;
+                }
                 $('#DepartmentId').empty();
                 $('#DepartmentId').append('<option value"" >Departman Seçiniz..</option>');
-                $.each(data, function (index, value) {
+                $.each(data.departments, function (index, value) {
                     $('#DepartmentId').append('<option value="' + value.Id + '" >' + value.Name + '</option>');
                 });
             });
@@ -226,6 +235,7 @@
         });
         $('#BranchId').keyup(function () {
             $('#branchVal').empty();
+            $('#branchMessage').empty();
         });
         $('#DepartmentId').keyup(function () {
             $('#departmentVal').empty();
