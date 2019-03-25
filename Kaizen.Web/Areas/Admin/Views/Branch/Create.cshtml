@@ -80,7 +80,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-
     <script>
     $(document).ready(function () {
         $('#CountryId').change(function () {
@@ -88,8 +87,8 @@
                 if (data.success == false) {
                     $('#CityId').empty();
                     $('#CountyId').empty();
-                    $('#CityId').append('<option value="" >Şehir Seçiniz..</option>');
-                    $('#CountyId').append('<option value="" >İlçe Seçiniz..</option>');
+                    $('#CityId').append('<option value="" >' + data.message + '</option>');
+                    $('#CountyId').append('<option value="" >' + data.message + '</option>');
                     return;
                 }
                 $('#CityId').empty();
@@ -102,7 +101,7 @@
             });
         });
         $('#CityId').change(function () {
-            $.post("@Url.Action("GetCounties", "Branch")", { CityId: $("#CityId").val }, function (data) {
+            $.post("@Url.Action("GetCounties", "Branch")", { CityId: $("#CityId").val() }, function (data) {
                 if (data.success == false) {
                     $('#CountyId').empty();
                     $('#CountyId').append('<option value="" >İlçe Seçiniz..</option>');
@@ -116,38 +115,6 @@
             });
         });
 
-        @*$('#CompanyId').keyup(function () {
-            $('#companyVal').empty();
-            $('#companyMessage').empty();
-        });
-        $('#BranchId').keyup(function () {
-            $('#branchVal').empty();
-        });
-        $('#DepartmentId').keyup(function () {
-            $('#departmentVal').empty();
-        });
-        $('#FirstName').keyup(function () {
-            $('#firstNameVal').empty();
-        });
-        $('#LastName').keyup(function () {
-            $('#lastNameVal').empty();
-        });
-        $('#UserName').keyup(function () {
-            $('#userNameVal').empty();
-        });
-        $('#Position').keyup(function () {
-            $('#positionVal').empty();
-        });
-        $('#Email').keyup(function () {
-            $('#emailVal').empty();
-        });
-        $('#Password').keyup(function () {
-            $('#passwordVal').empty();
-        });
-        $('#ConfirmPassword').keyup(function () {
-            $('#confirmPasswordVal').empty();
-        });*@
-
     });
     </script>
-    }
+}

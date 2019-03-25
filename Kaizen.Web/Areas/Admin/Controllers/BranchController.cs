@@ -41,7 +41,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var companyEmployeeEmails = (companyService.GetAll(f => f.Id == employee.CompanyId).FirstOrDefault()).Employees.Select(s => s.Email).ToList(); // birden fazla yönetici ülke ekleyince gösteriyor mu ?
             foreach (var item in companyEmployeeEmails)
             {
-                var countries = countryService.GetAll(c => c.CreatedBy == item);   // Bu kısma hoca ile bir bakılmalı.
+                var countries = countryService.GetAll(c => c.CreatedBy == item);   // Bu kısma online kullanıcının şirketindeki yöneticilerin ve kendisinin eklediği ülkeler.
                 ViewBag.CountryId = new SelectList(countries, "Id", "Name");
             }
             ViewBag.CityId = new SelectList("", "Id", "Name");
@@ -67,14 +67,22 @@ namespace Kaizen.Web.Areas.Admin.Controllers
 
         public JsonResult GetCities(Guid CountryId)
         {
+            if (CountryId == null)
+            {
+                return Json(new { success = false, message = "hata!"});
+            }
             var cities = cityService.GetAll(w => w.CountryId == CountryId).Select(c => new { Id = c.Id, Name = c.Name });
-            return Json(cities);
+            return Json(new { success = true, cities = cities });
         }
 
         public JsonResult GetCounties(Guid CityId)
         {
-            var counties = countyService.GetAll(w => w.CityId == CityId).Select(c => new { Id = c.Id, Name = c.Name}); ;
-            return Json(counties);
+            if (CityId == null)
+            {
+                return Json(new { success = false, message = "hata!" });
+            }
+            var counties = countyService.GetAll(w => w.CityId == CityId).Select(c => new { Id = c.Id, Name = c.Name });
+            return Json(new { success = true, counties = counties });
         }
 
         public ActionResult Edit(Guid id)

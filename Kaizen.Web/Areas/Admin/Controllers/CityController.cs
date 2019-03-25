@@ -36,11 +36,10 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var companyEmployeeEmails = (companyService.GetAll(f => f.Id == employee.CompanyId).FirstOrDefault()).Employees.Select(s => s.Email).ToList(); // birden fazla yönetici ülke ekleyince gösteriyor mu ?
             foreach (var item in companyEmployeeEmails)
             {
-                var countries = countryService.GetAll(c => c.CreatedBy == item);   // Bu kısma hoca ile bir bakılmalı.
+                var countries = countryService.GetAll(c => c.CreatedBy == item);   // Bu kısma online kullanıcının şirketindeki yöneticilerin ve kendisinin eklediği ülkeler.
                 ViewBag.CountryId = new SelectList(countries, "Id", "Name");
             }
-            var city = new City();
-            var cityViewModel = Mapper.Map<CityViewModel>(city);
+            var cityViewModel = new CityViewModel();
             return View(cityViewModel);
         }
 

@@ -21,8 +21,9 @@ namespace Kaizen.Web.Models
         [Required]
         [Display(Name = "İlçe Adı")]
         public string Name { get; set; }
-
-        public CityViewModel City { get; set; }
+        [Required]
+        [Display(Name = "Şehir")]
+        public Guid CityId { get; set; }
         public IEnumerable<BranchViewModel> Branches { get; set; }
     }
 }
