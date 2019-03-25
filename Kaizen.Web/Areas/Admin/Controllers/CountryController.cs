@@ -13,7 +13,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class CountryController : ControllerBase
     {
         private readonly ICountryService countryService;
-        public CountryController(ICountryService countryService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public CountryController(ICountryService countryService, ApplicationUserManager userManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.countryService = countryService;
         }

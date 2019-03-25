@@ -18,7 +18,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         private readonly ICountyService countyService;
         private readonly ICompanyService companyService;
 
-        public BranchController(IBranchService branchService, ICountryService countryService, ICityService cityService, ICountyService countyService, ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public BranchController(IBranchService branchService, ICountryService countryService, ICityService cityService, ICountyService countyService, ICompanyService companyService, ApplicationUserManager userManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.branchService = branchService;
             this.countryService = countryService;
@@ -73,7 +73,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
 
         public JsonResult GetCounties(Guid CityId)
         {
-            var counties = countyService.GetAll(w => w.CityId == CityId).Select(c => new { Id = c.Id, Name = c.Name}); ;
+            var counties = countyService.GetAll(w => w.CityId == CityId).Select(c => new { Id = c.Id, Name = c.Name }); ;
             return Json(counties);
         }
 

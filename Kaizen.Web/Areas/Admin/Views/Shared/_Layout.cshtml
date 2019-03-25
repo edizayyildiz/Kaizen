@@ -534,44 +534,50 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-parent">
-                                    <a>
-                                        <i class="fa fa-table" aria-hidden="true"></i>
-                                        <span>Tables</span>
-                                    </a>
-                                    <ul class="nav nav-children">
-                                        <li>
-                                            <a href="tables-basic.html">
-                                                Basic
+                                @foreach (var item in ViewBag.UserRoles) //Controller da Authorize ile Rol yetkilendirmesi de yapmak gerek
+                                {
+                                    if (item == "SuperAdmin" || item == "User")
+                                    {
+                                        <li class="nav-parent">
+                                            <a>
+                                                <i class="fa fa-table" aria-hidden="true"></i>
+                                                <span>Tables</span>
                                             </a>
+                                            <ul class="nav nav-children">
+                                                <li>
+                                                    <a href="tables-basic.html">
+                                                        Basic
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="tables-advanced.html">
+                                                        Advanced
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="tables-responsive.html">
+                                                        Responsive
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="tables-editable.html">
+                                                        Editable
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="tables-ajax.html">
+                                                        Ajax
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="tables-pricing.html">
+                                                        Pricing
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </li>
-                                        <li>
-                                            <a href="tables-advanced.html">
-                                                Advanced
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="tables-responsive.html">
-                                                Responsive
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="tables-editable.html">
-                                                Editable
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="tables-ajax.html">
-                                                Ajax
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="tables-pricing.html">
-                                                Pricing
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    }
+                                }
                                 <li class="nav-parent">
                                     <a>
                                         <i class="fa fa-map-marker" aria-hidden="true"></i>

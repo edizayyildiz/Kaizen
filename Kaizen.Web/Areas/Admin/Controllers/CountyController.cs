@@ -13,7 +13,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class CountyController : ControllerBase
     {
         private readonly ICountyService countyService;
-        public CountyController(ICountyService countyService, ApplicationUserManager userManager, IEmployeeService employeeService) : base(userManager, employeeService)
+        public CountyController(ICountyService countyService, ApplicationUserManager userManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.countyService = countyService;
         }
