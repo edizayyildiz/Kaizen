@@ -212,6 +212,7 @@
     <Compile Include="Areas\Admin\Controllers\ControllerBase.cs" />
     <Compile Include="Areas\Admin\Controllers\CountryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CountyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\SuggestionController.cs" />
@@ -2324,6 +2325,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Department\" />
     <Folder Include="Uploads\ProfilePhotos\" />
   </ItemGroup>
   <ItemGroup>

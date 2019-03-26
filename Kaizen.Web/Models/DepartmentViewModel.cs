@@ -22,7 +22,7 @@ namespace Kaizen.Web.Models
         [Display(Name = "Departman Adı")]
         public string Name { get; set; }
         [Display(Name = "Şube")]
-        public BranchViewModel Branch { get; set; }
+        public Guid BranchId { get; set; }
         [Display(Name = "Çalışanlar")]
         public IEnumerable<EmployeeViewModel> Employees { get; set; }
     }
