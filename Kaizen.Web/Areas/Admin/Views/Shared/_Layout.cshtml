@@ -518,7 +518,7 @@
                                 </li>
                                 @foreach (var item in ViewBag.UserRoles) //Controller da Authorize ile Rol yetkilendirmesi de yapmak gerek
                                 {
-                                    if (item == "SuperAdmin" || item == "User")
+                                    if (item == "SuperAdmin" || item == "User" || item == "Developer" || item == "Admin")
                                     {
                                         <li class="nav-parent">
                                             <a>
