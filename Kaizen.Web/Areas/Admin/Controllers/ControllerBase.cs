@@ -36,8 +36,8 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var userName = User.Identity.Name;
             var currentUser = userManager.FindByNameAsync(userName).Result; // Result async i senkrona çeviriyor
             var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == currentUser.Email);
-            //var userRoles = Roles.GetRolesForUser(userName); // Kullanıcının rollerini string dizi olarak döndürür
-            var userRoles = userManager.GetRolesAsync(currentUser.Id).Result;
+            //var userRoles = Roles.GetRolesForUser(userName);
+            var userRoles = userManager.GetRolesAsync(currentUser.Id).Result; // Kullanıcının rollerini string dizi olarak döndürür
             ViewBag.ProfilePhoto = employee.Photo;
             ViewBag.CurrentUser = currentUser.FullName;
             ViewBag.CurrentEmail = currentUser.Email;
