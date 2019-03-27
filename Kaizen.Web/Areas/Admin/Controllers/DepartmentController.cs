@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Kaizen.Model;
 using Kaizen.Service;
 using Kaizen.Web.Models;
 using System;
@@ -12,9 +13,13 @@ namespace Kaizen.Web.Areas.Admin.Controllers
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentService departmentService;
-        public DepartmentController(IDepartmentService departmentService, ApplicationUserManager userManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
+        private readonly ICompanyService companyService;
+        private readonly IBranchService branchService;
+        public DepartmentController(IDepartmentService departmentService, ICompanyService companyService, IBranchService branchService, ApplicationUserManager userManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)
         {
             this.departmentService = departmentService;
+            this.companyService = companyService;
+            this.branchService = branchService;
         }
         // GET: Admin/Department
         public ActionResult Index()
@@ -24,5 +29,27 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             return View(departmentViewModels);
         }
 
+        public ActionResult Create()
+        {
+            var userMail = User.Identity.Name;
+            var currentEmployee = employeeService.GetAll(e => e.Email == userMail).FirstOrDefault();
+            var currentCompanyId = companyService.GetAll(c => c.Id == currentEmployee.CompanyId).FirstOrDefault().Id;
+            var branches = branchService.GetAll(b => b.CompanyId == currentCompanyId);
+            ViewBag.BranchId = new SelectList(branches, "Id", "Name");
+            var departmentViewModel = new DepartmentViewModel();
+            return View(departmentViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Create(DepartmentViewModel departmentViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var departmant = Mapper.Map<Department>(departmentViewModel);
+                departmentService.Insert(departmant);
+                return RedirectToAction("Index");
+            }
+            return View(departmentViewModel);
+        }
     }
 }
