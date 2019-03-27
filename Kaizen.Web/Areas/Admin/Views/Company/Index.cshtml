@@ -4,58 +4,52 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Kayıt Sistemini Kullanan Şirketler</h2>
+<section class="panel">
+    <header class="panel-heading">
 
-<br />
+        <h3>Kayıt Sistemini Kullanan Şirketler</h3>
+    </header>
+    <div class="panel-body">
+        <p>
+            @Html.ActionLink("Yeni Şirket Oluştur", "Create")
+        </p>
+        <table class="table table-bordered table-striped mb-none" id="datatable-tabletools" data-swf-path="~/AdminFiles/assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
+            <thead>
+                <tr>
+                    <th>Şirket Yetkilisi</th>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Sector)</th>
+                    <th class="hidden-phone">@Html.DisplayNameFor(model => model.Description)</th>
+                    <th class="hidden-phone">@Html.DisplayNameFor(model => model.HeadCount)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
 
-<p>
-    @Html.ActionLink("Yeni Şirket Oluştur", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Şirket Yetkilisi
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sector)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HeadCount)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            @*bir aşağıdaki kodun çalışması için emplooyees tablosuna companyId kayıt ediyor olmalıyız*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Employees.ToList().OrderBy(d => d.CreatedAt).FirstOrDefault().FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sector)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeadCount)
-            </td>
-            <td>
-                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detaylar", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Sil", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
+                    <tr class="gradeX">
+                        <td>@Html.DisplayFor(modelItem => item.Employees.ToList().OrderBy(d => d.CreatedAt).FirstOrDefault().FullName)</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sector)
+                        </td>
+                        <td class="center hidden-phone">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td class="center hidden-phone">
+                            @Html.DisplayFor(modelItem => item.HeadCount)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Detaylar", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

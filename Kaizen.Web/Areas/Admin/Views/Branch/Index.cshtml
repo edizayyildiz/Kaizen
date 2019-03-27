@@ -4,10 +4,6 @@
     ViewBag.Title = "Şubeler";
 }
 
-<h2>Şubeler</h2>
-
-<hr />
-
 <p class="col-md-7">
     @Html.ActionLink("Yeni Şube Ekle", "Create")
 </p>
@@ -19,51 +15,54 @@
     </div>
 </div>
 
+<section class="panel">
+    <header class="panel-heading">
 
-<table class="table">
-    <tr>
-        <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.CountryId)
-        </th>
-        <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.CityId)
-        </th>
-        <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.CountyId)
-        </th>
-        <th class="col-md-2"></th>
-    </tr>
+        <h3>Şubeler</h3>
+    </header>
+    <div class="panel-body">
+        <p>
+            @Html.ActionLink("Yeni Şube Ekle", "Create")
+        </p>
+        <table class="table table-bordered table-striped mb-none" id="datatable-tabletools" data-swf-path="~/AdminFiles/assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Address)</th>
+                    <th>@Html.DisplayNameFor(model => model.CountryId)</th>
+                    <th class="hidden-phone">@Html.DisplayNameFor(model => model.CityId)</th>
+                    <th class="hidden-phone">@Html.DisplayNameFor(model => model.CountyId)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td class="col-md-2">
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td class="col-md-2">
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <th class="col-md-2">
+                    <tr class="gradeX">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
 
-            </th>
-            <th class="col-md-2">
+                        </td>
+                        <td class="center hidden-phone">
 
-            </th>
-            <th class="col-md-2">
+                        </td>
+                        <td class="center hidden-phone">
 
-            </th>
-            <td class="col-md-2">
-                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Ayrıntılar", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Sil", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
+                        </td>
+                        <td>
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Detaylar", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
