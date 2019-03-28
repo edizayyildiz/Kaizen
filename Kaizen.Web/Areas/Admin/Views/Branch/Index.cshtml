@@ -47,15 +47,15 @@
                             @Html.DisplayFor(modelItem => item.Address)
                         </td>
                         <td>
-
+                            @Html.DisplayFor(modelıtem => item.Country.Name)
                         </td>
                         <td class="center hidden-phone">
-
+                            @Html.DisplayFor(modelItem => item.City.Name)
                         </td>
                         <td class="center hidden-phone">
-
+                            @Html.DisplayFor(modelItem => item.County.Name)
                         </td>
-                        <td>
+                        <td class="text-center">
                             @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
                             @Html.ActionLink("Detaylar", "Details", new { id = item.Id }) |
                             @Html.ActionLink("Sil", "Delete", new { id = item.Id })

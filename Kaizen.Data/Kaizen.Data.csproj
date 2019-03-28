@@ -82,6 +82,10 @@
     <Compile Include="Migrations\201903232002303_RoleRemovedFromEmployeeEntity.Designer.cs">
       <DependentUpon>201903232002303_RoleRemovedFromEmployeeEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903281834521_VirtualAddedToCountyInBranch.cs" />
+    <Compile Include="Migrations\201903281834521_VirtualAddedToCountyInBranch.Designer.cs">
+      <DependentUpon>201903281834521_VirtualAddedToCountyInBranch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -112,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903232002303_RoleRemovedFromEmployeeEntity.resx">
       <DependentUpon>201903232002303_RoleRemovedFromEmployeeEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903281834521_VirtualAddedToCountyInBranch.resx">
+      <DependentUpon>201903281834521_VirtualAddedToCountyInBranch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

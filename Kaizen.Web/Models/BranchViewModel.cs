@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kaizen.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,10 +26,13 @@ namespace Kaizen.Web.Models
         public CompanyViewModel Company { get; set; }
         [Display(Name = "Ülke")]
         public Guid CountryId { get; set; } // Navigation property sil Guid CountryId Koy bunun yerine
+        public Country Country { get; set; }
         [Display(Name = "İl")]
         public Guid CityId { get; set; } // Navigation property sil Guid CityId Koy bunun yerine
+        public City City { get; set; }
         [Display(Name = "İlçe")]
         public Guid CountyId { get; set; } // Navigation property sil Guid CountyId Koy bunun yerine
+        public County County { get; set; }
         [Display(Name = "Şube Adresi")]
         public string Address { get; set; }
         [Display(Name = "Departmanlar")]

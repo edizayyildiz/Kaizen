@@ -69,7 +69,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
         {
             if (CountryId == null)
             {
-                return Json(new { success = false, message = "hata!"});
+                return Json(new { success = false, message = "hata!" });
             }
             var cities = cityService.GetAll(w => w.CountryId == CountryId).Select(c => new { Id = c.Id, Name = c.Name });
             return Json(new { success = true, cities = cities });

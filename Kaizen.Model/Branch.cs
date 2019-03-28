@@ -21,7 +21,7 @@ namespace Kaizen.Model
         public Guid? CityId { get; set; }
         public virtual City City { get; set; }
         public Guid? CountyId { get; set; }
-        public County County { get; set; }
+        public virtual County County { get; set; }
         public string Address { get; set; }
 
         public virtual ICollection<Department> Departments { get; set; }
