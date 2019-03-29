@@ -51,5 +51,46 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             }
             return View(departmentViewModel);
         }
+
+        public ActionResult Edit(Guid id)
+        {
+            var userMail = User.Identity.Name;
+            var currentEmployee = employeeService.GetAll(e => e.Email == userMail).FirstOrDefault();
+            var currentCompanyId = companyService.GetAll(c => c.Id == currentEmployee.CompanyId).FirstOrDefault().Id;
+            var branches = branchService.GetAll(b => b.CompanyId == currentCompanyId);
+            var department = departmentService.Find(id);
+            var departmentViewModel = Mapper.Map<DepartmentViewModel>(department);
+            if (departmentViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.BranchId = new SelectList(branches, "Id", "Name", department.BranchId );
+            return View(departmentViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(DepartmentViewModel departmentViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var department = Mapper.Map<Department>(departmentViewModel);
+                departmentService.Update(department);
+                return RedirectToAction("Index");
+            }
+            return View(departmentViewModel);
+        }
+
+        public ActionResult Delete(Guid id)
+        {
+            departmentService.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(Guid id)
+        {
+            var department = departmentService.Find(id);
+            var departmentViewModel = Mapper.Map<DepartmentViewModel>(department);
+            return View(departmentViewModel);
+        }
     }
 }
