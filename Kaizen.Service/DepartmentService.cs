@@ -19,6 +19,7 @@ namespace Kaizen.Service
         IEnumerable<Department> GetAll();
         IEnumerable<Department> GetAll(Expression<Func<Department, bool>> where);
         IEnumerable<Department> GetDepartmentsByBranch(Guid BranchId);
+        IEnumerable<Department> Search(string name);
     }
     public class DepartmentService : IDepartmentService
     {
@@ -68,6 +69,11 @@ namespace Kaizen.Service
         {
             this.departmentRepository.Insert(entity);
             unitOfWork.SaveChanges();
+        }
+
+        public IEnumerable<Department> Search(string name)
+        {
+            return this.GetAll(f => f.Name.Contains(name));
         }
 
         public void Update(Department entity)

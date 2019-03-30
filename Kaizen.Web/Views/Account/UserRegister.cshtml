@@ -1,10 +1,12 @@
 ﻿@model Kaizen.Web.Models.UserRegisterViewModel
 
 @{
-    /**/
+                /**/
 
-    ViewBag.Title = "UserRegister";
-    Layout = null;
+                /**/
+
+                ViewBag.Title = "UserRegister";
+                Layout = null;
 }
 
 <!doctype html>
@@ -64,7 +66,7 @@
                                 <div class="col-md-9">
                                     @Html.LabelFor(model => model.CompanyId, new { @class = "control-label" })
                                     @Html.TextBoxFor(model => model.CompanyId, new { @class = "form-control input-lg" })
-                                    @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger", id="companyVal" })
+                                    @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger", id = "companyVal" })
                                     <div id="companyMessage" class="text-danger"></div>
                                 </div>
                                 <div class="col-md-3">
@@ -119,7 +121,12 @@
                         </div>
                         <div class="form-group mb-lg">
                             @Html.LabelFor(m => m.Email, "E-Posta", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg" })
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", placeholder = "örnek@gmail.com" })
+                            </div>
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", id = "emailVal" })
                         </div>
                         <div class="form-group mb-none">
@@ -138,12 +145,36 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="AgreeTermsModal" tabindex="-1" role="dialog" aria-labelledby="AgreeTermsModalTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="AgreeTermsModalTitle">Kullanım Koşulları</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus feugiat urna. Sed tempus quam a odio mattis, et imperdiet neque ultrices. Donec vehicula ipsum nibh, nec bibendum ipsum auctor vel. Fusce porttitor est auctor ligula mollis, non fermentum orci euismod. Curabitur at nisi sed lorem luctus sagittis. Nulla facilisi. Aenean vulputate interdum quam, a semper tortor cursus non. Aliquam tristique luctus neque tempor laoreet. Sed non eleifend urna, dictum placerat metus. Donec eu finibus sapien. Nulla magna odio, consectetur ac malesuada in, dignissim eu metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sed ligula a ipsum pretium tincidunt eu nec lorem. Maecenas sit amet ante quis nisl placerat lobortis a ac nunc. Vestibulum ultrices sem id tortor imperdiet tincidunt dapibus facilisis nisl. In dui erat, pretium ac est vitae, porttitor tempus quam.
+
+                                        Nullam molestie orci tempus ante varius, sit amet aliquet felis feugiat. Vestibulum vitae sem a ex posuere congue. Curabitur tincidunt dolor nisi, ut suscipit augue dictum vestibulum. Vivamus sodales aliquam justo, at bibendum lectus imperdiet vel. Aliquam tristique ornare diam sed sollicitudin. Donec posuere consequat velit in dapibus. Morbi aliquam odio interdum lorem pulvinar porttitor. Sed in ipsum quam. Donec quis tortor ac neque tempus consectetur.
+
+                                        Donec nibh eros, lacinia ut tellus at, semper luctus lorem. Nam sit amet eros ac nulla lacinia fermentum id et enim. Phasellus euismod vehicula ipsum, in convallis nibh accumsan eu. Vivamus erat nisi, pretium vel pellentesque et, iaculis quis odio. Ut iaculis feugiat erat, ac tristique tellus ullamcorper non. Ut nibh dui, viverra at purus nec, eleifend fringilla orci. Donec varius aliquam tellus finibus pulvinar. Maecenas volutpat leo eu est luctus, in cursus massa dapibus. Donec cursus leo libero, id lacinia mi auctor at. Mauris dapibus, ipsum vitae vehicula semper, lectus neque sagittis orci, sed vulputate mi nulla sit amet mi. Nulla eu elit augue. Etiam pharetra urna in massa ultricies iaculis.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                        <button type="button" class="btn btn-primary">Kabul Et</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="checkbox-custom checkbox-default">
                                         <input id="AgreeTerms" name="agreeterms" type="checkbox" />
-                                        <label for="AgreeTerms"><a href="#">Kullanım koşulları</a>nı kabul ediyorum</label>
+                                        <label for="AgreeTerms"><a href="#" data-toggle="modal" data-target="#AgreeTermsModal">Kullanım koşulları</a>nı kabul ediyorum</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 text-right">

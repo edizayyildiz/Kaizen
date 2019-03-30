@@ -18,6 +18,7 @@ namespace Kaizen.Service
         Company Find(Guid id);
         IEnumerable<Company> GetAll();
         IEnumerable<Company> GetAll(Expression<Func<Company, bool>> where);
+        IEnumerable<Company> Search(string name);
     }
     public class CompanyService : ICompanyService
     {
@@ -62,6 +63,11 @@ namespace Kaizen.Service
         {
             companyRepository.Insert(entity);
             unitOfWork.SaveChanges();
+        }
+
+        public IEnumerable<Company> Search(string name)
+        {
+            return this.GetAll(f => f.Name.Contains(name));
         }
 
         public void Update(Company entity)

@@ -18,6 +18,7 @@ namespace Kaizen.Service
         Suggestion Find(Guid id);
         IEnumerable<Suggestion> GetAll();
         IEnumerable<Suggestion> GetAll(Expression<Func<Suggestion, bool>> where);
+        IEnumerable<Suggestion> Search(string name);
     }
 
     public class SuggestionService : ISuggestionService
@@ -64,6 +65,11 @@ namespace Kaizen.Service
             suggestionRepository.Insert(entity);
             entity.Assessment = Assessment.Bekleniyor;
             unitOfWork.SaveChanges();
+        }
+
+        public IEnumerable<Suggestion> Search(string name)
+        {
+            return this.GetAll(f => f.Subject.Contains(name));
         }
 
         public void Update(Suggestion entity)
