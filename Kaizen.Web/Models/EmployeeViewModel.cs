@@ -37,6 +37,8 @@ namespace Kaizen.Web.Models
         public string Email { get; set; }
         public string Photo { get; set; }
         public Guid CompanyId { get; set; } //bunu silmek gerekecek
+        public CompanyViewModel Company { get; set; }
         public Guid? BranchId { get; set; }
+        public BranchViewModel Branch { get; set; }
     }
 }

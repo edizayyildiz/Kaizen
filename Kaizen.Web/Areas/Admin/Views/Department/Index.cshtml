@@ -6,8 +6,9 @@
 
 <section class="panel">
     <header class="panel-heading">
-
-        <h3>Departmanlar</h3>
+        <div class="center">
+            <h3>Departmanlar</h3>
+        </div>
     </header>
     <div class="panel-body">
         <p>
@@ -16,9 +17,9 @@
         <table class="table table-bordered table-striped mb-none" id="datatable-tabletools" data-swf-path="~/AdminFiles/assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
-                    <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
                     <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Branch.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Branch.Company.Name)</th>
                     <th></th>
                 </tr>
             </thead>
@@ -28,13 +29,13 @@
 
                     <tr class="gradeX">
                         <td>
-                            @Html.DisplayFor(modelItem => item.CreatedAt)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreatedBy)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Branch.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Branch.Company.Name)
                         </td>
                         <td class="text-center">
                             @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |

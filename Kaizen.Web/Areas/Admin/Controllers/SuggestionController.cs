@@ -63,12 +63,12 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // Suggestion ı edit yaptıktan sonra FirstName ve LastName alanı boş geliyordu(employee null olarak update ediliyordu), onun için suggestion ı veren employee bulundu ve suggestionViewModel e update öncesi eklendi
+                //suggestionViewModel'e EmployeeId eklenmezse FirstName LastName bulamıyor.
                 var employee = employeeService.GetAll().FirstOrDefault(f => f.Suggestions.FirstOrDefault().Id == suggestionViewModel.Id);
                 var employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
+                suggestionViewModel.EmployeeId = employeeViewModel.Id;
                 suggestionViewModel.Employee = employeeViewModel;
-
                 var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
-                //Create postta employee için yaptıklarımızı yap
                 suggestionService.Update(suggestion);
                 return RedirectToAction("Index");
             }

@@ -4,26 +4,21 @@
     ViewBag.Title = "Şubeler";
 }
 
-<p class="col-md-7">
-    @Html.ActionLink("Yeni Şube Ekle", "Create")
-</p>
-<div class="col-md-5">
-    <div class="btn-group btn-group-sm" role="group">
-        <a href="@Url.Action("Index", "Country")" class="btn btn-primary btn-sm mb-sm"><i class="fa fa-globe"></i> Ülkeler</a>
-        <a href="@Url.Action("Index", "City")" class="btn btn-primary btn-sm mb-sm">Şehirler</a>
-        <a href="@Url.Action("Index", "County")" class="btn btn-primary btn-sm mb-sm">İlçeler</a>
-    </div>
-</div>
-
 <section class="panel">
     <header class="panel-heading">
-
-        <h3>Şubeler</h3>
+        <div class="center">
+            <h3>Şubeler</h3>
+            <div class="btn-group btn-group-sm" role="group">
+                <a href="@Url.Action("Index", "Country")" class="btn btn-primary btn-sm mb-sm"><i class="fa fa-globe"></i> Ülkeler</a>
+                <a href="@Url.Action("Index", "City")" class="btn btn-primary btn-sm mb-sm">Şehirler</a>
+                <a href="@Url.Action("Index", "County")" class="btn btn-primary btn-sm mb-sm">İlçeler</a>
+            </div>
+        </div>
     </header>
     <div class="panel-body">
-        <p>
+        <div>
             @Html.ActionLink("Yeni Şube Ekle", "Create")
-        </p>
+        </div>
         <table class="table table-bordered table-striped mb-none" id="datatable-tabletools" data-swf-path="~/AdminFiles/assets/vendor/jquery-datatables/extras/TableTools/swf/copy_csv_xls_pdf.swf">
             <thead>
                 <tr>

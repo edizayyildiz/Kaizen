@@ -32,6 +32,7 @@ namespace Kaizen.Web.Models
         public string SuggestedStatus { get; set; }
         [Display(Name = "Değerlendirme")]
         public Assessment Assessment { get; set; }
+        public Guid? EmployeeId { get; set; }
         public EmployeeViewModel Employee { get; set; }
     }
 }
