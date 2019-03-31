@@ -92,19 +92,31 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             var employee = employeeService.GetAll().FirstOrDefault(f => f.Email == user.Email);
             if (file != null && file.ContentLength > 0) // byte üzerinden kontrol et
             {
-                string fileName = Path.GetFileName(file.FileName);
-                string extension = Path.GetExtension(fileName).ToLower();
-                if (extension == ".jpeg" || extension == ".jpg" || extension == ".png" || extension == ".gif")
+                if (file.ContentLength <= 3145728) // Dosya boyutu 3 MB dan büyük olamaz
                 {
-                    string path = Path.Combine(Server.MapPath("~/Uploads/ProfilePhotos"), fileName);
-                    file.SaveAs(path);
-                    employee.Photo = fileName;
-                    employeeService.Update(employee);
-                    return Json("/Uploads/ProfilePhotos/" + fileName);
+                    string fileName = Path.GetFileName(file.FileName);
+                    string extension = Path.GetExtension(fileName).ToLower();
+                    if (extension == ".jpeg" || extension == ".jpg" || extension == ".png" || extension == ".gif")
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Uploads/ProfilePhotos"), fileName);
+                        if (employee.Photo != null) // Eğer profil fotoğrafı var ise siler
+                        {
+                            string oldPhotoPath = Path.Combine(Server.MapPath("~/Uploads/ProfilePhotos"), employee.Photo);
+                            System.IO.File.Delete(oldPhotoPath);
+                        }
+                        file.SaveAs(path); // Yeni fotoğrafı kaydeder
+                        employee.Photo = fileName;
+                        employeeService.Update(employee);
+                        return Json("/Uploads/ProfilePhotos/" + fileName);
+                    }
+                    else
+                    {
+                        return Json(new { message = "Dosya uzantısı .jpeg, .jpg, .png veya .gif olmalıdır." });
+                    }
                 }
                 else
                 {
-                    return Json(new { message = "Dosya uzantısı .jpeg, .jpg, .png veya .gif olmalıdır." });
+                    return Json(new { message = "Dosya boyutu 3 MB'dan büyük olamaz." });
                 }
             }
             else

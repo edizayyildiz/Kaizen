@@ -62,9 +62,9 @@
             <!-- start: search & user box -->
             <div class="header-right">
 
-                <form action="pages-search-results.html" class="search nav-form">
+                <form action="@Url.Action("Index", "Search")" class="search nav-form">
                     <div class="input-group input-search">
-                        <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+                        <input type="text" class="form-control" name="searchContent" id="q" placeholder="Arama...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                         </span>
@@ -239,7 +239,7 @@
                 <div id="userbox" class="userbox">
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img class="profilePhoto" src="@(ViewBag.ProfilePhoto != null ? ("/Uploads/ProfilePhotos/" + ViewBag.ProfilePhoto) : "/AdminFiles/assets/images/empty_avatar.jpg")" style="border-radius: 50%;" />
+                            <img class="profilePhoto" src="@(ViewBag.ProfilePhoto != null ? ("/Uploads/ProfilePhotos/" + ViewBag.ProfilePhoto) : "/AdminFiles/assets/images/empty_avatar.jpg")" style="border-radius: 30%;" />
                         </figure>
                         <div class="profile-info" data-lock-name="" data-lock-email="">
                             <span class="name">@(ViewBag.CurrentUser ?? "Kullanıcı Adı")</span>

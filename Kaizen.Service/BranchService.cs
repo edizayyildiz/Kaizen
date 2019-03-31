@@ -19,6 +19,7 @@ namespace Kaizen.Service
         IEnumerable<Branch> GetAll();
         IEnumerable<Branch> GetAll(Expression<Func<Branch, bool>> where);
         IEnumerable<Branch> GetBranchesByCompany(Guid CompanyId);
+        IEnumerable<Branch> Search(string name);
 
     }
     public class BranchService : IBranchService
@@ -81,6 +82,11 @@ namespace Kaizen.Service
         public IEnumerable<Branch> GetBranchesByCompany(Guid CompanyId)
         {
             return this.GetAll().Where(f => f.CompanyId == CompanyId);
+        }
+
+        public IEnumerable<Branch> Search(string name)
+        {
+            return this.GetAll(f => f.Name.Contains(name));
         }
     }
 }

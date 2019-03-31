@@ -25,6 +25,7 @@ namespace Kaizen.Web.Models
         [Required]
         [Display(Name = "Soyad")]
         public string LastName { get; set; }
+        [Display(Name = "Ad Soyad")]
         public string FullName { get { return FirstName + " " + LastName; } }
         [Required]
         [Display(Name = "Kullanıcı Adı")]
