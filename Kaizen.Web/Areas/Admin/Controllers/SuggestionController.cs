@@ -48,7 +48,11 @@ namespace Kaizen.Web.Areas.Admin.Controllers
 
         public ActionResult Edit(Guid id)
         {
+            var userMail = User.Identity.Name;
+            ViewBag.CurrentEmployeeId = employeeService.GetAll(e => e.Email == userMail).FirstOrDefault().Id;
+            ViewBag.AuthorEmployeeId = suggestionService.GetAll(f => f.Id == id).FirstOrDefault().EmployeeId;
             var suggestion = suggestionService.Find(id);
+            
             var suggestionViewModel = Mapper.Map<SuggestionViewModel>(suggestion);
             if (suggestionViewModel == null)
             {
@@ -64,10 +68,12 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             {
                 // Suggestion ı edit yaptıktan sonra FirstName ve LastName alanı boş geliyordu(employee null olarak update ediliyordu), onun için suggestion ı veren employee bulundu ve suggestionViewModel e update öncesi eklendi
                 //suggestionViewModel'e EmployeeId eklenmezse FirstName LastName bulamıyor.
-                var employee = employeeService.GetAll().FirstOrDefault(f => f.Suggestions.FirstOrDefault().Id == suggestionViewModel.Id);
-                var employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
-                suggestionViewModel.EmployeeId = employeeViewModel.Id;
-                suggestionViewModel.Employee = employeeViewModel;
+                var employeeId = suggestionService.GetAll(f => f.Id == suggestionViewModel.Id).FirstOrDefault().EmployeeId;
+                //var employee = employeeService.GetAll(f => f.Id == employeeId).FirstOrDefault();
+                //var employee = employeeService.GetAll().FirstOrDefault(f => f.Suggestions.FirstOrDefault().Id == suggestionViewModel.Id);
+                //var employeeViewModel = Mapper.Map<EmployeeViewModel>(employee);
+                suggestionViewModel.EmployeeId = employeeId;
+                //suggestionViewModel.Employee = employeeViewModel;
                 var suggestion = Mapper.Map<Suggestion>(suggestionViewModel);
                 suggestionService.Update(suggestion);
                 return RedirectToAction("Index");

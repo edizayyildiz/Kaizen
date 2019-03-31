@@ -23,10 +23,10 @@
             <thead>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.Address)</th>
+                    <th>@Html.DisplayNameFor(model => model.Company.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.CountryId)</th>
-                    <th class="hidden-phone">@Html.DisplayNameFor(model => model.CityId)</th>
-                    <th class="hidden-phone">@Html.DisplayNameFor(model => model.CountyId)</th>
+                    <th>@Html.DisplayNameFor(model => model.CityId)</th>
+                    <th>@Html.DisplayNameFor(model => model.CountyId)</th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,15 +39,15 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Address)
+                            @Html.DisplayFor(modelItem => item.Company.Name)
                         </td>
                         <td>
                             @Html.DisplayFor(modelıtem => item.Country.Name)
                         </td>
-                        <td class="center hidden-phone">
+                        <td>
                             @Html.DisplayFor(modelItem => item.City.Name)
                         </td>
-                        <td class="center hidden-phone">
+                        <td>
                             @Html.DisplayFor(modelItem => item.County.Name)
                         </td>
                         <td class="text-center">

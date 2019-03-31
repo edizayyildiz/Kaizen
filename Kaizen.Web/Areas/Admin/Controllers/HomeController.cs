@@ -10,6 +10,7 @@ using System.Web.Mvc;
 namespace Kaizen.Web.Areas.Admin.Controllers
 {
     [RouteArea("Admin")]
+    [Authorize]
     public class HomeController : ControllerBase
     {
         public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEmployeeService employeeService, ApplicationRoleManager roleManager) : base(userManager, employeeService, roleManager)

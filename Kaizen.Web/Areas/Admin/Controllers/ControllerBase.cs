@@ -42,6 +42,7 @@ namespace Kaizen.Web.Areas.Admin.Controllers
             ViewBag.CurrentUser = currentUser.FullName;
             ViewBag.CurrentEmail = currentUser.Email;
             ViewBag.CurrentUserName = currentUser.UserName;
+            ViewBag.CurrentUserRole = currentUser.Role;
             ViewBag.UserRoles = userRoles;
 
             base.OnActionExecuted(filterContext);
