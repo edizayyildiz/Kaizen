@@ -164,7 +164,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                                        <button type="button" class="btn btn-primary">Kabul Et</button>
+                                        <button type="button" id="btnAgree" class="btn btn-primary" data-dismiss="modal">Kabul Et</button>
                                     </div>
                                 </div>
                             </div>
@@ -260,6 +260,10 @@
                     $('#DepartmentId').append('<option value="' + value.Id + '" >' + value.Name + '</option>');
                 });
             });
+        });
+
+        $('#btnAgree').click(function () {
+            $('#AgreeTerms').prop('checked', 'checked'); // AgreeTerms checkbox ın checked property sini checked olarak set eder.
         });
 
         $('#CompanyId').keyup(function () {

@@ -1,5 +1,7 @@
 ﻿@model Kaizen.Web.Models.CompanyRegisterViewModel
 @{
+    /**/
+
     ViewBag.Title = "Kayıt Ol";
     Layout = null;
 }
@@ -162,7 +164,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                                        <button type="button" class="btn btn-primary">Kabul Et</button>
+                                        <button type="button" id="btnAgree" class="btn btn-primary" data-dismiss="modal">Kabul Et</button>
                                     </div>
                                 </div>
                             </div>
@@ -217,6 +219,11 @@
 <script>
 
     $(document).ready(function () {
+
+        $('#btnAgree').click(function () {
+            $('#AgreeTerms').prop('checked', 'checked'); // AgreeTerms checkbox ın checked property sini checked olarak set eder.
+        });
+
 
         $('#Name').keyup(function () {
             $('#nameVal').empty();
