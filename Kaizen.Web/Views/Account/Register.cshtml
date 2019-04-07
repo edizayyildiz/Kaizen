@@ -54,7 +54,7 @@
                     <h2 class="title text-uppercase text-bold m-none" style="letter-spacing: 0.5px;"><i class="fa fa-user mr-xs"></i> Hesap Oluştur <br /><small style="color: white; letter-spacing: 1px; font-size: 10px;">-Kurumsal-</small></h2>
                 </div>
                 <div class="panel-body">
-                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm", @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -146,24 +146,39 @@
                             </div>
                         </div>
                         <!-- Modal -->
+                        <div class="modal fade" id="TermsErrorModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title text-dark">Uyarı</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-danger">Lütfen kullanım koşullarını kabul ediniz.</p>
+                                        <p>Okumak için <a data-toggle="modal" data-target="#AgreeTermsModal">tıklayınız.</a></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="modal fade" id="AgreeTermsModal" tabindex="-1" role="dialog" aria-labelledby="AgreeTermsModalTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="AgreeTermsModalTitle">Kullanım Koşulları</h5>
+                                        <h4 class="modal-title text-dark" id="AgreeTermsModalTitle">Kullanım Koşulları</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body text-left">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus feugiat urna. Sed tempus quam a odio mattis, et imperdiet neque ultrices. Donec vehicula ipsum nibh, nec bibendum ipsum auctor vel. Fusce porttitor est auctor ligula mollis, non fermentum orci euismod. Curabitur at nisi sed lorem luctus sagittis. Nulla facilisi. Aenean vulputate interdum quam, a semper tortor cursus non. Aliquam tristique luctus neque tempor laoreet. Sed non eleifend urna, dictum placerat metus. Donec eu finibus sapien. Nulla magna odio, consectetur ac malesuada in, dignissim eu metus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sed ligula a ipsum pretium tincidunt eu nec lorem. Maecenas sit amet ante quis nisl placerat lobortis a ac nunc. Vestibulum ultrices sem id tortor imperdiet tincidunt dapibus facilisis nisl. In dui erat, pretium ac est vitae, porttitor tempus quam.
-
-                                        Nullam molestie orci tempus ante varius, sit amet aliquet felis feugiat. Vestibulum vitae sem a ex posuere congue. Curabitur tincidunt dolor nisi, ut suscipit augue dictum vestibulum. Vivamus sodales aliquam justo, at bibendum lectus imperdiet vel. Aliquam tristique ornare diam sed sollicitudin. Donec posuere consequat velit in dapibus. Morbi aliquam odio interdum lorem pulvinar porttitor. Sed in ipsum quam. Donec quis tortor ac neque tempus consectetur.
-
-                                        Donec nibh eros, lacinia ut tellus at, semper luctus lorem. Nam sit amet eros ac nulla lacinia fermentum id et enim. Phasellus euismod vehicula ipsum, in convallis nibh accumsan eu. Vivamus erat nisi, pretium vel pellentesque et, iaculis quis odio. Ut iaculis feugiat erat, ac tristique tellus ullamcorper non. Ut nibh dui, viverra at purus nec, eleifend fringilla orci. Donec varius aliquam tellus finibus pulvinar. Maecenas volutpat leo eu est luctus, in cursus massa dapibus. Donec cursus leo libero, id lacinia mi auctor at. Mauris dapibus, ipsum vitae vehicula semper, lectus neque sagittis orci, sed vulputate mi nulla sit amet mi. Nulla eu elit augue. Etiam pharetra urna in massa ultricies iaculis.
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                        <button type="button" id="btnAgreeClose" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
                                         <button type="button" id="btnAgree" class="btn btn-primary" data-dismiss="modal">Kabul Et</button>
                                     </div>
                                 </div>
@@ -173,13 +188,13 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="checkbox-custom checkbox-default">
-                                        <input id="AgreeTerms" name="agreeterms" type="checkbox" />
-                                        <label for="AgreeTerms"><a href="#" data-toggle="modal" data-target="#AgreeTermsModal">Kullanım koşulları</a>nı kabul ediyorum</label>
+                                        <input id="AgreeTerms" name="agreeTerms" type="checkbox" />
+                                        <label for="AgreeTerms"><a data-toggle="modal" data-target="#AgreeTermsModal">Kullanım koşulları</a>nı kabul ediyorum</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 text-right">
                                     <button type="submit" class="btn btn-primary hidden-xs">Kayıt Ol</button>
-                                    <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign Up</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Kayıt Ol</button>
                                 </div>
                             </div>
                         </div>
@@ -220,11 +235,34 @@
 
     $(document).ready(function () {
 
+        // AgreeTerms işlemleri
         $('#btnAgree').click(function () {
-            $('#AgreeTerms').prop('checked', true); // AgreeTerms checkbox ın checked property sini true olarak set eder.
+            $('#AgreeTerms').prop('checked', true).attr('value', true); // AgreeTerms checkbox ın checked property sini ve value attribute unu true olarak set eder.
+            $('#TermsErrorModal').modal('hide');
         });
 
+        $('#btnAgreeClose').click(function () {
+            $('#TermsErrorModal').modal('hide');
+        });
 
+        $('#AgreeTerms').change(function () {
+            if ($('#AgreeTerms').is(':checked') == true) {
+                $('#AgreeTerms').attr('value', true);
+            }
+            else {
+                $('#AgreeTerms').attr('value', false);
+            };
+        });
+
+        $('#registerForm').submit(function (e) { // form submit olduğunda koşullar kabul edilmemiş ise submit event inin default action ınını iptal eder ve modal ı gösterir
+            if ($('#AgreeTerms').is(':checked') == false) {
+                e.preventDefault();
+                $('#TermsErrorModal').modal();
+                return;
+            };
+        });
+
+        // Validasyon hatalarını keyup ile temizlemek için
         $('#Name').keyup(function () {
             $('#nameVal').empty();
         });

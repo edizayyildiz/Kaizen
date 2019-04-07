@@ -21,6 +21,7 @@ namespace Kaizen.Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Role { get; set; }
+        public bool IsAgreeTheTerms { get; set; }
         public string FullName { get { return FirstName + " " + LastName; } }
     }
 }

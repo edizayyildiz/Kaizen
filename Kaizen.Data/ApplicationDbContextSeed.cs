@@ -210,7 +210,8 @@ namespace Kaizen.Data
                 LockoutEndDateUtc = null,
                 AccessFailedCount = 0,
                 UserName = "admin@gmail.com",
-                Role = "Developer"
+                Role = "Developer",
+                IsAgreeTheTerms = true
             };
 
             context.Companies.AddOrUpdate(reason);

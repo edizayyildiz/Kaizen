@@ -198,46 +198,53 @@ namespace Kaizen.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(CompanyRegisterViewModel model)
+        public async Task<ActionResult> Register(CompanyRegisterViewModel model, bool? agreeTerms)
         {
             if (ModelState.IsValid)
             {
-                CreateDefaultRoles();
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Role = "SuperAdmin" };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (agreeTerms == true)
                 {
-                    var companyViewModel = new CompanyViewModel();
-                    companyViewModel.Name = model.Name;
-                    companyViewModel.Sector = model.Sector;
-                    companyViewModel.HeadCount = model.HeadCount;
-                    companyViewModel.Description = model.Description;
-                    var company = Mapper.Map<Company>(companyViewModel);
-                    companyService.Insert(company);
+                    CreateDefaultRoles();
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsAgreeTheTerms = true, Role = "SuperAdmin" };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var companyViewModel = new CompanyViewModel();
+                        companyViewModel.Name = model.Name;
+                        companyViewModel.Sector = model.Sector;
+                        companyViewModel.HeadCount = model.HeadCount;
+                        companyViewModel.Description = model.Description;
+                        var company = Mapper.Map<Company>(companyViewModel);
+                        companyService.Insert(company);
 
-                    var employeeViewModel = new EmployeeViewModel();
-                    employeeViewModel.Email = model.Email;
-                    employeeViewModel.FirstName = model.FirstName;
-                    employeeViewModel.LastName = model.LastName;
-                    employeeViewModel.Position = model.Position;
-                    employeeViewModel.UserName = model.UserName;
-                    var employee = Mapper.Map<Employee>(employeeViewModel);
-                    employee.CompanyId = company.Id; //company index viewında yazdığım yorum satır için bu satırı yazdım.
-                    employeeService.Insert(employee);
+                        var employeeViewModel = new EmployeeViewModel();
+                        employeeViewModel.Email = model.Email;
+                        employeeViewModel.FirstName = model.FirstName;
+                        employeeViewModel.LastName = model.LastName;
+                        employeeViewModel.Position = model.Position;
+                        employeeViewModel.UserName = model.UserName;
+                        var employee = Mapper.Map<Employee>(employeeViewModel);
+                        employee.CompanyId = company.Id; //company index viewında yazdığım yorum satır için bu satırı yazdım.
+                        employeeService.Insert(employee);
 
-                    UserManager.AddToRole(user.Id, "SuperAdmin"); // CompanyRegister ile kayıt olan kullanıcıya SuperAdmin rolü atanır
+                        UserManager.AddToRole(user.Id, "SuperAdmin"); // CompanyRegister ile kayıt olan kullanıcıya SuperAdmin rolü atanır
 
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                {
+                    return View(model);
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -280,7 +287,7 @@ namespace Kaizen.Web.Controllers
                 return Json(new { success = false, message = "Lütfen şube seçiniz." });
             }
             var departments = this.departmentService.GetDepartmentsByBranch(Guid.Parse(BranchId)).Select(s => new { Id = s.Id, Name = s.Name });
-            return Json(new { success = true, departments = departments});
+            return Json(new { success = true, departments = departments });
         }
 
         // GET: /Account/UserRegister
@@ -297,44 +304,51 @@ namespace Kaizen.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UserRegister(UserRegisterViewModel model)
+        public async Task<ActionResult> UserRegister(UserRegisterViewModel model, bool? agreeTerms)
         {
             if (ModelState.IsValid)
             {
-                CreateDefaultRoles();
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Role = "User" };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (agreeTerms == true)
                 {
-                    var employeeModel = new EmployeeViewModel();
-                    employeeModel.Email = model.Email;
-                    employeeModel.FirstName = model.FirstName;
-                    employeeModel.LastName = model.LastName;
-                    employeeModel.Position = model.Position;
-                    employeeModel.UserName = model.UserName;
-                    employeeModel.BranchId = model.BranchId;
-                    employeeModel.CompanyId = Guid.Parse(model.CompanyId);
+                    CreateDefaultRoles();
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, IsAgreeTheTerms = true, Role = "User" };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var employeeModel = new EmployeeViewModel();
+                        employeeModel.Email = model.Email;
+                        employeeModel.FirstName = model.FirstName;
+                        employeeModel.LastName = model.LastName;
+                        employeeModel.Position = model.Position;
+                        employeeModel.UserName = model.UserName;
+                        employeeModel.BranchId = model.BranchId;
+                        employeeModel.CompanyId = Guid.Parse(model.CompanyId);
 
-                    var employee = Mapper.Map<Employee>(employeeModel);
-                    employeeService.Insert(employee);
+                        var employee = Mapper.Map<Employee>(employeeModel);
+                        employeeService.Insert(employee);
 
-                    var department = departmentService.Find(model.DepartmentId);
-                    department.Employees.Add(employee);
-                    departmentService.Update(department);
+                        var department = departmentService.Find(model.DepartmentId);
+                        department.Employees.Add(employee);
+                        departmentService.Update(department);
 
-                    UserManager.AddToRole(user.Id, "User"); // UserRegister ile kayıt olan kullanıcıya User rolü atanır
+                        UserManager.AddToRole(user.Id, "User"); // UserRegister ile kayıt olan kullanıcıya User rolü atanır
 
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                {
+                    return View(model);
+                }
             }
             ViewBag.BranchId = new SelectList(branchService.GetAll(f => f.Id == model.BranchId), "Id", "Name");
             ViewBag.DepartmentId = new SelectList(departmentService.GetAll(f => f.Id == model.DepartmentId), "Id", "Name");
