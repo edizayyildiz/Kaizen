@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Kaizen.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Developer,SuperAdmin,Admin")]
     public class BranchController : ControllerBase
     {
         private readonly IBranchService branchService;
